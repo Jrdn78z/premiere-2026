@@ -187,6 +187,48 @@ h2.solo{font-size:1.3rem;margin:0 0 12px}
 @media (min-width:900px){.wrap{max-width:620px}.hello h1{font-size:2.6rem}}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{transition-duration:0s!important;animation:none!important}}
 
+/* ===== XP, pièces, mode admin (7 octobre 2026) ===== */
+.xpx{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 12px}
+.xpx div{background:rgba(var(--fw),.06);box-shadow:inset 0 0 0 1px var(--felt-line);border-radius:14px;padding:12px 10px;min-width:0}
+.xpx b{display:block;font-family:var(--didone);font-weight:900;font-size:1.45rem;line-height:1.1;font-variant-numeric:lining-nums tabular-nums}
+.xpx span{display:block;font-weight:800;font-size:.82rem;margin-top:2px}
+.xpx small{display:block;color:var(--felt-mute);font-size:.74rem;line-height:1.3;margin-top:4px}
+.xpx .co b{color:var(--gold)}
+@media (max-width:380px){.xpx{grid-template-columns:1fr}.xpx div{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:baseline}.xpx small{grid-column:1/-1}}
+.who .coin{border:0;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;background:rgba(231,198,107,.16);color:var(--gold);font-weight:800;font-size:.85rem;font-variant-numeric:tabular-nums;box-shadow:inset 0 0 0 1px rgba(231,198,107,.45)}
+.who .coin i{width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFF1B8,var(--gold) 55%,#B8932F);box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
+.shop button.buy{box-shadow:inset 0 0 0 2px var(--gold)!important;color:var(--gold)}
+.admsw{display:flex;gap:12px;align-items:center;margin:6px 0 10px}
+.admsw b{display:block}.admsw small{color:var(--felt-mute);font-size:.82rem}
+.sw{position:relative;width:48px;height:28px;flex:0 0 auto;cursor:pointer}
+.sw input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.sw span{position:absolute;inset:0;border-radius:999px;background:rgba(var(--fw),.16);transition:background .2s var(--ease)}
+.sw span::after{content:"";position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:var(--card);transition:transform .2s var(--ease)}
+.sw input:checked+span{background:var(--gold)}
+.sw input:checked+span::after{transform:translateX(20px)}
+.sw input:focus-visible+span{outline:2px solid var(--gold);outline-offset:3px}
+.adh{font-size:2rem;margin:4px 0 6px}
+#adm select.inp{appearance:auto}
+.adl{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:10px}
+.adl>li{background:rgba(var(--fw),.06);box-shadow:inset 0 0 0 1px var(--felt-line);border-radius:16px;padding:12px 14px;min-width:0}
+.adt b{display:block;font-weight:800;overflow-wrap:anywhere}
+.adt small{color:var(--felt-mute);font-size:.8rem}
+.adn{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:10px 0}
+.adn span{font-size:.72rem;color:var(--felt-mute);line-height:1.2}
+.adn b{display:block;font-family:var(--didone);font-weight:900;font-size:1.1rem;color:var(--felt-ink);font-variant-numeric:lining-nums tabular-nums}
+.adl .btn{padding:9px 14px;font-size:.88rem}
+.adgive{margin-top:10px;padding-top:10px;border-top:1px solid var(--felt-line)}
+.adrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.adrow label{font-weight:700;font-size:.85rem;display:grid;gap:4px}
+.adth{display:block;width:100%;text-align:left;border:0;background:transparent;padding:0}
+.adth b{display:block;font-weight:800}
+.adth small{color:var(--felt-mute);font-size:.8rem}
+.adtd{margin-top:10px;padding-top:10px;border-top:1px solid var(--felt-line)}
+.adtd textarea{width:100%;margin-top:8px;font:inherit;font-size:15px;resize:vertical}
+.admq{list-style:none;padding:0;margin:0 0 10px;display:grid;gap:6px}
+.admq li{display:flex;justify-content:space-between;gap:10px;font-size:.88rem}
+.adtx{margin:8px 0 0;font-size:.92rem;overflow-wrap:anywhere}
+
 /* ===== Ajouts hub Première 2026 ===== */
 :root{--sub:#C9DDD2;--hair:rgba(var(--fw),.22)}
 body{background-color:var(--felt-lo)}
@@ -972,7 +1014,7 @@ body[data-theme="clair"] .today,body[data-theme="clair"] .ev2,body[data-theme="c
 <div class="wrap">
 
 <section id="v-table">
-  <div class="top"><h1>Première 2026</h1><div class="who"><div class="date" id="tDate"></div><button class="avbtn" type="button" id="tProf" aria-label="Mon profil"><span class="av" id="tAv"></span></button></div></div>
+  <div class="top"><h1>Première 2026</h1><div class="who"><button class="coin" type="button" id="tCoin" aria-label="Mes pièces"></button><div class="date" id="tDate"></div><button class="avbtn" type="button" id="tProf" aria-label="Mon profil"><span class="av" id="tAv"></span></button></div></div>
   <p class="banner" id="banner"><i></i><span>Chargement du paquet…</span></p>
   <div id="extras"></div>
   <div class="tcols"><div class="colA">
@@ -1043,6 +1085,9 @@ body[data-theme="clair"] .today,body[data-theme="clair"] .ev2,body[data-theme="c
 <section id="v-quetes" hidden><div id="quests"></div></section>
 <section id="v-profil" hidden>
   <div id="pf"></div>
+</section>
+<section id="v-admin" hidden>
+  <div id="adm"></div>
 </section>
 
 <section id="v-cours" hidden>
@@ -1121,7 +1166,7 @@ const matName=mid=>(C.M[mid]&&C.M[mid].nom)||mid;
 
 /* ================= PROGRESSION (par compte) ================= */
 let P=Object.assign({c:{},q:{},j:{},e:{},f:{}},LS.get("prog",{}));
-["c","q","j","e","f","x","t","df","sm","pl","bb","qw"].forEach(k=>{if(!P[k]||typeof P[k]!=="object")P[k]={}});
+["c","q","j","e","f","x","t","df","sm","pl","bb","qw","own","buy","gx"].forEach(k=>{if(!P[k]||typeof P[k]!=="object")P[k]={}});
 (()=>{const lim=isoOf(new Date(NOW.getFullYear(),NOW.getMonth(),NOW.getDate()-70));Object.keys(P.sm).forEach(k=>{if(k<lim)delete P.sm[k]});Object.keys(P.qw).forEach(k=>{if(k.slice(0,10)<lim)delete P.qw[k]})})();
 let pRef=null,remoteOK=false,pT=null,pBusy=false,pDirty=false;
 function saveP(){LS.set("prog",P);pDirty=true;clearTimeout(pT);pT=setTimeout(flushP,1200)}
@@ -1147,6 +1192,9 @@ function mergeP(r){
   if(r.cls&&typeof r.cls==="object"&&!P.cls){P.cls=r.cls;ch=true}
   ["srcm","hide"].forEach(k=>{if(r[k]&&typeof r[k]==="object"){P[k]=P[k]||{};Object.entries(r[k]).forEach(([a,v])=>{if(!(a in P[k])){P[k][a]=v;ch=true}})}});
   if(r.sk&&typeof r.sk==="object"&&!P.sk){P.sk=r.sk;ch=true}
+  ["own","buy","gx"].forEach(k=>{if(r[k]&&typeof r[k]==="object")Object.entries(r[k]).forEach(([a,v])=>{if(!(a in P[k])){P[k][a]=v;ch=true}})});
+  if(typeof r.ownXP==="number"&&r.ownXP>(P.ownXP||0)){P.ownXP=r.ownXP;ch=true}
+  if(!r.ownV&&typeof grandfather==="function"){const t=P.ownXP>0?P.ownXP:totalXP();grandfather(t);P.ownXP=t;ch=true}
   if(r.rw&&typeof r.rw==="object"){P.rw=P.rw||{};Object.entries(r.rw).forEach(([k,v])=>{if(!(k in P.rw)){P.rw[k]=v;ch=true}})}
   if(r.dc&&typeof r.dc==="object"){P.dc=P.dc||{};Object.entries(r.dc).forEach(([k,v])=>{if(!(k in P.dc)){P.dc[k]=v;ch=true}})}
   if(typeof r.fc==="number"&&!(P.fc>=r.fc)){P.fc=r.fc;ch=true}
@@ -1206,16 +1254,17 @@ function applyTint(from){
 function enter(el,delay){if(reduce||!el||!el.animate)return null;return el.animate([{opacity:0,transform:"translateY(8px)"},{opacity:1,transform:"none"}],{duration:220,delay:delay||0,easing:EASE_OUT,fill:"backwards"})}
 
 /* ================= NAVIGATION ================= */
-const views=["table","jeu","duel","cours","fiches","profil","ligue","import","clubs","quetes"];
+const views=["table","jeu","duel","cours","fiches","profil","ligue","import","clubs","quetes","admin"];
+const ADM=()=>!!(IMP&&IMP.isOwner&&LS.get("adm",false));
 let view="table";
-function go(v){if(!views.includes(v))v="table";if(view==="clubs"&&v!=="clubs")clubStop();if(view==="quetes"&&v!=="quetes")EX.quest=null;view=v;document.body.dataset.view=v;views.forEach(x=>$("#v-"+x).hidden=x!==v);
+function go(v){if(!views.includes(v))v="table";if(v==="admin"&&!ADM())v="profil";if(v==="admin")AD.need=true;if(view==="clubs"&&v!=="clubs")clubStop();if(view==="quetes"&&v!=="quetes")EX.quest=null;view=v;document.body.dataset.view=v;views.forEach(x=>$("#v-"+x).hidden=x!==v);
   document.querySelectorAll("nav.dock button").forEach(b=>{if(b.dataset.v===v)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
-  if(v!=="import"&&v!=="profil")LS.set("view",v);window.scrollTo(0,0);render();enter($("#v-"+v));dockTo(v)}
+  if(v!=="import"&&v!=="profil"&&v!=="admin")LS.set("view",v);window.scrollTo(0,0);render();enter($("#v-"+v));dockTo(v)}
 function dockTo(v){const d=$("nav.dock div"),hl=$("#dockHl");if(!d||!hl)return;const b=d.querySelector(`button[data-v="${v}"]`);if(!b){hl.style.clipPath="inset(0 100% 0 0 round 999px)";return}
   const r=hl.getBoundingClientRect(),q=b.getBoundingClientRect();hl.style.clipPath=`inset(0 ${Math.max(0,r.right-q.right)}px 0 ${Math.max(0,q.left-r.left)}px round 999px)`}
 addEventListener("resize",()=>dockTo(view));
 document.querySelectorAll("nav.dock button").forEach(b=>b.onclick=()=>go(b.dataset.v));
-function render(){if(view==="clubs")renderClubs();else if(view==="quetes"){if(!EX.quest)renderQuetes()}else if(view==="table")renderTable();else if(view==="jeu")renderJeuPicks();else if(view==="duel"){if(!inDuel&&!BB.on)renderSeries()}else if(view==="ligue"){if(!LG.defi)renderLigue()}else if(view==="import"){if(IMPV.need){IMPV.need=false;renderImport()}}else if(view==="fiches"){if(!((FI.mode==="new"&&$("#fnGo"))||(FI.mode==="preview"&&$("#fpSave"))))renderFiches()}else if(view==="profil"){renderProfil()}else renderCours();applyTint();paintMyAv()}
+function render(){if(view==="clubs")renderClubs();else if(view==="quetes"){if(!EX.quest)renderQuetes()}else if(view==="table")renderTable();else if(view==="jeu")renderJeuPicks();else if(view==="duel"){if(!inDuel&&!BB.on)renderSeries()}else if(view==="ligue"){if(!LG.defi)renderLigue()}else if(view==="import"){if(IMPV.need){IMPV.need=false;renderImport()}}else if(view==="fiches"){if(!((FI.mode==="new"&&$("#fnGo"))||(FI.mode==="preview"&&$("#fpSave"))))renderFiches()}else if(view==="profil"){renderProfil()}else if(view==="admin"){if(AD.need){AD.need=false;renderAdmin()}}else renderCours();applyTint();paintMyAv()}
 
 /* ================= TABLE ================= */
 const EVAL=t=>t==="controle"||t==="oral";
@@ -1644,7 +1693,7 @@ async function qrRead(file){const jsQR=await loadLib(QR_READ,"jsQR");const pic=a
   const d=g.getImageData(0,0,W,H),r=jsQR(d.data,W,H);if(!r)return "";const m=/duel=([A-Z0-9]{4})/i.exec(r.data)||/^([A-Z0-9]{4})$/i.exec(r.data.trim());return m?m[1].toUpperCase():""}
 
 function startOnline(epoch,cid,si,seed){
-  const ch=C.chaps[cid];if(!ch||!ch.quiz||!ch.quiz[si])return;
+  const ch=C.chaps[cid];if(!ch||!ch.quiz||!ch.quiz[si]){toast(`<span class="tm">!</span><div><b>Ce thème n’est pas dans tes cours</b><span>Demande à l’hôte de lancer un « Mélange » ou un thème de ta classe.</span></div>`);return}
   const r=rng(seed);const qsx=sshuffle(ch.quiz[si].qs,r).slice(0,10).map(q=>({q,opts:optsOf(q,r)}));
   OL.epoch=epoch;OL.game={cid,si,qs:qsx};OL.qi=0;OL.score=0;OL.ms=0;
   if(!OL.host)OL.g.presence({epoch,qi:0,score:0,ms:0,done:false}).catch(()=>{});
@@ -1703,7 +1752,7 @@ function renderCours(){
    ${ch.probl?`<p class="probl">${esc(ch.probl)}</p>`:""}
    ${(ch.seances||[]).length?`<details class="seances"><summary>Séances relevées sur Pronote</summary>${ch.seances.map(s=>`<div class="day"><span class="d">${esc(s.d?fmtShort.format(parseIso(s.d)):"")}</span><span class="t">${esc(s.t)}</span></div>`).join("")}</details>`:""}
    ${parts.length?gaugeHTML(st)+"<div style='height:18px'></div>"+parts.map(p=>`<div class="part" style="--suit:${suitOf(ch.mat)}"><h2>${tex(p.t)}</h2><p class="muted">${p.cartes.length} cartes, fais glisser</p>
-     <div class="rail">${p.cartes.map((c,i)=>`<article class="lc"><div class="k">${tex(c.k)}</div><p>${tex(c.v)}</p>${c.n?`<p class="lcn">${esc(c.n)}</p>`:""}${c.w?`<p class="lcw">${esc(c.w)}</p>`:""}${c.s&&c.s!==ch.src?srcBadge(c.s):""}${isProg(ch)&&c.id?`<button class="hidec linkbtn" type="button" data-id="${esc(c.id)}">Masquer</button>`:""}<span class="num">${i+1} / ${p.cartes.length}</span></article>`).join("")}</div></div>`).join("")
+     <div class="rail">${p.cartes.map((c,i)=>`<article class="lc"><div class="k">${tex(c.k)}</div><p>${tex(c.v)}</p>${c.n?`<p class="lcn">${esc(c.n)}</p>`:""}${c.w?`<p class="lcw">${esc(c.w)}</p>`:""}${c.s&&c.s!==ch.src?srcBadge(c.s):""}${isProg(ch)&&c.id?`<button class="hidec linkbtn" type="button" data-id="${esc(c.id)}">${ADM()?"Masquer pour tous":"Masquer"}</button>`:""}<span class="num">${i+1} / ${p.cartes.length}</span></article>`).join("")}</div></div>`).join("")
      +`<button class="btn light" type="button" id="cPlay">Jouer ce chapitre</button>`
    :isProg(ch)?"":`<div class="empty2"><h2>Pas encore de cartes</h2><p>Envoie-moi les photos de ton cahier pour ce chapitre : je reprends les mots de ton prof.</p></div>`}
    ${atelierHTML(ch)}`;
@@ -1840,7 +1889,14 @@ const LG={ok:false,ref:null,rows:[],me:null,nick:cleanNick(LS.get("nick","")),di
 const mondayOf=d=>{const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()-((x.getDay()+6)%7));return x};
 const WEEK=isoOf(mondayOf(NOW));
 function weekSum(){const m=mondayOf(NOW);let s=0;for(let i=0;i<7;i++){const d=new Date(m);d.setDate(m.getDate()+i);s+=P.x[isoOf(d)]||0}return s}
-function totalXP(){return Object.values(P.x).reduce((a,b)=>a+(+b||0),0)}
+function giftSum(k){return Object.values(P.gx||{}).reduce((a,g)=>a+(g&&+g[k]>0?Math.min(+g[k],k==="xp"?1000:5000):0),0)}
+/* XP total : tout ce que tu as gagné depuis le début. Il ne baisse jamais. */
+function totalXP(){return Object.values(P.x).reduce((a,b)=>a+(+b||0),0)+giftSum("xp")}
+/* Pièces : 1 pièce par XP gagné, plus les cadeaux. On les dépense dans la boutique. */
+function coinsEarned(){return totalXP()+giftSum("co")}
+function coinsSpent(){return Object.values(P.buy||{}).reduce((a,b)=>a+(+b>0?+b:0),0)}
+function coins(){return coinsEarned()-coinsSpent()}
+const fmtN=n=>Number(n||0).toLocaleString("fr-FR");
 function streakNow(){let s=0;for(let i=0;i<400;i++){const d=new Date(NOW);d.setDate(d.getDate()-i);if(P.j[isoOf(d)])s++;else if(i>0)break}return s}
 function gainXP(n,el){
   const cur=P.x[TODAY_ISO]||0;let add=n;
@@ -1875,7 +1931,7 @@ function trophies(){
     {id:"quete",m:"Q",nom:"Trois sans-faute",cond:"Les 3 quêtes d’une même semaine",got:questWeeksFull()||!!P.t.quete}
   ];
 }
-function dosUnlocked(){const t=totalXP();return DOS.filter(d=>d.rw?!!(P.rw&&P.rw[d.rw]):t>=d.xp)}
+function dosUnlocked(){return DOS.filter(d=>owned(d))}
 let toastQ=[],toastOn=false;
 function toast(html){toastQ.push(html);if(!toastOn)nextToast()}
 function nextToast(){const el=$("#toast");const h=toastQ.shift();if(!h){toastOn=false;return}toastOn=true;el.innerHTML=h;void el.offsetWidth;el.classList.add("on");buzz(18);
@@ -1891,7 +1947,7 @@ function checkRewards(silent){
 }
 /* Ligne de classement : chacun n'écrit que la sienne (ligue/<son id>) */
 function lgRow(){const me=LG.me||{};const df=P.df[TODAY_ISO];
-  return {nick:LG.nick,av:avData(),avk:avK(),cl:(P.pf&&P.pf.cl)||"",sk:{ch:chromaNow(),w:(P.sk&&P.sk.w)||""},mo:{[MON]:monthSum(MON),[PMON]:monthSum(PMON)},rx:rxClean(LG.myRx),sem:WEEK,xp:weekSum(),tot:totalXP(),div:LG.div||0,dos:P.dos||"classique",tr:Object.keys(P.t).slice(0,20),
+  return {nick:LG.nick,av:avData(),avk:avK(),cl:(P.pf&&P.pf.cl)||"",sk:{ch:chromaNow(),w:(P.sk&&P.sk.w)||""},mo:{[MON]:monthSum(MON),[PMON]:monthSum(PMON)},rx:rxClean(LG.myRx),sem:WEEK,xp:weekSum(),tot:totalXP(),div:LG.div||0,dos:P.dos||"classique",tr:Object.keys(P.t).slice(0,20),nch:Object.keys(IMP.mine||{}).length+((IMP.pub&&IMP.pub[UID])||[]).length,
     jour:df?{d:TODAY_ISO,s:df.s,ms:df.ms}:(me.jour&&me.jour.d===TODAY_ISO?me.jour:null),res:LG.res||null,codes:["HUB",...myCodes()],mesLigues:(P.lg&&P.lg.mine)||{},upd:Date.now()}}
 function lgPush(now){if(!LG.ref||!LG.nick||LG.ro)return;clearTimeout(LG.t);
   const go=async()=>{const row=lgRow();try{await LG.ref.set(row);LG.me=row}catch(e){if(e&&(e.code==="invalid_argument"||e.code==="not_granted")){LG.ro=true;guestOn();if(view==="ligue"&&!LG.defi)renderLigue()}}};
@@ -1920,7 +1976,8 @@ function lgRanking(){const rows=LG.rows.filter(r=>r.nick&&(inCur(r)||r.id===UID)
   return rows.map(r=>Object.assign({},r,{wx:xpOf(r),me:r.id===UID,div:r.id===UID?LG.div:(+r.div||0),dos:r.id===UID?(P.dos||"classique"):(r.dos||"classique")})).sort((a,b)=>b.wx-a.wx||String(a.nick).localeCompare(String(b.nick)))}
 function weekLabel(){const m=mondayOf(NOW),e=new Date(m);e.setDate(m.getDate()+6);const left=Math.max(0,Math.round((e-new Date(NOW.getFullYear(),NOW.getMonth(),NOW.getDate()))/864e5));
   return `Semaine du ${m.getDate()} ${MOIS[m.getMonth()]} · ${left?"fin dans "+left+" j":"dernier jour"}`}
-function defiQs(){const all=Object.values(C.qs).filter(x=>!x.ch._doc||(x.ch.vis||"hub")==="hub").map(x=>x.q).filter(q=>q&&q.ok&&(q.no||[]).length).sort((a,b)=>a.id<b.id?-1:1);
+const DEFI={pool:null,req:false};function defiLoad(){if(DEFI.req||typeof fetch!=="function")return;DEFI.req=true;fetch("prog/defi.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(Array.isArray(j)&&j.length>=10){DEFI.pool=j;if(view==="ligue"&&!LG.defi)renderLigue()}else DEFI.req=false}).catch(()=>{DEFI.req=false})}
+function defiQs(){defiLoad();const all=(DEFI.pool||Object.values(C.qs).filter(x=>!x.ch._doc||(x.ch.vis||"hub")==="hub").map(x=>x.q)).filter(q=>q&&q.ok&&(q.no||[]).length).sort((a,b)=>a.id<b.id?-1:1);
   let seed=0;for(const ch of TODAY_ISO)seed=(seed*31+ch.charCodeAt(0))|0;const r=rng(seed);
   return sshuffle(all,r).slice(0,10).map(q=>({q,opts:optsOf(q,r)}))}
 function renderLigue(){
@@ -1929,12 +1986,12 @@ function renderLigue(){
   if(!C.ready){box.innerHTML=`<p class="loading">${dbState==="off"?"Ouvre la page depuis claude.ai, connecté, pour voir la ligue.":"Chargement de la ligue…"}</p>`;return}
   if(!LG.ok){box.innerHTML=`<div class="lgtop"><h1>Ligue</h1></div><p class="guestnote"><b>Mode invité.</b> Connecte-toi pour apparaître dans le classement. En attendant, défie tes amis avec un code : ils jouent les mêmes questions que toi.</p>`+friendsHTML()+shopHTML(totalXP());bindFriends();bindShop();return}
   const rk=lgRanking(),meI=rk.findIndex(r=>r.me),wk=weekSum(),tot=totalXP(),today=P.x[TODAY_ISO]||0;
-  const un=dosUnlocked().filter(d=>!d.rw),nx=DOS.find(d=>!d.rw&&tot<d.xp),prevX=un[un.length-1].xp;
+  const cn=coins(),nx=DOS.find(d=>!d.rw&&!owned(d));
   let h=`<div class="lgtop"><h1>Ligue</h1>${LG.nick?`<span class="dv" data-v="${LG.div}">${DIVS[LG.div]}</span>`:""}</div><p class="lgsub">${weekLabel()}</p>`+(LG.nick?lgPickHTML():"");
   const pm=mondayOf(NOW);pm.setDate(pm.getDate()-7);
   if(LG.res&&LG.res.sem===isoOf(pm)){const r=LG.res;h+=`<p class="lgres">Semaine passée : <b>${r.rk?r.rk+(r.rk===1?"er":"e")+" sur "+r.n:"pas classé"}</b> avec ${r.xp} XP. ${r.mv>0?"Tu montes en <b>"+DIVS[LG.div]+"</b>.":r.mv<0?"Tu redescends en "+DIVS[LG.div]+" : une donne par soir suffit pour remonter.":"Tu restes en "+DIVS[LG.div]+"."}</p>`}
   if(!LG.nick){
-    h+=`<div class="lgjoin"><h2>Rejoins la ligue</h2><p>Chaque carte, duel et défi te rapporte des points. Le classement repart à zéro chaque lundi.</p>
+    h+=`<div class="lgjoin"><h2>Rejoins la ligue</h2><p>Chaque carte, duel et défi te rapporte de l’XP. Le classement de la semaine repart à zéro chaque lundi, ton XP total et tes pièces restent.</p>
      <label class="lab" for="lgNick">Ton pseudo</label><div class="olrow"><input id="lgNick" class="inp" maxlength="16" autocomplete="off" value="${esc(OL.nick||"")}" placeholder="Ex. Jeremy"><button class="btn" type="button" id="lgJoin">Rejoindre</button></div><p class="olerr" id="lgErr" role="alert"></p></div>`;
   } else {
     h+=`<div class="lgme"><span class="rk">${meI+1}<small>${meI===0?"er":"e"}</small></span><b>${esc(LG.nick)}</b><span class="xp">${wk}<small>XP cette semaine</small></span><span>${today>=CAP?"Plafond du jour atteint":"Aujourd’hui : "+today+" / "+CAP+" XP"}</span></div>
@@ -1957,7 +2014,8 @@ function renderLigue(){
        :`<p>Pas assez de questions de duel pour un défi.</p>`)+
     duelHTML()+(drows.length?`<ol class="dlist">${drows.slice(0,6).map((r,i)=>`<li class="${r.me?"me":""}"><span class="r">${i+1}</span><span class="dn"></span><span>${r.s}/10 · ${(r.ms/1000).toFixed(1).replace(".",",")} s</span></li>`).join("")}</ol>`:"")+`</div>`;
   h+=friendsHTML();
-  if(nx)h+=`<div class="sec"><h2>Boutique</h2><span>${tot} XP au total</span></div><div class="nextd"><i class="dosv" data-d="${nx.id}"></i><b>Encore ${nx.xp-tot} XP pour « ${esc(nx.nom)} »</b><span class="bar" style="--p:${((tot-prevX)/(nx.xp-prevX)).toFixed(3)}"><i></i></span></div>`;
+  h+=`<div class="sec"><h2>XP et pièces</h2></div>`+xpExplainHTML();
+  if(nx)h+=`<div class="sec"><h2>Boutique</h2><span>${fmtN(cn)} pièces</span></div><div class="nextd"><i class="dosv" data-d="${nx.id}"></i><b>${cn>=nx.xp?"Tu peux acheter « "+esc(nx.nom)+" » : touche-le dans la boutique":"Encore "+fmtN(nx.xp-cn)+" pièces pour « "+esc(nx.nom)+" »"}</b><span class="bar" style="--p:${Math.min(1,cn/nx.xp).toFixed(3)}"><i></i></span></div>`;
   h+=shopHTML(tot,!nx);
   const tr=trophies();
   h+=`<div class="sec"><h2>Trophées</h2><span>${tr.filter(t=>t.got).length} / ${tr.length}</span></div><div class="trog">${tr.map(t=>`<div class="tro${t.got?" got":""}"><i>${esc(t.m)}</i><b>${esc(t.nom)}</b><small>${esc(t.cond)}</small></div>`).join("")}</div>`;
@@ -1966,6 +2024,7 @@ function renderLigue(){
     <li><b>Duel</b> : 1 XP par bonne réponse, 5 XP de bonus pour un 10/10.</li>
     <li><b>Défi du jour</b> : 2 XP par bonne réponse. <b>Exercice corrigé terminé</b> : 3 XP.</li>
     <li><b>Série</b> : 10 XP au premier point du jour si tu as joué la veille.</li>
+    <li><b>Pièces</b> : chaque XP gagné te donne aussi 1 pièce. Les pièces s’achètent rien, elles se gagnent, et elles ne disparaissent jamais : tu les dépenses dans la boutique quand tu veux.</li>
     <li>Plafond de ${CAP} XP par jour. Chaque lundi, la première moitié du classement monte d’une division (100 XP minimum), et ceux à 0 XP descendent.</li></ul></details>`;
   h+=INVITE_HELP_F();
   box.innerHTML=h;
@@ -2027,11 +2086,12 @@ const slug=t=>String(t).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").re
 const PAL=["#5B4B8A","#2F6F73","#8A5A2B","#3E6B2F","#7A2E4D","#2C4F8A","#8C3B2E","#4D5B66"];
 const suitFor=k=>PAL[parseInt(hash(String(k)),36)%PAL.length];
 const clip=(t,n)=>String(t==null?"":t).replace(/[\u0000-\u0008\u000b-\u001f]/g,"").trim().slice(0,n);
-function visibleImp(ch,author){if(author===UID)return true;const v=ch.vis||"hub";if(v==="hub")return true;if(v.startsWith("ligue:"))return myCodes().includes(v.slice(6));return false}
+function visibleImp(ch,author){if(author===UID)return true;const v=ch.vis||"hub";if(v==="hub")return false;if(v.startsWith("ligue:"))return myCodes().includes(v.slice(6));return false}
 function mergeAll(){
-  C.M=Object.assign({},C.M0||{});C.chaps=Object.assign({},C.chaps0||{});
+  C.M=Object.assign({},C.M0||{});C.chaps=Object.assign({},(IMP.isOwner||UID==="demo")?(C.chaps0||{}):{});
   const addMat=(id,nom,court,suit)=>{if(!id||C.M[id])return;C.M[id]={id,nom:clip(nom||id,40),court:clip(court||nom||id,18),suit:/^#[0-9a-f]{6}$/i.test(suit||"")?suit:suitFor(id),ordre:100+Object.keys(C.M).length}};
   progAdd(addMat);
+  IMP.ech=IMP.ech.map(e=>{if(!e||e.mat||!e.matNom)return e;const M=resolveMat("",e.matNom);if(Array.isArray(P.mats)&&P.mats.length&&!P.mats.includes(M.id))P.mats.push(M.id);return Object.assign({},e,{mat:M.id,matNom:M.nom})});
   const addCh=(ch,author,own)=>{if(!ch||!ch.id||!ch.mat)return;addMat(ch.mat,ch.matNom,ch.matCourt,ch.suit);C.chaps["u."+ch.id]=Object.assign({},ch,{id:"u."+ch.id,_doc:ch.id,_author:author,_own:own})};
   Object.entries(IMP.pub).forEach(([a,list])=>list.forEach(ch=>{if(visibleImp(ch,a))addCh(ch,a,a===UID)}));
   Object.values(IMP.mine).forEach(ch=>addCh(Object.assign({},ch,{vis:"moi"}),UID,true));
@@ -2050,7 +2110,7 @@ async function impInit(){
   if(!DB)return;
   try{IMP.sample=await window.claude?.use?.("sample")}catch(e){IMP.sample=null}
   if(IMP.sample){try{IMP.caps=await IMP.sample.limits()}catch(e){IMP.caps=null}}
-  progInit();
+  progInit();defiLoad();
   DB.collection("fiches").onSnapshot(s=>{FI.prete={};s.docs.forEach(d=>{const v=d.data();if(v)FI.prete[d.id]=Object.assign({},v,{id:d.id})});FI.loaded=true;if(view==="fiches"&&(FI.mode==="list"||FI.mode==="read"))renderFiches()},()=>{FI.loaded=true});
   if(!UID)return;
   DB.collection("biblio").onSnapshot(s=>{s.docs.forEach(d=>{const a=d.id;if(IMP.subs[a])return;IMP.subs[a]=1;
@@ -2061,7 +2121,13 @@ async function impInit(){
   DB.collection("data/users/"+UID+"/fiche").onSnapshot(s=>{FI.mine={};s.docs.forEach(d=>{FI.mine[d.id]=Object.assign({},d.data()||{},{id:d.id})});fiExt();if(view==="fiches"&&FI.mode==="list")renderFiches()},()=>{});
   DB.collection("data/users/"+UID+"/chap").onSnapshot(s=>{IMP.mine={};s.docs.forEach(d=>{IMP.mine[d.id]=Object.assign({},d.data()||{},{id:d.id})});rebuild()},()=>{});
   DB.collection("data/users/"+UID+"/ech").onSnapshot(s=>{IMP.ech=s.docs.map(d=>Object.assign({},d.data()||{},{id:d.id}));rebuild()},()=>{});
+  DB.collection("data/users/"+UID+"/cadeau").onSnapshot(s=>giftsIn(s.docs.map(d=>Object.assign({},d.data()||{},{id:d.id}))),()=>{});
 }
+function giftsIn(list){let n=0;P.gx=P.gx||{};
+  list.forEach(g=>{if(!g||!g.id||P.gx[g.id])return;const xp=Math.max(0,Math.min(1000,Math.round(+g.xp||0))),co=Math.max(0,Math.min(5000,Math.round(+g.co||0)));if(!xp&&!co)return;
+    P.gx[g.id]={xp,co,d:String(g.date||new Date().toISOString()).slice(0,10),r:clip(g.raison,80)};n++;
+    toast(`<span class="tm">+</span><div><b>Cadeau de l’admin${xp?" : +"+fmtN(xp)+" XP":""}${co?(xp?", ":" : ")+"+"+fmtN(co)+" pièces":""}</b><span>${esc(clip(g.raison,80)||"Bravo !")}</span></div>`)});
+  if(n){saveP();lgPush();checkRewards(true);if(C.ready&&!inDuel&&view!=="jeu")render()}}
 function openImport(tab){IMPV.need=true;if(tab)IMPV.tab=tab;if(view!=="import")IMPV.prev=view;go("import")}
 const STOPW=["et","de","des","du","la","le","les","d","l","llc","spe","specialite","option"];
 const matToks=t=>String(t).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").split(/[^a-z0-9]+/).filter(w=>w&&!STOPW.includes(w));
@@ -2091,7 +2157,7 @@ function renderImport(){
 }
 // Étape 4 : visibilité des contenus créés par les utilisateurs.
 // Le propriétaire conserve la publication publique.
-function canPublishHub(){return !GUEST&&IMP.isOwner===true}
+function canPublishHub(){return false}
 function validUserVis(v){
   if(v==="moi")return true;
   if(GUEST)return false;
@@ -2297,21 +2363,26 @@ function impAuto(z){
    <div class="exrow"><button class="btn light" type="button" id="aCopy">Copier le texte</button><span class="istat" id="aStat" role="status"></span></div>
    <label class="lab" for="aJson" style="margin-top:18px">La réponse de Claude</label><textarea id="aJson" class="inp" placeholder="Colle ici le JSON" style="min-height:120px"></textarea>
    ${GUEST?"":visField("av","moi")}
+   
    <div class="exrow"><button class="btn light" type="button" id="aGo">Enregistrer</button><span class="istat" id="aJStat" role="status"></span></div>`;
-  $("#aTxt").value=autoPromptJSON();
+  const AC=IMPV.autoCours;$("#aTxt").value=autoPromptJSON()+(AC?`\n\nMatière : ${AC.matNom}. Chapitre : ${AC.titre}.\nMon cours (copié de Pronote) :\n${AC.texte}`:"");
+  if(AC){$("#aStat").textContent="Ton cours « "+AC.titre+" » est déjà dans le texte : copie-le tel quel.";IMPV.autoCours=null}
   $("#aCopy").onclick=async()=>{const t=$("#aTxt");try{await navigator.clipboard.writeText(t.value);$("#aStat").textContent="Copié."}catch(e){t.focus();t.select();$("#aStat").textContent="Sélectionné : copie-le avec Ctrl+C."}};
   $("#aGo").onclick=async()=>{const st=$("#aJStat");st.className="istat";let j;
     try{const raw=$("#aJson").value;const i=raw.indexOf("{"),k=raw.lastIndexOf("}");j=JSON.parse(raw.slice(i,k+1))}catch(e){st.className="istat err";st.textContent="Je ne lis pas ce texte. Colle exactement le bloc JSON de Claude.";return}
-    const vis=GUEST?"moi":readVis("av");let nC=0,nE=0;$("#aGo").disabled=true;st.textContent="Enregistrement…";
-    try{for(const ch of (Array.isArray(j.chapitres)?j.chapitres:[]).slice(0,10)){const M=resolveMat(ch.mat,ch.matNom||ch.mat);const cid=hash(UID||"x").slice(0,4)+Date.now().toString(36)+nC;
+    const vis=GUEST?"moi":readVis("av"),ALL=!!(IMP.isOwner&&$("#aAll")&&$("#aAll").checked);let nC=0,nE=0;$("#aGo").disabled=true;st.textContent="Enregistrement…";
+    try{for(const ch of (Array.isArray(j.chapitres)?j.chapitres:[]).slice(0,10)){const M=resolveMat(ch.mat,ch.matNom||ch.mat);const okId=ALL&&/^[a-z0-9][a-z0-9-]{1,40}$/.test(String(ch.id||""));const cid=okId?String(ch.id):(ALL?M.id.slice(0,6)+"-"+Date.now().toString(36)+nC:hash(UID||"x").slice(0,4)+Date.now().toString(36)+nC);
         const pq=(Array.isArray(ch.paquets)?ch.paquets:[]).slice(0,4).map((p,pi)=>({k:"p"+pi,nom:clip(p&&p.nom,40)||"Cartes",cartes:(Array.isArray(p&&p.cartes)?p.cartes:[]).filter(c=>c&&c.r&&c.v).slice(0,30).map((c,ci)=>({id:cid+"."+pi+"."+ci,r:clip(c.r,160),v:clip(c.v,400),q:clip(c.q,60)}))})).filter(p=>p.cartes.length);
         const qz=(Array.isArray(ch.quiz)?ch.quiz:[]).filter(q=>q&&q.q&&q.ok&&Array.isArray(q.no)&&q.no.length>=2).slice(0,15).map((q,qi)=>({id:cid+".q"+qi,q:clip(q.q,240),ok:clip(q.ok,160),no:q.no.slice(0,3).map(x=>clip(x,160)),why:clip(q.why,300)}));
         if(!pq.length&&!qz.length)continue;const titre=clip(ch.titre,80)||"Chapitre importé";
         const doc={id:cid,mat:M.id,matNom:M.nom,matCourt:(C.M[M.id]&&C.M[M.id].court)||M.nom.slice(0,14),suit:(C.M[M.id]&&/^#/.test(C.M[M.id].suit)&&C.M[M.id].suit)||suitFor(M.id),titre,court:clip(ch.court,24)||titre.slice(0,24),vis,auteur:myNick(),src:"import",etat:"importé",cree:new Date().toISOString(),ordre:Date.now(),paquets:pq,quiz:qz.length?[{nom:"Quiz · "+titre.slice(0,30),d:titre,qs:qz}]:[]};
-        const w=await putDoc("chap",vis==="moi",cid,doc);if(w==="db"){if(vis==="moi")IMP.mine[cid]=doc;else IMP.pub[UID]=(IMP.pub[UID]||[]).filter(x=>x.id!==cid).concat([doc])}
+        if(ALL){const old=(C.chaps0&&C.chaps0[cid])||{};const sd=Object.assign({},old,{id:cid,mat:M.id,titre,court:doc.court,etat:clip(ch.etat,40)||old.etat||"",src:old.src||"import",ordre:old.ordre!=null?old.ordre:Date.now()%1e6,paquets:pq,quiz:doc.quiz});delete sd.vis;
+          await DB.doc("chapitres/"+cid).set(sd);C.chaps0=Object.assign({},C.chaps0||{},{[cid]:Object.assign({},sd)})}
+        else{const w=await putDoc("chap",vis==="moi",cid,doc);if(w==="db"){if(vis==="moi")IMP.mine[cid]=doc;else IMP.pub[UID]=(IMP.pub[UID]||[]).filter(x=>x.id!==cid).concat([doc])}}
         if(Array.isArray(P.mats)&&P.mats.length&&!P.mats.includes(M.id)){P.mats.push(M.id);saveP()}nC++}
       for(const e of (Array.isArray(j.echeances)?j.echeances:[]).slice(0,40)){if(!e||!/^\d{4}-\d{2}-\d{2}$/.test(e.date)||e.date<TODAY_ISO||!e.titre)continue;const M=resolveMat(e.mat,e.matNom||e.mat);
         const row={date:e.date,mat:M.id,matNom:M.nom,type:["controle","oral","devoir"].includes(e.type)?e.type:"devoir",titre:clip(e.titre,90),src:"import"};const id="i"+hash(row.date+row.mat+row.titre);row.id=id;
+        if(ALL){await DB.doc("echeances/"+id).set(row);C.ech0=(C.ech0||[]).filter(x=>x.id!==id).concat([row]);nE++;continue}
         const w=await putDoc("ech",true,id,row);if(w!=="local")IMP.ech=IMP.ech.filter(x=>x.id!==id).concat([row]);nE++}
       mergeAll();reindex();st.textContent=(nC||nE)?`${nC} chapitre${nC>1?"s":""} et ${nE} date${nE>1?"s":""} enregistrés.`:"Rien à enregistrer dans ce texte.";if(nC||nE)toast(`<span class="tm">+</span><div><b>Import terminé</b><span>${nC} chapitre${nC>1?"s":""} · ${nE} date${nE>1?"s":""}</span></div>`)}
     catch(e){st.className="istat err";st.textContent=writeErr(e)}finally{$("#aGo").disabled=false}};
@@ -2342,9 +2413,15 @@ function impMes(z){
 }
 
 /* ================= FICHIER PONT PRONOTE ================= */
+function pfClean(j){if(!j||j.format!=="pont-pronote"||!Array.isArray(j.echeances)||!Array.isArray(j.seances))throw new Error("format");
+  j=Object.assign({},j);
+  j.echeances=j.echeances.filter(e=>e&&/^\d{4}-\d{2}-\d{2}$/.test(e.date)&&e.date>=TODAY_ISO).slice(0,80).map(e=>({id:clip(e.id,40),date:e.date,matNom:clip(e.matNom,40),type:["controle","oral","devoir"].includes(e.type)?e.type:"devoir",titre:clip(e.titre,90)||"Travail à faire"}));
+  j.seances=j.seances.filter(x=>x&&x.matNom).slice(0,60).map(x=>({date:/^\d{4}-\d{2}-\d{2}$/.test(x.date)?x.date:TODAY_ISO,matNom:clip(x.matNom,40),titre:clip(x.titre,120)||"Séance",texte:clip(x.texte,8000)}));
+  return j}
 function impPronote(z){
+  if(!IMPV.pfile&&!IMPV.pAsk&&DB&&UID&&!GUEST){IMPV.pAsk=1;DB.doc("data/users/"+UID+"/pont").get().then(s=>{const j=s.exists?s.data():null;if(j){try{IMPV.pfile=pfClean(j);IMPV.pfDb=1;if(IMPV.tab==="pronote"||$("#pfIn"))impPronote(z)}catch(e){}}}).catch(()=>{})}
   const F=IMPV.pfile,cs=myCodes();
-  let h=`<p class="dlnote"><b>Pont Pronote</b> est un petit programme pour PC Windows qui se connecte à ton Pronote avec le QR code, comme Papillon, et prépare un fichier pour ce hub. Ton mot de passe reste sur ton PC. Demande le programme à celui qui t’a invité ici.</p>
+  let h=`<p class="dlnote"><b>Pont Pronote 2</b> est un petit programme pour PC Windows qui se connecte à ton Pronote avec le QR code, comme Papillon. Tu cliques sur « Synchroniser » : tes devoirs et contrôles arrivent dans ton agenda ici, tout seuls, et tes contenus de cours s’affichent ci-dessous. Ton mot de passe Pronote reste sur ton PC.${IMPV.pfDb?"":" Tu peux aussi choisir le fichier qu’il range dans Documents › Pont Pronote."}</p>
    <label class="pfile"><input type="file" id="pfIn" accept=".json,application/json"><b>${F?"Choisir un autre fichier":"Choisir mon fichier Pronote"}</b>Il s’appelle pronote-AAAA-MM-JJ.json, dans Documents › Pont Pronote</label>
    <p class="istat" id="pfStat" role="status"></p>`;
   if(F){
@@ -2353,7 +2430,7 @@ function impPronote(z){
       return Object.assign({},e,{i,mid:m.id,mnom:m.nom,hid:id,etat:!old?"new":old.date!==e.date?"mv":"ok",avant:old&&old.date})});
     IMPV.prows=rows;
     const nNew=rows.filter(r=>r.etat==="new").length,nMv=rows.filter(r=>r.etat==="mv").length;
-    h+=`<div class="sec"><h2>Tes dates</h2><span>fichier du ${new Date(F.exporte).toLocaleDateString("fr-FR",{day:"numeric",month:"long"})}</span></div>
+    h+=`<div class="sec"><h2>Tes dates</h2><span>${IMPV.pfDb?"synchro":"fichier"} du ${new Date(F.exporte).toLocaleDateString("fr-FR",{day:"numeric",month:"long"})}</span></div>
       <p class="note" style="margin:0 0 6px">${nNew} nouvelle${nNew>1?"s":""}${nMv?" · "+nMv+" déplacée"+(nMv>1?"s":""):""} · ${rows.length-nNew-nMv} déjà dans ton agenda</p>
       <div id="pfList">${rows.map(r=>`<label class="eli"><input type="checkbox" data-i="${r.i}" ${r.etat==="ok"?"":"checked"}><span><b>${esc(r.mnom)}</b> · ${esc(r.titre)}${r.etat==="new"?'<span class="ptag new">nouveau</span>':r.etat==="mv"?'<span class="ptag mv">déplacé</span>':'<span class="ptag ok">déjà là</span>'}<small>${esc(r.type==="controle"?"Contrôle":r.type==="oral"?"Oral":"Devoir")} · ${fmtShort.format(parseIso(r.date))}${r.etat==="mv"?" (avant : "+fmtShort.format(parseIso(r.avant))+")":""}</small></span><span></span></label>`).join("")||'<p class="muted">Aucune date à venir dans ce fichier.</p>'}</div>
       ${cs.length?`<label class="share"><input type="checkbox" id="pfShare"> Partager mes contrôles et oraux avec ma ligue <select id="pfLig">${cs.map(c=>`<option value="${esc(c)}">${esc(ligName(c))}</option>`).join("")}</select></label><p class="note" style="margin:4px 0 0">Mode classe : tes camarades de cette ligue voient ces dates dans leurs contrôles, avec ton pseudo. Tes devoirs restent privés.</p>`:""}
@@ -2367,7 +2444,7 @@ function impPronote(z){
       if(!j||j.format!=="pont-pronote"||!Array.isArray(j.echeances)||!Array.isArray(j.seances))throw new Error("format");
       j.echeances=j.echeances.filter(e=>e&&/^\d{4}-\d{2}-\d{2}$/.test(e.date)&&e.date>=TODAY_ISO).slice(0,80).map(e=>({id:clip(e.id,40),date:e.date,matNom:clip(e.matNom,40),type:["controle","oral","devoir"].includes(e.type)?e.type:"devoir",titre:clip(e.titre,90)||"Travail à faire"}));
       j.seances=j.seances.filter(x=>x&&x.matNom).slice(0,60).map(x=>({date:/^\d{4}-\d{2}-\d{2}$/.test(x.date)?x.date:TODAY_ISO,matNom:clip(x.matNom,40),titre:clip(x.titre,120)||"Séance",texte:clip(x.texte,8000)}));
-      IMPV.pfile=j;impPronote(z)}
+      IMPV.pfile=pfClean(j);IMPV.pfDb=0;impPronote(z)}
     catch(err){st.className="istat err";st.textContent="Ce fichier n’est pas un export de Pont Pronote."}};
   if(!F)return;
   $("#pfSave")&&($("#pfSave").onclick=async()=>{const st=$("#pfSStat");const pick=[...z.querySelectorAll("#pfList input:checked")].map(i=>IMPV.prows[+i.dataset.i]);
@@ -2381,6 +2458,7 @@ function impPronote(z){
       mergeAll();reindex();toast(`<span class="tm">${pick.length}</span><div><b>Agenda à jour</b><span>${share?"partagé avec « "+esc(ligName(share))+" »":"depuis ton Pronote"}</span></div>`);impPronote(z)}
     catch(e){$("#pfSave").disabled=false;st.className="istat err";st.textContent=writeErr(e)}});
   z.querySelectorAll(".sea [data-s]").forEach(b=>b.onclick=()=>{const x=F.seances[+b.dataset.s],m=resolveMat("",x.matNom);
+    if(!IMP.sample){IMPV.autoCours={matNom:m.nom,titre:x.titre,texte:x.texte};IMPV.tab="auto";renderImport();return}
     IMPV.prefill={mat:m.id,matNom:m.nom,titre:x.titre,texte:x.texte};IMPV.draft=null;IMPV.tab="cours";renderImport()});
 }
 
@@ -2506,7 +2584,7 @@ function avParts(r){const a=r&&typeof r.av==="string"&&/^data:image\/(jpeg|png|w
 function avHTML(r,cls){const {col,inner}=avParts(r);
   const chx=r&&r.sk&&CHR.includes(r.sk.ch)?r.sk.ch:"";
   return `<span class="av ${cls||""}" style="--av:${col}"${chx?` data-ch="${chx}"`:""}>${inner}</span>`}
-function paintMyAv(){const t=$("#tAv");if(!t)return;const {col,inner}=avParts({nick:myNick()||"Moi",av:avData(),avk:avK()});t.style.setProperty("--av",col);t.innerHTML=inner}
+function paintMyAv(){const tc=$("#tCoin");if(tc){tc.innerHTML=`<i aria-hidden="true"></i>${fmtN(coins())}`;tc.onclick=()=>go("ligue")}const t=$("#tAv");if(!t)return;const {col,inner}=avParts({nick:myNick()||"Moi",av:avData(),avk:avK()});t.style.setProperty("--av",col);t.innerHTML=inner}
 /* Lecture d'image sans blob: (la page publiée refuse les images blob:) */
 function readDataURL(f){return new Promise((ok,ko)=>{const r=new FileReader();r.onload=()=>ok(r.result);r.onerror=()=>ko(r.error||new Error("lecture"));r.readAsDataURL(f)})}
 async function loadPic(f){
@@ -2634,7 +2712,8 @@ function renderProfil(){const box=$("#pf");P.pf=P.pf||{};
    <label class="lab" for="pfCl">Classe <span>(facultatif)</span></label><input id="pfCl" class="inp" maxlength="16" autocomplete="off" placeholder="Ex. 1re G3">
    <div class="exrow"><button class="btn light" type="button" id="pfSave">Enregistrer</button><span class="istat" id="pfStat" role="status"></span></div></div>
    <div class="sec"><h2>En chiffres</h2></div>
-   <div class="pfstat"><div><b>${tot}</b><span>XP au total</span></div><div><b>${streakNow()}</b><span>soirs d’affilée</span></div><div><b>${tr}</b><span>trophées</span></div></div>
+   ${xpExplainHTML()}<div class="pfstat"><div><b>${streakNow()}</b><span>soirs d’affilée</span></div><div><b>${tr}</b><span>trophées</span></div><div><b>${fmtN(giftSum("xp"))}</b><span>XP en cadeau</span></div></div>
+   ${IMP.isOwner?`<div class="sec"><h2>Administration</h2></div><div class="admsw"><label class="sw"><input type="checkbox" id="pfAdm" ${ADM()?"checked":""}><span></span></label><div><b>Mode admin</b><small>${ADM()?"Activé sur cet appareil.":"Désactivé : tu vois le site comme un élève."}</small></div></div>${ADM()?`<div class="exrow"><button class="btn light" type="button" id="pfAdmGo">Ouvrir le panneau admin</button></div>`:""}`:""}
    <div class="sec"><h2>Affichage</h2></div>
    <div class="pick sm" id="pfTheme">${[["","Sombre"],["clair","Clair"],["auto","Comme mon téléphone"]].map(([k,l])=>`<button type="button" class="${(P.theme||"")===k?"on":""}" data-k="${k}">${l}</button>`).join("")}</div>
    <div class="sec"><h2>Mes matières</h2><span>${(C.mats||[]).length}</span></div>
@@ -2647,6 +2726,8 @@ function renderProfil(){const box=$("#pf");P.pf=P.pf||{};
    <div class="row"><button class="linkbtn" type="button" id="pfCode">Nouveau code de secours</button><button class="linkbtn" type="button" id="pfPwd">Changer mon mot de passe</button><button class="linkbtn" type="button" id="pfExp">Exporter mes données</button><label class="linkbtn" style="cursor:pointer">Importer un export<input type="file" id="pfImpJ" accept=".json,application/json" hidden></label></div>
    <div id="pfAcctBox"></div><p class="istat" id="pfAcct" role="status"></p></div>`;
   $("#pfNick").value=n;$("#pfCl").value=P.pf.cl||"";
+  if($("#pfAdm"))$("#pfAdm").onchange=e=>{LS.set("adm",!!e.target.checked);mergeAll();reindex();renderProfil()};
+  if($("#pfAdmGo"))$("#pfAdmGo").onclick=()=>go("admin");
   $("#pfBack").onclick=()=>go(LS.get("view","table")==="profil"?"table":LS.get("view","table"));
   avTabsWire();avWire();
   $("#pfSave").onclick=async()=>{const nk=cleanNick($("#pfNick").value),cl=clip($("#pfCl").value,16),st=$("#pfStat");
@@ -2935,7 +3016,13 @@ const BF=[{id:"",nom:"Pilule",xp:0,r:"999px"},{id:"arrondi",nom:"Arrondi",xp:60,
 const BC=[{id:"",nom:"Blanc",xp:0,c:"#FAFAF7"},{id:"or",nom:"Or",xp:120,c:"#F3D27A"},{id:"menthe",nom:"Menthe",xp:300,c:"#B9F0CF"},{id:"ciel",nom:"Ciel",xp:450,c:"#BFE6F7"},{id:"rose",nom:"Rose",xp:650,c:"#F7C6D6"},{id:"corail",nom:"Corail",xp:850,c:"#FFC7AE"},{id:"violet",nom:"Violet",xp:1000,c:"#D6CBFA"},{id:"saison",nom:"Saison",rw:"saison",c:"#F3D27A"}];
 const BX=[{id:"",nom:"Aucun",xp:0},{id:"rebond",nom:"Rebond",xp:80},{id:"vib",nom:"Vibration",xp:180},{id:"etincelles",nom:"Étincelles",xp:600}];
 const CHR=["bronze","argent","or","diamant"];
-const owned=it=>it.rw?!!(P.rw&&P.rw[it.rw]):totalXP()>=it.xp;
+[["dos",DOS],["w",WALLS],["bf",BF],["bc",BC],["bx",BX]].forEach(([k,L])=>L.forEach(it=>{it._k=k+":"+it.id}));
+/* Un objet est à toi s'il est gratuit, gagné (récompense de ligue) ou acheté avec tes pièces. */
+const owned=it=>it.rw?!!(P.rw&&P.rw[it.rw]):(!it.xp||!!(P.own&&P.own[it._k]));
+/* Passage aux pièces : ce que l'XP avait déjà débloqué reste à toi, sans rien payer. */
+function grandfather(t){P.own=P.own||{};[DOS,WALLS,BF,BC,BX].forEach(L=>L.forEach(it=>{if(!it.rw&&it.xp&&t>=it.xp)P.own[it._k]=1}))}
+if(!P.ownV){P.ownXP=totalXP();grandfather(P.ownXP);P.ownV=1;try{LS.set("prog",P)}catch(e){}}
+function buyItem(it){const k=it._k,price=+it.xp||0;if(owned(it)||it.rw)return true;if(coins()<price)return false;P.own[k]=1;P.buy[k]=price;saveP();return true}
 function chromaNow(){const c=P.sk&&P.sk.ch;const i=CHR.indexOf(c);if(i<0)return "";return CHR[Math.min(i,LG.nick&&!LG.ro?(LG.div||0):0)]}
 function applySkin(){const k=P.sk||{},b=document.body;
   b.dataset.wall=WALLS.find(w=>w.id===k.w&&owned(w))?k.w:"";
@@ -2946,9 +3033,9 @@ function shopCheck(silent){/* nouveaux objets débloqués par l'XP : une seule a
   const all=[...WALLS.map(x=>["w",x]),...BF.map(x=>["f",x]),...BC.map(x=>["c",x]),...BX.map(x=>["x",x])].filter(([t,x])=>x.id&&owned(x)).map(([t,x])=>t+":"+x.id);
   const seen=Array.isArray(P.shn)?P.shn:null;P.shn=all;if(!seen)return;const nw=all.filter(k=>!seen.includes(k));
   if(nw.length&&!silent){toast(`<span class="tm">${nw.length}</span><div><b>Nouveau dans la boutique</b><span>${nw.length>1?nw.length+" objets débloqués":"Un objet débloqué"} · Ligue</span></div>`);markLigue(true)}}
-function shopHTML(tot,head){const k=P.sk||{},tab=LG.shop||"dos",lock=(it)=>!owned(it),cost=it=>it.rw==="equipe"?"Objectif de ligue":it.rw==="saison"?"Podium de saison":it.xp+" XP";
-  const item=(kind,it,inner)=>{const on=(kind==="dos"?(P.dos||"classique"):(k[kind]||""))===it.id,lk=lock(it);return `<button type="button" class="${on?"on":""}${lk?" lock":""}" data-kind="${kind}" data-id="${esc(it.id)}" ${lk?'aria-disabled="true"':""} aria-label="${esc(it.nom)}${lk?", "+esc(cost(it)):""}">${inner}${on?"Choisi":lk?esc(cost(it)):esc(it.nom)}</button>`};
-  let h=(head===false?"":`<div class="sec"><h2>Boutique</h2><span>${tot} XP au total</span></div>`)+`<div class="pick sm" id="shopTabs">${[["dos","Dos de cartes"],["w","Fonds"],["b","Boutons"],["ch","Thèmes"]].map(([t,l])=>`<button type="button" class="${tab===t?"on":""}" data-t="${t}">${l}</button>`).join("")}</div>`;
+function shopHTML(tot,head){const k=P.sk||{},tab=LG.shop||"dos",lock=(it)=>!owned(it),cost=it=>it.rw==="equipe"?"Objectif de ligue":it.rw==="saison"?"Podium de saison":fmtN(it.xp)+" pièces";
+  const item=(kind,it,inner)=>{const on=(kind==="dos"?(P.dos||"classique"):(k[kind]||""))===it.id,lk=lock(it);return `<button type="button" class="${on?"on":""}${lk?" lock":""}" data-kind="${kind}" data-id="${esc(it.id)}" ${lk&&it.rw?'aria-disabled="true"':""} aria-label="${esc(it.nom)}${lk?(it.rw?", "+esc(cost(it)):", à acheter pour "+esc(cost(it))):""}">${inner}${on?"Choisi":lk?esc(cost(it)):esc(it.nom)}</button>`};
+  let h=(head===false?"":`<div class="sec"><h2>Boutique</h2><span>${fmtN(coins())} pièces</span></div>`)+`<div class="pick sm" id="shopTabs">${[["dos","Dos de cartes"],["w","Fonds"],["b","Boutons"],["ch","Thèmes"]].map(([t,l])=>`<button type="button" class="${tab===t?"on":""}" data-t="${t}">${l}</button>`).join("")}</div>`;
   if(tab==="dos")h+=`<div class="shop">${DOS.map(d=>item("dos",d,`<i class="dosv" data-d="${d.id}"></i>`)).join("")}</div>`;
   else if(tab==="w")h+=`<div class="shop">${WALLS.map(w=>item("w",w,`<i class="wallv" data-w="${w.id}"></i>`)).join("")}</div><p class="shopnote">Le fond s’affiche derrière tout le hub. Les sets Équipe et Saison se gagnent à plusieurs.</p>`;
   else if(tab==="b")h+=`<div class="shop wide" style="grid-template-columns:repeat(3,minmax(0,1fr))"><h4>Forme</h4>${BF.map(f=>item("bf",f,`<i class="bfv" style="border-radius:${f.r}">Jouer</i>`)).join("")}</div>
@@ -2962,6 +3049,11 @@ function shopHTML(tot,head){const k=P.sk||{},tab=LG.shop||"dos",lock=(it)=>!owne
 function bindShop(){const box=$("#lg");if(!box)return;
   box.querySelectorAll("#shopTabs button").forEach(b=>b.onclick=()=>{LG.shop=b.dataset.t;if(LG.ok)renderLigue();else{LG.ok=false;renderLigue()}});
   box.querySelectorAll(".shop button[data-kind]").forEach(b=>b.onclick=()=>{
+    const L={dos:DOS,w:WALLS,bf:BF,bc:BC,bx:BX}[b.dataset.kind],it=L&&L.find(x=>x.id===b.dataset.id);
+    if(b.classList.contains("lock")&&it&&!it.rw&&b.dataset.kind!=="ch"){const price=+it.xp||0,have=coins();
+      if(have>=price){if(!b.classList.contains("buy")){box.querySelectorAll(".shop button.buy").forEach(x=>{x.classList.remove("buy");x.lastChild.textContent=x.dataset.lab||x.lastChild.textContent});b.dataset.lab=b.lastChild.textContent;b.classList.add("buy");b.lastChild.textContent="Acheter ? "+fmtN(price);return}
+        buyItem(it);buzz(18);toast(`<span class="tm">✓</span><div><b>${esc(it.nom)} est à toi</b><span>−${fmtN(price)} pièces · il t’en reste ${fmtN(coins())}</span></div>`);b.classList.remove("lock","buy");}
+      else{buzz([8,60,8]);toast(`<span class="tm">·</span><div><b>Il te manque ${fmtN(price-have)} pièces</b><span>1 XP gagné = 1 pièce. Tes pièces : ${fmtN(have)}.</span></div>`);if(!reduce&&b.animate)b.animate([{transform:"translateX(0)"},{transform:"translateX(-5px)"},{transform:"translateX(4px)"},{transform:"none"}],{duration:260});return}}
     if(b.classList.contains("lock")){buzz([8,60,8]);if(!reduce&&b.animate)b.animate([{transform:"translateX(0)"},{transform:"translateX(-5px)"},{transform:"translateX(4px)"},{transform:"none"}],{duration:260});return}
     const kind=b.dataset.kind,id=b.dataset.id;
     if(kind==="dos"){P.dos=id;document.body.dataset.dos=id}else{P.sk=Object.assign({},P.sk||{});P.sk[kind]=id}
@@ -3356,6 +3448,141 @@ function bootDemo(){
   fiExt();onContent()}
 
 
+/* ================= XP ET PIÈCES : l'explication en trois compteurs ================= */
+function xpExplainHTML(){const t=totalXP(),w=weekSum(),c=coins();
+  return `<div class="xpx"><div><b>${fmtN(t)}</b><span>XP total</span><small>Tout ce que tu as gagné depuis le début. Il ne baisse jamais.</small></div>`+
+    `<div><b>${fmtN(w)}</b><span>XP de la semaine</span><small>Ton score de ligue. Il repart à 0 chaque lundi, ton total reste.</small></div>`+
+    `<div class="co"><b>${fmtN(c)}</b><span>Pièces</span><small>1 XP gagné = 1 pièce. Elles restent jusqu’à ce que tu les dépenses en boutique.</small></div></div>`}
+
+/* ================= MODE ADMIN ================= */
+const AD={need:true,tab:"el",users:null,sig:null,jour:null,mat:null,tid:null,give:null,busy:false};
+function admTime(ms){if(!ms)return "jamais";const d=Math.round((Date.now()-ms)/60000);if(d<2)return "à l’instant";if(d<60)return "il y a "+d+" min";const h=Math.round(d/60);if(h<24)return "il y a "+h+" h";const j=Math.round(h/24);return j<2?"hier":"il y a "+j+" jours"}
+const admDate=s=>{try{return new Date(s).toLocaleDateString("fr-FR",{day:"numeric",month:"short"})}catch(e){return ""}};
+const admUid=x=>/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(String(x||""));
+async function admUsers(force){if(AD.users&&!force)return AD.users;if(!window.P26||!window.P26.admin)throw Object.assign(new Error("Panneau admin indisponible ici."),{code:"unavailable"});
+  const raw=await window.P26.admin.users();
+  AD.users=raw.filter(u=>admUid(u.id)).map(u=>{const l=u.lig||{};return {id:u.id,pseudo:u.pseudo||"?",role:u.role,cree:u.cree,act:u.act||0,tot:+l.tot||0,sem:l.sem===WEEK?(+l.xp||0):0,div:+l.div||0,nch:typeof l.nch==="number"?l.nch:(u.nbib||0)}});
+  return AD.users}
+function renderAdmin(){AD.need=false;const box=$("#adm");if(!box)return;if(!ADM()){box.innerHTML="";return}
+  box.innerHTML=`<div class="ihead"><span></span><button class="linkbtn" type="button" id="adBack">Retour</button></div>
+   <h1 class="adh">Administration</h1>
+   <p class="note" style="margin:0 0 14px">Toi seul vois cet écran. Ce que tu fais ici touche tout le site : relis avant de valider.</p>
+   <div class="pick sm" id="adTabs">${[["el","Élèves"],["pg","Programme"],["sg","Signalements"],["jr","Journal"]].map(([k,l])=>`<button type="button" class="${AD.tab===k?"on":""}" data-t="${k}">${l}</button>`).join("")}</div>
+   <div id="adBody"></div>`;
+  $("#adBack").onclick=()=>go("profil");
+  box.querySelectorAll("#adTabs button").forEach(b=>b.onclick=()=>{AD.tab=b.dataset.t;renderAdmin()});
+  const z=$("#adBody");({el:admEleves,pg:admProg,sg:admSig,jr:admJour})[AD.tab](z)}
+
+/* ----- Élèves ----- */
+async function admEleves(z){
+  if(!AD.users){z.innerHTML=`<p class="loading">Chargement des élèves…</p>`;try{await admUsers()}catch(e){z.innerHTML=`<p class="istat err">${esc(writeErr(e))}</p>`;return}if(view!=="admin"||AD.tab!=="el")return}
+  const L=AD.users.slice().sort((a,b)=>(b.act||0)-(a.act||0));
+  z.innerHTML=`<p class="note" style="margin:14px 0 10px">${L.length} compte${L.length>1?"s":""}. Tu vois ce que la ligue montre déjà à tous (pseudo, XP, division), la dernière activité et le nombre de chapitres importés. Le contenu des cours et la progression de chacun restent privés.</p>
+   <div class="exrow"><button class="btn ghost" type="button" id="adRef">Actualiser</button><span class="istat" id="adSt" role="status"></span></div>
+   <ul class="adl">${L.map((u,i)=>`<li>
+     <div class="adt"><b class="adp"></b><small>${u.role==="admin"?"admin · ":""}${DIVS[Math.min(3,u.div)]||"Bronze"} · inscrit le ${esc(admDate(u.cree))} · actif ${esc(admTime(u.act))}</small></div>
+     <div class="adn"><span><b>${fmtN(u.tot)}</b>XP total</span><span><b>${fmtN(u.sem)}</b>cette semaine</span><span><b>${fmtN(u.nch)}</b>chapitres</span></div>
+     <button class="btn ghost adgb" type="button" data-i="${i}">${AD.give===u.id?"Fermer":"Donner XP ou pièces"}</button>
+     ${AD.give===u.id?`<div class="adgive"><div class="adrow"><label>XP<input class="inp" type="number" inputmode="numeric" min="0" max="1000" step="1" id="gXp" value="50"></label><label>Pièces<input class="inp" type="number" inputmode="numeric" min="0" max="5000" step="1" id="gCo" value="0"></label></div>
+       <label class="lab" for="gWhy">Pourquoi <span>(il le verra)</span></label><input class="inp" id="gWhy" maxlength="80" placeholder="Ex. Gagnant du tournoi de vendredi">
+       <p class="note" style="margin:8px 0 0">L’XP donné compte dans son XP total et lui donne autant de pièces. Il ne compte pas dans le classement de la semaine.</p>
+       <div class="exrow"><button class="btn light" type="button" id="gGo">Envoyer le cadeau</button><span class="istat" id="gSt" role="status"></span></div></div>`:""}</li>`).join("")}</ul>`;
+  z.querySelectorAll(".adl .adp").forEach((b,i)=>b.textContent=L[i].pseudo);
+  $("#adRef").onclick=async()=>{$("#adSt").textContent="…";try{await admUsers(true);admEleves(z)}catch(e){$("#adSt").className="istat err";$("#adSt").textContent=writeErr(e)}};
+  z.querySelectorAll(".adgb").forEach(b=>b.onclick=()=>{const u=L[+b.dataset.i];AD.give=AD.give===u.id?null:u.id;admEleves(z);const f=$("#gXp");if(f)f.focus()});
+  const go2=$("#gGo");if(go2)go2.onclick=async()=>{const u=L.find(x=>x.id===AD.give),st=$("#gSt");if(!u)return;
+    const xp=Math.round(+$("#gXp").value||0),co=Math.round(+$("#gCo").value||0),why=clip($("#gWhy").value,80);
+    if(xp<0||co<0||xp>1000||co>5000||(!xp&&!co)){st.className="istat err";st.textContent="Entre 1 et 1 000 XP, ou 1 et 5 000 pièces.";return}
+    if(!confirm(`Donner ${xp?fmtN(xp)+" XP":""}${xp&&co?" et ":""}${co?fmtN(co)+" pièces":""} à ${u.pseudo} ?`))return;
+    go2.disabled=true;st.className="istat";st.textContent="Envoi…";
+    const id=Date.now().toString(36)+Math.random().toString(36).slice(2,7),g={xp,co,raison:why,par:myNick()||(window.P26&&window.P26.profile&&window.P26.profile.pseudo)||"Admin",date:new Date().toISOString()};
+    try{await DB.doc("data/users/"+u.id+"/cadeau/"+id).set(g);
+      try{await DB.doc("data/users/"+UID+"/journal/"+id).set(Object.assign({pour:u.id,pseudo:u.pseudo},g));AD.jour=null}catch(e){}
+      AD.give=null;admEleves(z);toast(`<span class="tm">+</span><div><b>Cadeau envoyé à ${esc(u.pseudo)}</b><span>Il le verra à sa prochaine ouverture du site.</span></div>`)}
+    catch(e){go2.disabled=false;st.className="istat err";st.textContent=writeErr(e)}}}
+
+/* ----- Programme ----- */
+function progFetchAll(pm){return new Promise(res=>{if(PG.req[pm]===2)return res();progFetch(pm,res)})}
+function admProgDoc(tid){const pd=progDocOf(tid);const d=pd.d;const nc=d?(d.paquets||[]).reduce((a,p)=>a+(p.cartes||[]).length,0):0,nq=d?(d.quiz||[]).reduce((a,z)=>a+(z.qs||[]).length,0):0;return Object.assign(pd,{nc,nq})}
+const CLS_OF=pm=>Object.entries(CLS).filter(([k,K])=>K.tronc.map(x=>x==="lvb"?"":x).includes(pm)||K.spes.includes(pm)||(K.tronc.includes("lvb")&&LVB.includes(pm))).map(([k])=>k==="1G"?"Générale":k==="1STMG"?"STMG":"Bac pro MELEC");
+async function admProg(z){
+  if(!AD.mat){const c=clsOk(P.cls);AD.mat=c?clsMats(c)[0]:"maths"}
+  const pm=AD.mat,M=MATDEF[pm];
+  z.innerHTML=`<p class="note" style="margin:14px 0 10px">Le Programme est le même pour tous les élèves d’une classe. Tu peux remplacer les cartes d’un thème par une version corrigée, ou retirer des cartes pour tout le monde. Pour retirer une carte précise, tu peux aussi aller dans Cours › Programme avec le mode admin activé.</p>
+   <label class="lab" for="adMat">Matière</label><select id="adMat" class="inp">${Object.entries(MATDEF).map(([id,m])=>`<option value="${id}"${id===pm?" selected":""}>${esc(m.nom)} · ${esc(CLS_OF(id).join(", "))}</option>`).join("")}</select>
+   <div id="adTh"><p class="loading">Chargement du Programme…</p></div>`;
+  $("#adMat").onchange=e=>{AD.mat=e.target.value;AD.tid=null;admProg(z)};
+  await progFetchAll(pm);if(view!=="admin"||AD.tab!=="pg"||AD.mat!==pm)return;
+  const th=$("#adTh");
+  th.innerHTML=`<ul class="adl">${M.themes.map(t=>{const x=admProgDoc(t.id),nm=Object.keys(x.masque).length;return `<li class="${AD.tid===t.id?"open":""}"><button type="button" class="adth" data-t="${esc(t.id)}"><b>${esc(t.t)}</b><small>${x.nc} cartes · ${x.nq} questions${x.corrige?" · corrigé par toi":""}${nm?" · "+nm+" retirée"+(nm>1?"s":""):""}</small></button>${AD.tid===t.id?admThemeHTML(t,x):""}</li>`}).join("")}</ul>`;
+  th.querySelectorAll(".adth").forEach(b=>b.onclick=()=>{AD.tid=AD.tid===b.dataset.t?null:b.dataset.t;admProg(z)});
+  if(AD.tid)admThemeBind(z,M.themes.find(t=>t.id===AD.tid))}
+function admThemeHTML(t,x){const ids=Object.keys(x.masque),all=x.d?[...(x.d.paquets||[]).flatMap(p=>p.cartes||[]),...(x.d.quiz||[]).flatMap(z=>z.qs||[])]:[];
+  const lab=id=>{const c=all.find(y=>y.id===id);return c?(c.r||c.q||id):id};
+  return `<div class="adtd">
+   ${ids.length?`<p class="lab">Retirées pour tous</p><ul class="admq">${ids.map(id=>`<li><span>${tex(lab(id))}</span><button class="linkbtn" type="button" data-un="${esc(id)}">Remettre</button></li>`).join("")}</ul>`:""}
+   <p class="lab">Remplacer les cartes de ce thème</p>
+   <ol class="steps2"><li>Copie le texte ci-dessous et colle-le dans ton Claude.</li><li>Colle sa réponse (le JSON) dans la case du dessous.</li><li>Touche « Remplacer pour tout le monde ».</li></ol>
+   <div class="exrow"><button class="btn ghost" type="button" id="tCopy">Copier le texte pour Claude</button><span class="istat" id="tCSt" role="status"></span></div>
+   <textarea class="inp" id="tJson" rows="5" placeholder='{"paquets":[…],"quiz":[…]}'></textarea>
+   <div class="exrow"><button class="btn light" type="button" id="tGo">Remplacer pour tout le monde</button>${x.corrige?`<button class="btn ghost" type="button" id="tBack">Revenir au contenu d’origine</button>`:""}<span class="istat" id="tSt" role="status"></span></div></div>`}
+function admPrompt(t){const pm=t.id.slice(0,t.id.lastIndexOf("-")),M=MATDEF[pm],cl=CLS_OF(pm).join(" / ");
+  return `Tu prépares des cartes de révision pour des élèves de Première (${cl}, lycée, France), matière « ${M.nom} », d’après le programme officiel de l’Éducation nationale.
+Thème : « ${t.t} ». Notions du programme : ${t.n}.
+Règles : reste strictement dans le programme officiel ; définitions exactes et simples ; pas d’invention ; français correct. 14 à 20 cartes réparties en 2 ou 3 paquets (ex. « Notions », « Dates et repères », « Méthode »), et 8 à 10 questions de quiz à 4 choix. Formules en LaTeX entre $…$.
+Réponds uniquement avec ce JSON :
+{"paquets":[{"nom":"Notions","cartes":[{"r":"recto court","v":"verso","q":"consigne courte"}]}],"quiz":[{"q":"question","ok":"bonne réponse","no":["fausse 1","fausse 2","fausse 3"],"why":"explication"}]}`}
+function progNorm(d,tid){const st=Date.now().toString(36);
+  const pq=(Array.isArray(d&&d.paquets)?d.paquets:[]).slice(0,4).map((p,pi)=>({k:"p"+pi,nom:clip(p&&p.nom,40)||"Cartes",cartes:(Array.isArray(p&&p.cartes)?p.cartes:[]).filter(c=>c&&c.r&&c.v).slice(0,30).map((c,ci)=>({id:"pa."+tid+"."+st+"."+pi+"."+ci,r:clip(c.r,160),v:clip(c.v,400),q:clip(c.q,60)}))})).filter(p=>p.cartes.length);
+  const qs=(Array.isArray(d&&d.quiz)?d.quiz:[]).filter(q=>q&&q.q&&q.ok&&Array.isArray(q.no)&&q.no.length>=2).slice(0,15).map((q,qi)=>({id:"pa."+tid+"."+st+".q"+qi,q:clip(q.q,240),ok:clip(q.ok,160),no:q.no.slice(0,3).map(x=>clip(x,160)),why:clip(q.why,300)}));
+  return {pq,qs}}
+function parseLooseJSON(txt){let t=String(txt||"").trim().replace(/^```(?:json)?/i,"").replace(/```$/,"").trim();const a=t.indexOf("{"),b=t.lastIndexOf("}");if(a<0||b<a)throw new Error("json");return JSON.parse(t.slice(a,b+1))}
+function admThemeBind(z,t){if(!t)return;const pm=t.id.slice(0,t.id.lastIndexOf("-"));
+  $("#tCopy").onclick=async()=>{const p=admPrompt(t);$("#tJson").placeholder="Colle ici la réponse de Claude";try{await navigator.clipboard.writeText(p);$("#tCSt").textContent="Copié."}catch(e){$("#tJson").value=p;$("#tJson").select();$("#tCSt").textContent="Le texte est dans la case : copie-le, puis remplace-le par la réponse."}};
+  z.querySelectorAll("[data-un]").forEach(b=>b.onclick=async()=>{b.disabled=true;try{await admMasque(t.id,[b.dataset.un],false);admProg(z)}catch(e){b.disabled=false;$("#tSt").className="istat err";$("#tSt").textContent=writeErr(e)}});
+  $("#tGo").onclick=async()=>{const st=$("#tSt");let d;try{d=parseLooseJSON($("#tJson").value)}catch(e){st.className="istat err";st.textContent="Ce n’est pas un JSON lisible. Colle toute la réponse de Claude.";return}
+    const {pq,qs}=progNorm(d,t.id);if(pq.reduce((a,p)=>a+p.cartes.length,0)<4){st.className="istat err";st.textContent="Il faut au moins 4 cartes complètes (recto et verso).";return}
+    if(!confirm(`Remplacer « ${t.c} » pour tout le monde par ${pq.reduce((a,p)=>a+p.cartes.length,0)} cartes et ${qs.length} questions ?`))return;
+    $("#tGo").disabled=true;st.className="istat";st.textContent="Enregistrement…";
+    const doc={tid:t.id,corr:true,mat:pm,titre:t.t,paquets:pq,quiz:qs.length?[{nom:"Quiz · "+t.c,d:t.t,qs}]:[],masque:{},par:myNick()||(window.P26&&window.P26.profile&&window.P26.profile.pseudo)||"Admin",date:new Date().toISOString()};
+    try{await DB.doc("programme/"+t.id).set(doc);PG.shared[t.id]=doc;mergeAll();reindex();toast(`<span class="tm">✓</span><div><b>Programme mis à jour</b><span>${esc(t.c)} · pour tout le monde</span></div>`);admProg(z)}
+    catch(e){$("#tGo").disabled=false;st.className="istat err";st.textContent=writeErr(e)}};
+  if($("#tBack"))$("#tBack").onclick=async()=>{const st=$("#tSt");if(!confirm("Revenir aux cartes d’origine pour ce thème ? Ta version sera effacée."))return;
+    try{const sn=await DB.doc("programme/"+t.id).get(),cur=(sn.exists&&sn.data())||{},m=cur.masque||{};if(Object.keys(m).length){const doc={tid:t.id,masque:m};await DB.doc("programme/"+t.id).set(doc);PG.shared[t.id]=doc}else{await DB.doc("programme/"+t.id).delete();delete PG.shared[t.id]}mergeAll();reindex();admProg(z)}
+    catch(e){st.className="istat err";st.textContent=writeErr(e)}}}
+async function admMasque(tid,ids,on){if(!tid||!/^[a-z]+-\d+$/.test(tid))throw Object.assign(new Error("Carte inconnue."),{code:"invalid_argument"});
+  let cur=null;const sn=await DB.doc("programme/"+tid).get();cur=(sn.exists&&sn.data())||{tid};const m=Object.assign({},cur.masque||{});ids.forEach(i=>{if(on)m[i]=1;else delete m[i]});
+  const doc=Object.assign({},cur,{tid,masque:m});
+  if(!(Array.isArray(doc.paquets)&&doc.paquets.length)&&!Object.keys(m).length){await DB.doc("programme/"+tid).delete();delete PG.shared[tid]}
+  else{await DB.doc("programme/"+tid).set(doc);PG.shared[tid]=doc}
+  mergeAll();reindex();if(view!=="admin")render()}
+const tidOfCard=id=>{const m=/^p[gab]\.([a-z]+-\d+)\./.exec(String(id||""));return m?m[1]:null};
+
+/* ----- Signalements ----- */
+async function admSig(z){z.innerHTML=`<p class="loading">Chargement des signalements…</p>`;
+  let L=[];try{const s=await DB.collection("signalements").get();L=s.docs.map(d=>Object.assign({},d.data()||{},{_id:d.id})).sort((a,b)=>String(b.date||"").localeCompare(String(a.date||"")));try{await admUsers()}catch(e){}}
+  catch(e){z.innerHTML=`<p class="istat err">${esc(writeErr(e))}</p>`;return}
+  await Promise.all([...new Set(L.map(r=>tidOfCard(r.carte)).filter(Boolean).map(t=>t.slice(0,t.lastIndexOf("-"))))].map(progFetchAll));
+  if(view!=="admin"||AD.tab!=="sg")return;
+  const real=id=>{if(C.cards[id])return C.cards[id].c.r;const t=tidOfCard(id);const d=t&&progDocOf(t).d;const c=d&&[...(d.paquets||[]).flatMap(p=>p.cartes||[]),...(d.quiz||[]).flatMap(z=>z.qs||[])].find(x=>x.id===id);return c?(c.r||c.q):null};
+  const who=id=>{const u=(AD.users||[]).find(x=>x.id===id);return u?u.pseudo:"un élève"};
+  z.innerHTML=L.length?`<p class="note" style="margin:14px 0 10px">${L.length} signalement${L.length>1?"s":""}. « Traité » l’efface de la liste.</p><ul class="adl">${L.map((r,i)=>`<li><div class="adt"><b class="sr"></b><small>${esc(admDate(r.date))} · <span class="sw2"></span></small></div><p class="adtx"></p>
+     <div class="exrow">${tidOfCard(r.carte)?`<button class="btn ghost" type="button" data-hide="${i}">Retirer la carte pour tous</button>`:""}<button class="btn ghost" type="button" data-done="${i}">Traité</button><span class="istat" id="sgSt${i}" role="status"></span></div></li>`).join("")}</ul>`
+    :`<p class="note" style="margin:14px 0">Aucun signalement. Quand un élève signale une carte fausse, elle apparaît ici.</p>`;
+  z.querySelectorAll(".adl li").forEach((li,i)=>{const r=L[i];const rr=real(r.carte);li.querySelector(".sr").textContent=rr||((r.recto||r.carte||"Carte")+" (texte envoyé par l’élève)");li.querySelector(".sw2").textContent=who(r.par);li.querySelector(".adtx").textContent=r.texte||""});
+  z.querySelectorAll("[data-hide]").forEach(b=>b.onclick=async()=>{const r=L[+b.dataset.hide],st=$("#sgSt"+b.dataset.hide);b.disabled=true;
+    try{await admMasque(tidOfCard(r.carte),[r.carte],true);st.textContent="Carte retirée du Programme."}catch(e){b.disabled=false;st.className="istat err";st.textContent=writeErr(e)}});
+  z.querySelectorAll("[data-done]").forEach(b=>b.onclick=async()=>{const r=L[+b.dataset.done],st=$("#sgSt"+b.dataset.done);b.disabled=true;
+    try{await DB.doc("signalements/"+r._id).delete();admSig(z)}catch(e){b.disabled=false;st.className="istat err";st.textContent=writeErr(e)}})}
+
+/* ----- Journal des cadeaux ----- */
+async function admJour(z){z.innerHTML=`<p class="loading">Chargement du journal…</p>`;let L=[];
+  try{const s=await DB.collection("data/users/"+UID+"/journal").get();L=s.docs.map(d=>d.data()||{}).sort((a,b)=>String(b.date||"").localeCompare(String(a.date||"")))}catch(e){z.innerHTML=`<p class="istat err">${esc(writeErr(e))}</p>`;return}
+  if(view!=="admin"||AD.tab!=="jr")return;
+  z.innerHTML=L.length?`<p class="note" style="margin:14px 0 10px">Tous les cadeaux que tu as donnés, du plus récent au plus ancien.</p><ul class="adl">${L.map(()=>`<li><div class="adt"><b class="jp"></b><small class="jd"></small></div><p class="adtx"></p></li>`).join("")}</ul>`
+    :`<p class="note" style="margin:14px 0">Aucun cadeau donné pour l’instant.</p>`;
+  z.querySelectorAll(".adl li").forEach((li,i)=>{const g=L[i];li.querySelector(".jp").textContent=(g.pseudo||"?")+" · "+[g.xp?"+"+fmtN(g.xp)+" XP":"",g.co?"+"+fmtN(g.co)+" pièces":""].filter(Boolean).join(", ");li.querySelector(".jd").textContent=admDate(g.date);li.querySelector(".adtx").textContent=g.raison||""})}
+
 /* ================= PROGRAMME OFFICIEL ET CLASSE ================= */
 const AXES_LV=[["Identités et échanges","Identités","migrations, frontières, échanges culturels, mondialisation"],["Espace privé et espace public","Privé / public","vie privée, réseaux sociaux, place de l’individu dans la société"],["Art et pouvoir","Art et pouvoir","art engagé, propagande, censure, mécénat"],["Citoyenneté et mondes virtuels","Mondes virtuels","citoyenneté numérique, fake news, participation en ligne"],["Fictions et réalités","Fictions","mythes, utopies, héros, frontières entre réel et imaginaire"],["Innovations scientifiques et responsabilité","Innovations","progrès scientifique, éthique, environnement"],["Diversité et inclusion","Diversité","discriminations, égalité, minorités, inclusion"],["Territoire et mémoire","Mémoire","lieux de mémoire, héritage historique, identité régionale"]];
 const LV_VOC="vocabulaire, expressions utiles et faits culturels pour l’oral et l’écrit";
@@ -3409,15 +3636,24 @@ const PGA={};function pgId(mid){const M=MATDEF[mid],base=C.M0||{},vals=Object.va
   const same=x=>sameMat(M.nom,x.nom||"")||sameMat(M.court,x.court||"")||sameMat(M.court,x.nom||"")||sameMat(M.nom,x.court||"");
   const hit=vals.find(same);if(hit)return PGA[mid]=hit.id;return PGA[mid]=base[mid]?"p-"+mid:mid}
 const clsIds=c=>clsMats(c).map(pgId);
-const PG={shared:{},mine:{},subs:false};
+const PG={shared:{},mine:{},base:{},req:{},subs:false};
+function progFetch(pm,cb){if(PG.req[pm]===2){if(cb)cb();return}PG.wait=PG.wait||{};(PG.wait[pm]=PG.wait[pm]||[]).push(cb||null);if(PG.req[pm]===1)return;PG.req[pm]=1;
+  const done=ok=>{PG.req[pm]=ok?2:0;if(!ok)(PG.fail=PG.fail||{})[pm]=Date.now();const w=PG.wait[pm]||[];PG.wait[pm]=[];w.forEach(f=>{try{if(f)f()}catch(e){}})};
+  if(typeof fetch!=="function"){done(false);return}
+  fetch("prog/"+pm+".json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(j&&typeof j==="object")Object.entries(j).forEach(([k,v])=>{if(v&&Array.isArray(v.paquets))PG.base[k]=v});done(!!j);if(j)rebuild()}).catch(()=>done(false))}
+function progLoad(){const c=clsOk(P.cls);if(!c)return;clsMats(c).forEach(pm=>{if(!PG.req[pm]&&!(PG.fail&&Date.now()-(PG.fail[pm]||0)<60000))progFetch(pm)})}
+function progDocOf(tid,local){const ov=PG.shared[tid]||null;local=local||GL.get("prog");const corr=!!(ov&&ov.corr===true&&Array.isArray(ov.paquets)&&ov.paquets.length);
+  const d=(corr?ov:null)||PG.base[tid]||PG.mine[tid]||local[tid]||(ov&&Array.isArray(ov.paquets)&&ov.paquets.length?ov:null)||null;
+  return {d,masque:(ov&&ov.masque&&typeof ov.masque==="object")?ov.masque:{},corrige:corr}}
 const isProg=ch=>!!(ch&&ch.origin==="prog");
 const hasSrc=(mid,prog)=>Object.values(C.chaps||{}).some(c=>c.mat===mid&&isProg(c)===prog);
-function srcOf(mid){const s=P.srcm&&P.srcm[mid];if(s==="prog"||s==="cours")return s;return hasSrc(mid,false)?"cours":"prog"}
-function progAdd(addMat){const c=clsOk(P.cls);if(!c)return;const hide=P.hide||{},local=GL.get("prog");
+function progReady(mid){return !!IMP.sample||Object.values(C.chaps||{}).some(c=>c.mat===mid&&isProg(c)&&c._gen)}
+function srcOf(mid){if(!progReady(mid)&&hasSrc(mid,false))return "cours";const s=P.srcm&&P.srcm[mid];if(s==="prog"||s==="cours")return s;return hasSrc(mid,false)?"cours":"prog"}
+function progAdd(addMat){const c=clsOk(P.cls);if(!c)return;const hide=P.hide||{},local=GL.get("prog");progLoad();
   clsMats(c).forEach((pm,mi)=>{const M=MATDEF[pm],mid=pgId(pm);addMat(mid,M.nom,M.court,M.suit);if(C.M[mid]&&C.M[mid].ordre>=100)C.M[mid].ordre=50+mi;
-    M.themes.forEach((t,ti)=>{if(!c.th[pm].includes(t.id))return;const d=PG.mine[t.id]||local[t.id]||PG.shared[t.id]||null,cid="prog."+t.id;
+    M.themes.forEach((t,ti)=>{if(!c.th[pm].includes(t.id))return;const pd=progDocOf(t.id,local),d=pd.d,mq=pd.masque,cid="prog."+t.id;
       C.chaps[cid]={id:cid,mat:mid,_pm:pm,titre:t.t,court:t.c,notions:t.n,origin:"prog",src:"programme",ordre:ti,_tid:t.id,_gen:!!d,
-        paquets:d?(d.paquets||[]).map(p=>({...p,cartes:(p.cartes||[]).filter(x=>!hide[x.id])})).filter(p=>p.cartes.length):[],quiz:d?(d.quiz||[]):[]}})})}
+        paquets:d?(d.paquets||[]).map(p=>({...p,cartes:(p.cartes||[]).filter(x=>!hide[x.id]&&!mq[x.id])})).filter(p=>p.cartes.length):[],quiz:d?(d.quiz||[]).map(z=>({...z,qs:(z.qs||[]).filter(q=>!mq[q.id])})):[],_corr:pd.corrige}})})}
 function progInit(){if(!DB||PG.subs)return;PG.subs=true;
   DB.collection("programme").onSnapshot(s=>{PG.shared={};s.docs.forEach(d=>{const v=d.data();if(v)PG.shared[d.id]=v});rebuild()},()=>{});
   if(UID)DB.collection("data/users/"+UID+"/prog").onSnapshot(s=>{PG.mine={};s.docs.forEach(d=>{const v=d.data();if(v)PG.mine[d.id]=v});rebuild()},()=>{})}
@@ -3434,25 +3670,25 @@ Réponds uniquement avec ce JSON :
     if(!pq.length){st.className="istat err";st.textContent="Claude n’a pas réussi. Réessaie.";btn.disabled=false;return}
     const doc={tid,mat:ch._pm,titre:ch.titre,niv:clsOk(P.cls).niv,paquets:pq,quiz:qs.length?[{nom:"Quiz · "+ch.court,d:ch.titre,qs}]:[],cree:new Date().toISOString()};
     let where="db";
-    try{if(!DB||GUEST||!UID)throw 0;if(IMP.isOwner)await DB.doc("programme/"+tid).set(doc);else await DB.doc("data/users/"+UID+"/prog/"+tid).set(doc);(IMP.isOwner?PG.shared:PG.mine)[tid]=doc}
+    try{if(!DB||GUEST||!UID)throw 0;await DB.doc("data/users/"+UID+"/prog/"+tid).set(doc);PG.mine[tid]=doc}
     catch(e){where="local";const g=GL.get("prog");g[tid]=doc;GL.set("prog",g)}
-    toast(`<span class="tm">+</span><div><b>Cartes du programme prêtes</b><span>${esc(ch.court)}${where==="local"?" · sur ce téléphone":IMP.isOwner?" · pour tout le hub":""}</span></div>`);
+    toast(`<span class="tm">+</span><div><b>Cartes du programme prêtes</b><span>${esc(ch.court)}${where==="local"?" · sur ce téléphone":""}</span></div>`);
     mergeAll();reindex();render()}
   catch(e){btn.disabled=false;st.className="istat"+(e&&e.code==="cancelled"?"":" err");st.textContent=sampleErr(e)}}
-function srcSeg(el,mid,cb){if(!el)return;if(!mid||mid[0]==="@"||!hasSrc(mid,true)){el.hidden=true;el.innerHTML="";return}el.hidden=false;
+function srcSeg(el,mid,cb){if(!el)return;if(!mid||mid[0]==="@"||!hasSrc(mid,true)||!progReady(mid)){el.hidden=true;el.innerHTML="";return}el.hidden=false;
   const s=srcOf(mid),nC=Object.values(C.chaps).filter(c=>c.mat===mid&&!isProg(c)).length,nP=Object.values(C.chaps).filter(c=>c.mat===mid&&isProg(c)).length;
   el.innerHTML=`<span class="segi" aria-hidden="true"></span><button type="button" data-s="cours" class="${s==="cours"?"on":""}">Mon cours · ${nC}</button><button type="button" data-s="prog" class="${s==="prog"?"on":""}">Programme · ${nP}</button>`;
   const pos=()=>{const on=el.querySelector("button.on"),i=el.querySelector(".segi");if(on&&i){i.style.width=on.offsetWidth+"px";i.style.transform=`translateX(${on.offsetLeft}px)`}};requestAnimationFrame(pos);
   el.querySelectorAll("button").forEach(b=>b.onclick=()=>{if(b.dataset.s===s)return;P.srcm=P.srcm||{};P.srcm[mid]=b.dataset.s;saveP();el.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));pos();setTimeout(cb,reduce?0:180)})}
 function progCoursHTML(ch){if(!isProg(ch))return "";
-  return `<p class="note progn">Programme officiel de ${esc(CLS[clsOk(P.cls).niv].nom)}. Ton prof a peut-être fait d’autres choix : masque les cartes qui ne te concernent pas, elles ne reviendront plus. Tes cours importés restent dans « Mon cours », jamais mélangés.</p>
+  return `<p class="note progn">Programme officiel de ${esc(CLS[clsOk(P.cls).niv].nom)}, le même pour tout le monde${ch._corr?" (corrigé par l’administrateur)":""}. Ton prof a peut-être fait d’autres choix : masque les cartes qui ne te concernent pas, elles ne reviendront plus pour toi. Tes propres cours sont dans « Mon cours ».${ADM()?" <b>Mode admin</b> : « Masquer pour tous » retire la carte du Programme de tout le monde.":""}</p>
    ${ch._gen?"":`<div class="empty2"><h2>Cartes à préparer</h2><p>Au programme : ${esc(ch.notions)}.</p><div class="exrow" style="justify-content:center"><button class="btn light" type="button" id="pgGo">Préparer les cartes de ce thème</button></div><p class="istat" id="pgSt" role="status"></p></div>`}`}
 function progBind(ch){if(!isProg(ch))return;const b=$("#pgGo");if(b)b.onclick=()=>progGen(ch,b,$("#pgSt"));
-  document.querySelectorAll("#cours .lc .hidec").forEach(x=>x.onclick=()=>{P.hide=P.hide||{};P.hide[x.dataset.id]=1;saveP();toast(`<span class="tm">−</span><div><b>Carte masquée</b><span>Elle ne reviendra plus.</span></div>`);mergeAll();reindex();renderCours()})}
+  document.querySelectorAll("#cours .lc .hidec").forEach(x=>x.onclick=async()=>{if(ADM()){x.disabled=true;try{await admMasque(ch._tid,[x.dataset.id],true);toast(`<span class="tm">−</span><div><b>Carte retirée du Programme</b><span>Pour tout le monde.</span></div>`)}catch(e){x.disabled=false;toast(`<span class="tm">!</span><div><b>Refusé</b><span>${esc(writeErr(e))}</span></div>`)}return}P.hide=P.hide||{};P.hide[x.dataset.id]=1;saveP();toast(`<span class="tm">−</span><div><b>Carte masquée</b><span>Elle ne reviendra plus.</span></div>`);mergeAll();reindex();renderCours()})}
 
 /* ---------- Questionnaire de départ ---------- */
 const ONB={open:false,step:0,d:null,later:false};
-function onbCheck(){if(P.cls||ONB.open||ONB.later)return;onbOpen()}
+let PLOADED=false;function onbCheck(){if(P.cls||ONB.open||ONB.later||(!PLOADED&&UID!=="demo"))return;onbOpen()}
 function onbOpen(st){const c=clsOk(P.cls);ONB.d=c?JSON.parse(JSON.stringify(c)):{niv:"",spes:[],lvb:"esp",th:{}};ONB.step=c?(st==null?1:st):0;ONB.last=-1;ONB.open=true;let o=$("#onb");
   if(!o){o=document.createElement("div");o.id="onb";o.setAttribute("role","dialog");o.setAttribute("aria-modal","true");document.body.appendChild(o)}o.hidden=false;document.body.classList.add("onbon");onbRender()}
 function onbClose(){ONB.open=false;const o=$("#onb");if(o)o.hidden=true;document.body.classList.remove("onbon")}
@@ -3519,6 +3755,7 @@ function onContent(){mergeAll();reindex();C.ready=true;render();onbCheck()}
       if(!r||Object.keys(P.c).length>Object.keys((r&&r.c)||{}).length||changed){pDirty=true;flushP()}
       pRef.onSnapshot(sn=>{if(sn.exists&&!sn.metadata.hasPendingWrites&&mergeP(sn.data())){LS.set("prog",P);if(C.ready&&!inDuel&&view!=="jeu")render()}},()=>{});
     }catch(e){remoteOK=false}}
+  PLOADED=true;if(C.ready){mergeAll();reindex();render();onbCheck()}
   if(!UID)guestOn(true);
   ligueInit();impInit();paintMyAv();
   if(C.ready)render();
