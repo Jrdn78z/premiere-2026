@@ -257,6 +257,8 @@ body.p26locked{overflow:hidden}
   const have = new Set();           // collections déjà chargées
   const subs = [];                  // {kind:'coll'|'doc', key, cb, err}
   const collOf = (p) => p.slice(0, p.lastIndexOf("/"));
+  // Ce que la page a le droit de relire (mêmes règles que « docs: lecture » dans schema.sql)
+  const canSee = (p) => { const c = collOf(p); if (c === "signalements") return !!(profile && profile.role === "admin"); if (c.startsWith("data/users/")) return !!(session && c.split("/")[2] === session.user.id); return true; };
   const idOf = (p) => p.slice(p.lastIndexOf("/") + 1);
   let rt = null, rtOk = false, pollT = null;
 
@@ -320,9 +322,15 @@ body.p26locked{overflow:hidden}
       async set(v) {
         await ready;
         const data = JSON.parse(JSON.stringify(v == null ? {} : v));
-        const { error } = await sb.from("docs").upsert({ path, data }, { onConflict: "path" });
+        let { error } = await sb.from("docs").upsert({ path, data }, { onConflict: "path" });
+        // Un upsert doit aussi pouvoir relire la ligne : pour un document qu'on a le droit de créer
+        // sans pouvoir le lire (cadeau de l'admin chez un élève, signalement), on tente un insert simple.
+        if (error && errCode(error) === "invalid_argument") {
+          const r2 = await sb.from("docs").insert({ path, data });
+          if (!r2.error) error = null;
+        }
         if (error) throw wrapErr(error);
-        cache.set(path, data); notify(path);
+        if (canSee(path)) { cache.set(path, data); notify(path); }
       },
       async update(v) { const cur = (await this.get()).data() || {}; return this.set(Object.assign({}, cur, v)); },
       async delete() {
@@ -455,6 +463,24 @@ body.p26locked{overflow:hidden}
       return n;
     },
     profile: () => profile,
+  };
+
+  /* ================= ADMIN (lecture seule de ce qui est déjà public, plus les profils) ================= */
+  window.P26.admin = {
+    async users() {
+      await ready;
+      if (!profile || profile.role !== "admin") throw Object.assign(new Error("Réservé à l’administrateur."), { code: "invalid_argument" });
+      const [p, l, b] = await Promise.all([
+        sb.from("profiles").select("id,pseudo,role,created_at"),
+        sb.from("docs").select("path,data,updated_at").eq("coll", "ligue"),
+        sb.from("docs").select("owner").like("coll", "biblio/%/chap"),
+      ]);
+      for (const r of [p, l, b]) if (r.error) throw wrapErr(r.error);
+      const lig = {}, act = {}, nb = {};
+      (l.data || []).forEach((r) => { const id = idOf(r.path); lig[id] = r.data || {}; act[id] = Date.parse(r.updated_at) || 0; });
+      (b.data || []).forEach((r) => { if (r.owner) nb[r.owner] = (nb[r.owner] || 0) + 1; });
+      return (p.data || []).map((u) => ({ id: u.id, pseudo: u.pseudo, role: u.role, cree: u.created_at, lig: lig[u.id] || null, act: act[u.id] || 0, nbib: nb[u.id] || 0 }));
+    },
   };
 
   /* ================= window.claude ================= */
