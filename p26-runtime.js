@@ -434,7 +434,10 @@ body.p26locked{overflow:hidden}
 
   /* ================= COMPTE (utilisé par la page) ================= */
   window.P26.account = {
-    async signOut() { try { await sb.auth.signOut(); } catch (e) {} clearLocal(); try { localStorage.removeItem(LS_UID); } catch (e) {} location.reload(); },
+    async signOut() {
+      // Cet appareil ne doit plus recevoir les notifications de ce compte
+      try { if ("serviceWorker" in navigator) { const reg = await navigator.serviceWorker.getRegistration(); const sub = reg && await reg.pushManager.getSubscription(); if (sub) { await sb.rpc("push_desabonner", { p_endpoint: sub.endpoint }); await sub.unsubscribe(); } } } catch (e) {}
+      try { await sb.auth.signOut(); } catch (e) {} clearLocal(); try { localStorage.removeItem(LS_UID); } catch (e) {} location.reload(); },
     async newRecoveryCode() { const r = await sb.rpc("nouveau_code_secours"); if (r.error) throw wrapErr(r.error); return r.data; },
     async changePassword(p) { if (String(p || "").length < 8) throw Object.assign(new Error("Le mot de passe fait 8 caractères au moins."), { code: "invalid_argument" }); const { error } = await sb.auth.updateUser({ password: p }); if (error) throw wrapErr(error); },
     async exportAll() {
@@ -481,6 +484,60 @@ body.p26locked{overflow:hidden}
       (b.data || []).forEach((r) => { if (r.owner) nb[r.owner] = (nb[r.owner] || 0) + 1; });
       return (p.data || []).map((u) => ({ id: u.id, pseudo: u.pseudo, role: u.role, cree: u.created_at, lig: lig[u.id] || null, act: act[u.id] || 0, nbib: nb[u.id] || 0 }));
     },
+  };
+
+  /* ================= ELO (calculé par la base, voir 3-elo.sql) ================= */
+  const rpc = async (name, args) => { await ready; const r = await sb.rpc(name, args || {}); if (r.error) throw wrapErr(r.error); return r.data; };
+  window.P26.elo = {
+    async list() {
+      await ready;
+      const out = {};
+      for (let from = 0; from < 100000; from += 1000) {
+        const { data, error } = await sb.from("elo").select("uid,elo,parties").order("uid").range(from, from + 999);
+        if (error) throw wrapErr(error);
+        (data || []).forEach((r) => { out[r.uid] = { elo: r.elo, n: r.parties }; });
+        if (!data || data.length < 1000) break;
+      }
+      return out;
+    },
+    ouvrir: (nbq, sec, joue) => rpc("elo_ouvrir", { p_nbq: nbq, p_sec: sec, p_joue: joue !== false }),
+    rejoindre: (id) => rpc("elo_rejoindre", { p_id: id }),
+    score: (id, s) => rpc("elo_score", { p_id: id, p_score: s }),
+    cloturer: (id) => rpc("elo_cloturer", { p_id: id }),
+    rattrapage: () => rpc("elo_rattrapage"),
+    async resultat(id) {
+      await ready;
+      const { data, error } = await sb.from("elo_joueurs").select("uid,score,avant,delta").eq("partie", id);
+      if (error) throw wrapErr(error);
+      const me = (data || []).find((r) => r.uid === session.user.id) || null;
+      return { me, tous: data || [] };
+    },
+  };
+
+  /* ================= AMIS ET NOTIFICATIONS (voir 3-maj8.sql) ================= */
+  window.P26.social = {
+    async notifs() {
+      await ready;
+      const { data, error } = await sb.from("notifs").select("id,de,type,texte,lien,cree,lu").order("cree", { ascending: false }).limit(50);
+      if (error) throw wrapErr(error);
+      return data || [];
+    },
+    lues: (ids) => rpc("notifs_lues", { p_ids: ids }),
+    async amis() {
+      await ready;
+      const { data, error } = await sb.from("amis").select("a,b,de,statut,cree");
+      if (error) throw wrapErr(error);
+      const me = session.user.id, ids = [...new Set((data || []).map((r) => (r.a === me ? r.b : r.a)))];
+      const noms = {};
+      if (ids.length) { const p = await sb.from("profiles").select("id,pseudo").in("id", ids); (p.data || []).forEach((x) => { noms[x.id] = x.pseudo; }); }
+      return (data || []).map((r) => { const o = r.a === me ? r.b : r.a; return { id: o, pseudo: noms[o] || "?", ok: r.statut === "ok", recu: r.statut !== "ok" && r.de !== me, cree: r.cree }; });
+    },
+    demander: (p) => rpc("ami_demander", { p_pseudo: p }),
+    repondre: (id, ok) => rpc("ami_repondre", { p_autre: id, p_ok: !!ok }),
+    retirer: (id) => rpc("ami_retirer", { p_autre: id }),
+    defier: (id, code) => rpc("defier", { p_ami: id, p_code: code }),
+    abonner: (sub) => { const j = sub.toJSON(); return rpc("push_abonner", { p_endpoint: j.endpoint, p_p256dh: j.keys.p256dh, p_auth: j.keys.auth }); },
+    desabonner: (endpoint) => rpc("push_desabonner", { p_endpoint: endpoint }),
   };
 
   /* ================= window.claude ================= */

@@ -1,8 +1,14 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Première 2026</title>
 <meta name="description" content="Hub de révision de Première : cartes, quiz, fiches et ligue entre amis.">
-<meta name="theme-color" content="#1B4A38">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%231B4A38%27/%3E%3Ctext x=%2732%27 y=%2744%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-weight=%27900%27 font-size=%2734%27 fill=%27%23E7C66B%27%3E1%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#123526">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Première 2026">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700;6..96,900&family=Figtree:wght@400;500;600;700;800&family=Fredoka:wght@600&family=Pacifico&family=Permanent+Marker&family=Press+Start+2P&family=Bebas+Neue&family=Caveat:wght@700&family=Righteous&family=Space+Mono:wght@700&display=swap">
@@ -186,6 +192,76 @@ h2.solo{font-size:1.3rem;margin:0 0 12px}
 
 @media (min-width:900px){.wrap{max-width:620px}.hello h1{font-size:2.6rem}}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{transition-duration:0s!important;animation:none!important}}
+
+/* ===== Mise à jour 8 : Arène, verbes, Elo, amis, notifications ===== */
+.who .bell{border:0;background:rgba(var(--fw),.08);color:var(--felt-ink);width:38px;height:38px;border-radius:50%;display:grid;place-items:center;position:relative;box-shadow:inset 0 0 0 1px var(--felt-line)}
+.who .bell svg{width:20px;height:20px}
+.who .bell .nb2{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--red);color:#fff;font-size:.68rem;font-weight:800;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+.ntpush{background:var(--card);color:var(--card-ink);border-radius:18px;padding:14px 16px;margin:6px 0 4px}
+.ntpush p{margin:0 0 10px;font-size:.93rem}
+.ntpush .linkbtn,.ntpush .istat{color:var(--card-mute)}
+.ntl{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:8px}
+.ntl li{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:14px;background:rgba(var(--fw),.05);box-shadow:inset 0 0 0 1px var(--felt-line)}
+.ntl li.new{background:rgba(231,198,107,.12);box-shadow:inset 0 0 0 1px rgba(231,198,107,.45)}
+.ntl i{font-style:normal;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--card);color:var(--red);font-weight:900}
+.ntl b{display:block;font-weight:700;font-size:.93rem;overflow-wrap:anywhere}
+.ntl small{color:var(--felt-mute);font-size:.78rem}
+.ntl .btn{padding:8px 14px;font-size:.85rem}
+.ntam .exrow{margin-top:8px}
+.aml{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:8px}
+.aml li{display:grid;grid-template-columns:1fr auto auto auto;gap:10px;align-items:center;padding:8px 8px 8px 14px;border-radius:14px;background:rgba(var(--fw),.05);box-shadow:inset 0 0 0 1px var(--felt-line)}
+.aml b{font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.aml span{font-family:var(--didone);font-weight:900;font-size:1.1rem;font-variant-numeric:lining-nums tabular-nums;text-align:right}
+.aml span small{display:block;font-family:var(--sans);font-size:.65rem;font-weight:700;color:var(--felt-mute);letter-spacing:.06em;text-transform:uppercase}
+.aml .btn{padding:8px 14px;font-size:.85rem}
+.aml .linkbtn{color:var(--felt-mute);padding:6px}
+/* Arène */
+.online.arene{background:linear-gradient(160deg,#2B1B5A 0%,#46207A 100%);color:#F3EEFF;margin-bottom:22px}
+.online.arene .muted,.online.arene .lab{color:#D7CCF5}
+.online.arene .btn.light{background:#FAFAF7;color:#2B1B5A}
+.online.arene .btn.ghost{color:#F3EEFF;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)}
+.online.arene .inp{background:rgba(255,255,255,.12);color:#fff}
+.online.arene .inp::placeholder{color:#CFC3EE}
+.online.arene .olerr{color:#FFB3B3}
+.arbig{text-align:center;padding:26px 10px}
+.arbig b{display:block;font-family:var(--didone);font-weight:900;font-size:3rem;color:var(--gold);line-height:1}
+.arbig span{color:var(--felt-mute)}
+.arq h2{font-size:1.35rem}
+.arbar{position:relative;height:30px;border-radius:999px;background:#ECECE6;margin:4px 0 14px;overflow:hidden}
+.arbar i{position:absolute;inset:0;transform-origin:left;transform:scaleX(var(--p,1));background:linear-gradient(90deg,#46207A,#7B4FD0);transition:transform .25s linear}
+.arbar b{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-weight:900;color:var(--card-ink);font-variant-numeric:tabular-nums}
+.argrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.aro{border:0;border-radius:14px;min-height:84px;padding:12px;color:#fff;font-weight:800;font-size:.98rem;text-align:left;display:flex;gap:10px;align-items:flex-start;transition:transform .15s var(--ease),opacity .2s}
+.aro i{font-style:normal;font-size:1.1rem;line-height:1.3;opacity:.85}
+.aro.a0{background:#C1272D}.aro.a1{background:#1F3F8F}.aro.a2{background:#B8860B}.aro.a3{background:#1E7D4A}
+.aro:active{transform:scale(.97)}
+.aro:disabled{opacity:.45}.aro.pick{opacity:1;box-shadow:0 0 0 4px var(--gold)}
+.aro.dim{opacity:.35}.aro.right{box-shadow:0 0 0 4px #7BE0A4}.aro.wrong{opacity:.8;box-shadow:0 0 0 4px #FF9C9C}
+.arme{text-align:center;font-family:var(--didone);font-weight:900;font-size:1.5rem;margin:14px 0 0;color:var(--card-ink)}
+.arpod{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:end;margin:14px 0 18px}
+.arpod div{background:var(--card);color:var(--card-ink);border-radius:14px 14px 4px 4px;text-align:center;padding:10px 6px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.arpod .p1{min-height:150px;background:var(--gold)}.arpod .p2{min-height:115px}.arpod .p3{min-height:90px}
+.arpod b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800}
+.arpod i{font-style:normal;font-family:var(--didone);font-weight:900;font-size:1.8rem;margin-top:auto}
+.arelo{text-align:center;font-weight:700;margin:12px 0}
+.arelo .up{color:var(--ok)}.arelo .dn{color:var(--ko)}
+/* Verbes */
+.vbcard{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:rgba(var(--fw),.06);box-shadow:inset 0 0 0 1px var(--felt-line);border-radius:18px;padding:14px 16px;margin:0 0 22px}
+.vbcard b{display:block;font-weight:800}.vbcard span{font-size:.85rem;color:var(--felt-mute)}
+.vbcta{background:rgba(var(--fw),.06);box-shadow:inset 0 0 0 1px var(--felt-line);border-radius:16px;padding:12px 14px;margin:0 0 16px}
+.vbcta p{margin:0 0 10px;font-size:.92rem}
+.vbstat{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px}
+.vbstat div{background:rgba(var(--fw),.06);box-shadow:inset 0 0 0 1px var(--felt-line);border-radius:14px;padding:12px;text-align:center}
+.vbstat b{display:block;font-family:var(--didone);font-weight:900;font-size:1.5rem}
+.vbstat span{font-size:.8rem;color:var(--felt-mute)}
+.vbq h2{font-size:2rem;margin-bottom:12px}
+.vbl{display:block;margin:0 0 10px}
+.vbl span{display:block;font-weight:700;font-size:.82rem;color:var(--card-mute);margin-bottom:4px}
+.vbl .inp.good{border-color:#1E7D4A;background:#D9F2E3}.vbl .inp.bad{border-color:var(--red);background:#FBE1E1}
+.vbtab{overflow-x:auto;margin-top:8px;-webkit-overflow-scrolling:touch}
+.vbtab table{border-collapse:collapse;font-size:.85rem;min-width:100%}
+.vbtab th,.vbtab td{padding:6px 8px;text-align:left;border-bottom:1px solid var(--felt-line);white-space:nowrap}
+.vbtab td small{display:block;color:var(--felt-mute)}
 
 /* ===== XP, pièces, mode admin (7 octobre 2026) ===== */
 .xpx{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 12px}
@@ -1014,7 +1090,7 @@ body[data-theme="clair"] .today,body[data-theme="clair"] .ev2,body[data-theme="c
 <div class="wrap">
 
 <section id="v-table">
-  <div class="top"><h1>Première 2026</h1><div class="who"><button class="coin" type="button" id="tCoin" aria-label="Mes pièces"></button><div class="date" id="tDate"></div><button class="avbtn" type="button" id="tProf" aria-label="Mon profil"><span class="av" id="tAv"></span></button></div></div>
+  <div class="top"><h1>Première 2026</h1><div class="who"><button class="bell" type="button" id="tBell" aria-label="Notifications" hidden></button><button class="coin" type="button" id="tCoin" aria-label="Mes pièces"></button><div class="date" id="tDate"></div><button class="avbtn" type="button" id="tProf" aria-label="Mon profil"><span class="av" id="tAv"></span></button></div></div>
   <p class="banner" id="banner"><i></i><span>Chargement du paquet…</span></p>
   <div id="extras"></div>
   <div class="tcols"><div class="colA">
@@ -1089,6 +1165,8 @@ body[data-theme="clair"] .today,body[data-theme="clair"] .ev2,body[data-theme="c
 <section id="v-admin" hidden>
   <div id="adm"></div>
 </section>
+<section id="v-verbes" hidden><div id="vb"></div></section>
+<section id="v-notifs" hidden><div id="nt"></div></section>
 
 <section id="v-cours" hidden>
   <div class="cimp"><button class="btn focus" type="button" id="cImp">Importer un cours</button></div>
@@ -1254,17 +1332,17 @@ function applyTint(from){
 function enter(el,delay){if(reduce||!el||!el.animate)return null;return el.animate([{opacity:0,transform:"translateY(8px)"},{opacity:1,transform:"none"}],{duration:220,delay:delay||0,easing:EASE_OUT,fill:"backwards"})}
 
 /* ================= NAVIGATION ================= */
-const views=["table","jeu","duel","cours","fiches","profil","ligue","import","clubs","quetes","admin"];
+const views=["table","jeu","duel","cours","fiches","profil","ligue","import","clubs","quetes","admin","verbes","notifs"];
 const ADM=()=>!!(IMP&&IMP.isOwner&&LS.get("adm",false));
 let view="table";
 function go(v){if(!views.includes(v))v="table";if(v==="admin"&&!ADM())v="profil";if(v==="admin")AD.need=true;if(view==="clubs"&&v!=="clubs")clubStop();if(view==="quetes"&&v!=="quetes")EX.quest=null;view=v;document.body.dataset.view=v;views.forEach(x=>$("#v-"+x).hidden=x!==v);
   document.querySelectorAll("nav.dock button").forEach(b=>{if(b.dataset.v===v)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
-  if(v!=="import"&&v!=="profil"&&v!=="admin")LS.set("view",v);window.scrollTo(0,0);render();enter($("#v-"+v));dockTo(v)}
+  if(!["import","profil","admin","verbes","notifs"].includes(v))LS.set("view",v);if(v!=="verbes")clearInterval(VB.timer);window.scrollTo(0,0);render();enter($("#v-"+v));dockTo(v)}
 function dockTo(v){const d=$("nav.dock div"),hl=$("#dockHl");if(!d||!hl)return;const b=d.querySelector(`button[data-v="${v}"]`);if(!b){hl.style.clipPath="inset(0 100% 0 0 round 999px)";return}
   const r=hl.getBoundingClientRect(),q=b.getBoundingClientRect();hl.style.clipPath=`inset(0 ${Math.max(0,r.right-q.right)}px 0 ${Math.max(0,q.left-r.left)}px round 999px)`}
 addEventListener("resize",()=>dockTo(view));
 document.querySelectorAll("nav.dock button").forEach(b=>b.onclick=()=>go(b.dataset.v));
-function render(){if(view==="clubs")renderClubs();else if(view==="quetes"){if(!EX.quest)renderQuetes()}else if(view==="table")renderTable();else if(view==="jeu")renderJeuPicks();else if(view==="duel"){if(!inDuel&&!BB.on)renderSeries()}else if(view==="ligue"){if(!LG.defi)renderLigue()}else if(view==="import"){if(IMPV.need){IMPV.need=false;renderImport()}}else if(view==="fiches"){if(!((FI.mode==="new"&&$("#fnGo"))||(FI.mode==="preview"&&$("#fpSave"))))renderFiches()}else if(view==="profil"){renderProfil()}else if(view==="admin"){if(AD.need){AD.need=false;renderAdmin()}}else renderCours();applyTint();paintMyAv()}
+function render(){if(view==="clubs")renderClubs();else if(view==="quetes"){if(!EX.quest)renderQuetes()}else if(view==="table")renderTable();else if(view==="jeu")renderJeuPicks();else if(view==="duel"){if(!inDuel&&!BB.on)renderSeries()}else if(view==="ligue"){if(!LG.defi)renderLigue()}else if(view==="import"){if(IMPV.need){IMPV.need=false;renderImport()}}else if(view==="fiches"){if(!((FI.mode==="new"&&$("#fnGo"))||(FI.mode==="preview"&&$("#fpSave"))))renderFiches()}else if(view==="profil"){renderProfil()}else if(view==="admin"){if(AD.need){AD.need=false;renderAdmin()}}else if(view==="verbes"){if(!VB.q)renderVerbes()}else if(view==="notifs"){renderNotifs()}else renderCours();applyTint();paintMyAv()}
 
 /* ================= TABLE ================= */
 const EVAL=t=>t==="controle"||t==="oral";
@@ -1569,8 +1647,8 @@ function renderSeries(){inDuel=false;
   $("#duel").innerHTML=`<h1 style="font-size:2rem;margin-bottom:6px">Duel</h1><p class="muted" style="margin:0 0 18px">10 questions. Une erreur part dans ta pile « Erreurs » du Jeu.</p>
    <div class="pick" id="dMat"></div>
    <div class="series" id="dSer">${C.ready?"":'<p class="loading">Chargement…</p>'}</div>
-   <div class="online" id="onlineEntry"></div>`;
-  renderOnlineEntry();if(!C.ready)return;
+   <div id="arEntry"></div><div id="vbEntry"></div><div class="online" id="onlineEntry"></div>`;
+  renderOnlineEntry();arEntryPaint();if(!C.ready)return;
   const intro=$("#duel p.muted");if(intro)intro.insertAdjacentHTML("afterend",bbCardHTML());if($("#bbGo"))$("#bbGo").onclick=bbStart;
   pickRow($("#dMat"),mats.map(m=>({k:m.id,l:m.court||m.nom,suit:m.suit,dot:1})),duelMat,k=>{duelMat=k;renderSeries()});
   const list=duelMat?seriesOf(duelMat):[];
@@ -1642,7 +1720,7 @@ function players(){return (OL.g?OL.g.peers():[]).filter(p=>p.kind==="viewer"&&p.
 function hostPeer(){return players().filter(p=>p.presence.host).sort((a,b)=>a.peer<b.peer?-1:1)[0]}
 function onPeersChange(){
   const h=hostPeer();
-  if(h&&!h.isMe){const hp=h.presence;if(typeof hp.epoch==="number"&&hp.epoch>OL.epoch&&hp.seed!=null&&!OL.loading){if(hp.gref||hp.refs){OL.loading=true;OL.epoch=hp.epoch;mixFromHost(hp).finally(()=>{OL.loading=false})}else if(hp.cid&&hp.si!=null)startOnline(hp.epoch,hp.cid,hp.si,hp.seed)}}
+  if(h&&!h.isMe){const hp=h.presence;if(hp.eloId&&hp.eloId!==OL.eloId){OL.eloId=hp.eloId;if(!GUEST)eloJoin(hp.eloId)}if(typeof hp.epoch==="number"&&hp.epoch>OL.epoch&&hp.seed!=null&&!OL.loading){if(hp.gref||hp.refs){OL.loading=true;OL.epoch=hp.epoch;mixFromHost(hp).finally(()=>{OL.loading=false})}else if(hp.cid&&hp.si!=null)startOnline(hp.epoch,hp.cid,hp.si,hp.seed)}}
   if(!OL.game)renderLobby();else renderBoard();
 }
 function renderLobby(){
@@ -1682,6 +1760,7 @@ async function mixLaunch(){const seed=Math.floor(Math.random()*2**31),ep=OL.epoc
   const pres={epoch:ep,seed,qi:0,score:0,ms:0,done:false,cid:null,si:null,gref:null,refs:null};
   try{if(!DB||!UID||GUEST)throw 0;await DB.doc("biblio/"+UID+"/duel/"+OL.code).set({epoch:ep,seed,qs,upd:Date.now()});pres.gref=UID}
   catch(e){pres.refs=[...MIX.sel].slice(0,40);pres.n=MIX.n;if(err)err.textContent="Mode invité : tes amis doivent avoir les mêmes chapitres que toi."}
+  OL.eloId=(players().length>=2&&!GUEST&&UID)?await eloOpen(qs.length,60,true):null;EG.joined=EG.joined||{};if(OL.eloId)EG.joined[OL.eloId]=true;pres.eloId=OL.eloId;
   OL.g.presence(pres).catch(()=>{});startMix(ep,seed,qs)}
 async function mixFromHost(hp){if(hp.gref){try{const s=await DB.doc("biblio/"+hp.gref+"/duel/"+OL.code).get();const d=s.exists?s.data():null;if(d&&d.epoch===hp.epoch&&Array.isArray(d.qs))return startMix(hp.epoch,hp.seed,d.qs)}catch(e){}}
   if(Array.isArray(hp.refs)){const keep=MIX.sel,kn=MIX.n;MIX.sel=new Set(hp.refs.filter(k=>typeof k==="string"));MIX.n=+hp.n||10;const qs=mixBuild(hp.seed);MIX.sel=keep;MIX.n=kn;if(qs.length)return startMix(hp.epoch,hp.seed,qs)}
@@ -1690,7 +1769,7 @@ function startMix(epoch,seed,qs){const r=rng(seed+1);OL.epoch=epoch;OL.game={mix
   if(!OL.host)OL.g.presence({epoch,qi:0,score:0,ms:0,done:false}).catch(()=>{});renderOnlineQ()}
 async function qrShow(el,code){try{const qrcode=await loadLib(QR_GEN,"qrcode");const q=qrcode(0,"M");q.addData(HUB_URL+"#duel="+code);q.make();el.innerHTML=q.createSvgTag({cellSize:4,margin:2,scalable:true})}catch(e){el.textContent="QR code indisponible."}}
 async function qrRead(file){const jsQR=await loadLib(QR_READ,"jsQR");const pic=await loadPic(file);const W=Math.min(1200,pic.w),H=Math.round(pic.h*W/pic.w),cv=document.createElement("canvas");cv.width=W;cv.height=H;const g=cv.getContext("2d");g.drawImage(pic.src,0,0,W,H);
-  const d=g.getImageData(0,0,W,H),r=jsQR(d.data,W,H);if(!r)return "";const m=/duel=([A-Z0-9]{4})/i.exec(r.data)||/^([A-Z0-9]{4})$/i.exec(r.data.trim());return m?m[1].toUpperCase():""}
+  const d=g.getImageData(0,0,W,H),r=jsQR(d.data,W,H);if(!r)return "";const ma=/arene=([A-Z0-9]{5})/i.exec(r.data);if(ma)return ma[1].toUpperCase();const m=/duel=([A-Z0-9]{4})/i.exec(r.data)||/^([A-Z0-9]{4})$/i.exec(r.data.trim());return m?m[1].toUpperCase():""}
 
 function startOnline(epoch,cid,si,seed){
   const ch=C.chaps[cid];if(!ch||!ch.quiz||!ch.quiz[si]){toast(`<span class="tm">!</span><div><b>Ce thème n’est pas dans tes cours</b><span>Demande à l’hôte de lancer un « Mélange » ou un thème de ta classe.</span></div>`);return}
@@ -1726,9 +1805,10 @@ function renderEnd(){
   const rk=ranking(),all=rk.length>0&&rk.every(p=>p.done),N=OL.game?OL.game.qs.length:10;const sec=ms=>(ms/1000).toFixed(1).replace(".",",")+" s";
   $("#duel").innerHTML=`<div class="result"><div class="sc">${OL.score}/${N}</div><p>${all?(rk[0]&&rk[0].me?"Tu remportes le duel.":"Duel terminé."):"En attente des autres joueurs…"}</p></div>
    <ol class="endlist" id="endlist">${rk.map((p,i)=>`<li class="${p.me?"me":""}"><span class="rk">${i+1}</span><span class="bn">${esc(p.nick)}${p.me?" (toi)":""}</span><span class="bs">${p.score}/${N}</span><span class="bq">${p.done?sec(p.ms):p.qi+"/"+N}</span></li>`).join("")}</ol>
-   <p class="muted" style="font-size:.85rem">À égalité, le plus rapide gagne.</p>
+   <p class="muted" style="font-size:.85rem">À égalité, le plus rapide gagne.</p><p class="arelo" id="olElo">${OL.eloId?"":"Partie non classée (2 joueurs connectés minimum)."}</p>
    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">${OL.host?'<button class="btn light" type="button" id="olRe">Revanche</button>':'<span class="waitmsg">La revanche se lance chez l’hôte.</span>'}<button class="btn ghost" type="button" id="olLeave">Quitter</button></div>`;
   $("#olLeave").onclick=()=>leaveRoom();
+  if(OL.eloId){if(EG.id!==OL.eloId){EG.id=OL.eloId;eloSend(OL.eloId,Math.max(0,OL.score*1000-Math.min(999,Math.round(OL.ms/100))),"#olElo")}else eloPaintAgain(OL.eloId,"#olElo")}
   if($("#olRe"))$("#olRe").onclick=()=>{OL.game=null;OL.g.presence({done:false,qi:0,score:0,ms:0}).catch(()=>{});renderLobby()};
 }
 
@@ -1889,7 +1969,7 @@ const LG={ok:false,ref:null,rows:[],me:null,nick:cleanNick(LS.get("nick","")),di
 const mondayOf=d=>{const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()-((x.getDay()+6)%7));return x};
 const WEEK=isoOf(mondayOf(NOW));
 function weekSum(){const m=mondayOf(NOW);let s=0;for(let i=0;i<7;i++){const d=new Date(m);d.setDate(m.getDate()+i);s+=P.x[isoOf(d)]||0}return s}
-function giftSum(k){return Object.values(P.gx||{}).reduce((a,g)=>a+(g&&+g[k]>0?Math.min(+g[k],k==="xp"?1000:5000):0),0)}
+function giftSum(k){return Object.values(P.gx||{}).reduce((a,g)=>a+(g&&+g[k]>0?Math.min(+g[k],1e12):0),0)}
 /* XP total : tout ce que tu as gagné depuis le début. Il ne baisse jamais. */
 function totalXP(){return Object.values(P.x).reduce((a,b)=>a+(+b||0),0)+giftSum("xp")}
 /* Pièces : 1 pièce par XP gagné, plus les cadeaux. On les dépense dans la boutique. */
@@ -1947,7 +2027,7 @@ function checkRewards(silent){
 }
 /* Ligne de classement : chacun n'écrit que la sienne (ligue/<son id>) */
 function lgRow(){const me=LG.me||{};const df=P.df[TODAY_ISO];
-  return {nick:LG.nick,av:avData(),avk:avK(),cl:(P.pf&&P.pf.cl)||"",sk:{ch:chromaNow(),w:(P.sk&&P.sk.w)||""},mo:{[MON]:monthSum(MON),[PMON]:monthSum(PMON)},rx:rxClean(LG.myRx),sem:WEEK,xp:weekSum(),tot:totalXP(),div:LG.div||0,dos:P.dos||"classique",tr:Object.keys(P.t).slice(0,20),nch:Object.keys(IMP.mine||{}).length+((IMP.pub&&IMP.pub[UID])||[]).length,
+  return {nick:LG.nick,av:avData(),avk:avK(),cl:(P.pf&&P.pf.cl)||"",sk:{ch:chromaNow(),w:(P.sk&&P.sk.w)||""},mo:{[MON]:monthSum(MON),[PMON]:monthSum(PMON)},rx:rxClean(LG.myRx),sem:WEEK,xp:weekSum(),tot:totalXP(),div:LG.div||0,dos:P.dos||"classique",tr:Object.keys(P.t).slice(0,20),elo:myElo(),nch:Object.keys(IMP.mine||{}).length+((IMP.pub&&IMP.pub[UID])||[]).length,
     jour:df?{d:TODAY_ISO,s:df.s,ms:df.ms}:(me.jour&&me.jour.d===TODAY_ISO?me.jour:null),res:LG.res||null,codes:["HUB",...myCodes()],mesLigues:(P.lg&&P.lg.mine)||{},upd:Date.now()}}
 function lgPush(now){if(!LG.ref||!LG.nick||LG.ro)return;clearTimeout(LG.t);
   const go=async()=>{const row=lgRow();try{await LG.ref.set(row);LG.me=row}catch(e){if(e&&(e.code==="invalid_argument"||e.code==="not_granted")){LG.ro=true;guestOn();if(view==="ligue"&&!LG.defi)renderLigue()}}};
@@ -1965,7 +2045,7 @@ async function ligueInit(){
   checkRewards(true);if(LG.me)lgPush();
 }
 /* Fin de semaine : montée si tu finis dans la première moitié avec 100 XP ou plus, descente si 0 XP */
-function rollWeek(){LG.rolled=true;const prev=LG.me.sem;
+function rollWeek(){LG.rolled=true;return;const prev=LG.me.sem;
   const rows=LG.rows.filter(r=>r.sem===prev).sort((a,b)=>(b.xp||0)-(a.xp||0)||String(a.id).localeCompare(String(b.id)));
   const n=rows.length,rk=rows.findIndex(r=>r.id===UID)+1,xp=+LG.me.xp||0;let mv=0;
   if(xp>=100&&rk>0&&rk<=Math.ceil(n/2)&&LG.div<3)mv=1;else if(xp===0&&LG.div>0)mv=-1;
@@ -1973,7 +2053,7 @@ function rollWeek(){LG.rolled=true;const prev=LG.me.sem;
 }
 const xpOf=r=>LG.per==="mois"?(r.id===UID?monthSum(MON):(+(r.mo&&r.mo[MON])||0)):(r.id===UID?weekSum():(r.sem===WEEK?(+r.xp||0):0));
 function lgRanking(){const rows=LG.rows.filter(r=>r.nick&&(inCur(r)||r.id===UID));if(LG.nick&&!rows.find(r=>r.id===UID))rows.push({id:UID,nick:LG.nick,div:LG.div,dos:P.dos});
-  return rows.map(r=>Object.assign({},r,{wx:xpOf(r),me:r.id===UID,div:r.id===UID?LG.div:(+r.div||0),dos:r.id===UID?(P.dos||"classique"):(r.dos||"classique")})).sort((a,b)=>b.wx-a.wx||String(a.nick).localeCompare(String(b.nick)))}
+  return rows.map(r=>Object.assign({},r,{wx:eloOf(r.id),np:eloN(r.id),me:r.id===UID,div:eloDiv(eloOf(r.id)),dos:r.id===UID?(P.dos||"classique"):(r.dos||"classique")})).sort((a,b)=>b.wx-a.wx||b.np-a.np||String(a.nick).localeCompare(String(b.nick)))}
 function weekLabel(){const m=mondayOf(NOW),e=new Date(m);e.setDate(m.getDate()+6);const left=Math.max(0,Math.round((e-new Date(NOW.getFullYear(),NOW.getMonth(),NOW.getDate()))/864e5));
   return `Semaine du ${m.getDate()} ${MOIS[m.getMonth()]} · ${left?"fin dans "+left+" j":"dernier jour"}`}
 const DEFI={pool:null,req:false};function defiLoad(){if(DEFI.req||typeof fetch!=="function")return;DEFI.req=true;fetch("prog/defi.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(Array.isArray(j)&&j.length>=10){DEFI.pool=j;if(view==="ligue"&&!LG.defi)renderLigue()}else DEFI.req=false}).catch(()=>{DEFI.req=false})}
@@ -1981,7 +2061,7 @@ function defiQs(){defiLoad();const all=(DEFI.pool||Object.values(C.qs).filter(x=
   let seed=0;for(const ch of TODAY_ISO)seed=(seed*31+ch.charCodeAt(0))|0;const r=rng(seed);
   return sshuffle(all,r).slice(0,10).map(q=>({q,opts:optsOf(q,r)}))}
 function renderLigue(){
-  LG.cur="HUB";
+  LG.cur="HUB";eloLoad();if(SOC()&&Date.now()-NT.amisT>20000)amisLoad().then(()=>{if(view==="ligue"&&!LG.defi)renderLigue()});
   markLigue(false);const box=$("#lg");
   if(!C.ready){box.innerHTML=`<p class="loading">${dbState==="off"?"Ouvre la page depuis claude.ai, connecté, pour voir la ligue.":"Chargement de la ligue…"}</p>`;return}
   if(!LG.ok){box.innerHTML=`<div class="lgtop"><h1>Ligue</h1></div><p class="guestnote"><b>Mode invité.</b> Connecte-toi pour apparaître dans le classement. En attendant, défie tes amis avec un code : ils jouent les mêmes questions que toi.</p>`+friendsHTML()+shopHTML(totalXP());bindFriends();bindShop();return}
@@ -1991,18 +2071,18 @@ function renderLigue(){
   const pm=mondayOf(NOW);pm.setDate(pm.getDate()-7);
   if(LG.res&&LG.res.sem===isoOf(pm)){const r=LG.res;h+=`<p class="lgres">Semaine passée : <b>${r.rk?r.rk+(r.rk===1?"er":"e")+" sur "+r.n:"pas classé"}</b> avec ${r.xp} XP. ${r.mv>0?"Tu montes en <b>"+DIVS[LG.div]+"</b>.":r.mv<0?"Tu redescends en "+DIVS[LG.div]+" : une donne par soir suffit pour remonter.":"Tu restes en "+DIVS[LG.div]+"."}</p>`}
   if(!LG.nick){
-    h+=`<div class="lgjoin"><h2>Rejoins la ligue</h2><p>Chaque carte, duel et défi te rapporte de l’XP. Le classement de la semaine repart à zéro chaque lundi, ton XP total et tes pièces restent.</p>
+    h+=`<div class="lgjoin"><h2>Rejoins la ligue</h2><p>Chaque carte, duel et défi te rapporte de l’XP et des pièces. Le classement se fait à l’Elo, qui ne repart jamais à zéro.</p>
      <label class="lab" for="lgNick">Ton pseudo</label><div class="olrow"><input id="lgNick" class="inp" maxlength="16" autocomplete="off" value="${esc(OL.nick||"")}" placeholder="Ex. Jeremy"><button class="btn" type="button" id="lgJoin">Rejoindre</button></div><p class="olerr" id="lgErr" role="alert"></p></div>`;
   } else {
-    h+=`<div class="lgme"><span class="rk">${meI+1}<small>${meI===0?"er":"e"}</small></span><b>${esc(LG.nick)}</b><span class="xp">${wk}<small>XP cette semaine</small></span><span>${today>=CAP?"Plafond du jour atteint":"Aujourd’hui : "+today+" / "+CAP+" XP"}</span></div>
+    h+=`<div class="lgme"><span class="rk">${meI+1}<small>${meI===0?"er":"e"}</small></span><b>${esc(LG.nick)}</b><span class="xp">${fmtN(myElo())}<small>Elo · ${eloN(UID)} partie${eloN(UID)>1?"s":""} classée${eloN(UID)>1?"s":""}</small></span><span>Cette semaine : ${fmtN(wk)} XP${today>=CAP?" · plafond du jour atteint":""}</span></div>
      <div class="exrow" style="margin-top:10px"><button class="btn ghost" type="button" id="lgCard">Ma carte de score</button><span class="istat" id="lgCardSt" role="status"></span></div>`;
     if(LG.ro||GUEST)h+=`<p class="guestnote"><b>Mode invité.</b> Tes points, tes cartes et tes fiches restent sur ce téléphone. Reconnecte-toi pour apparaître dans le classement.</p>`;
   }
   if(LG.nick&&!LG.ro)h+=goalHTML();
-  h+=`<div class="sec"><h2>Classement</h2><span class="per" id="lgPer"><button type="button" data-p="sem" class="${LG.per==="sem"?"on":""}">Semaine</button><button type="button" data-p="mois" class="${LG.per==="mois"?"on":""}">Saison de ${MOIS_L[NOW.getMonth()]}</button></span></div>`+seasonResHTML();
+  h+=amisHTML()+`<div class="sec"><h2>Classement Elo</h2><span>ne repart jamais à zéro</span></div><p class="muted" style="margin:-4px 0 10px;font-size:.85rem">Tout le monde part à 1000. L’Elo bouge seulement dans les parties classées à plusieurs : duel en ligne et Arène. Battre plus fort que toi rapporte plus.</p>`;
   if(rk.length){const half=Math.ceil(rk.length/2);
     const canRx=LG.nick&&!LG.ro&&!GUEST;
-    h+=`<ol class="lgl">`+rk.map((r,i)=>`${i===half&&rk.length>1&&LG.per==="sem"?'<li class="cut">Au-dessus : zone de montée (100 XP minimum)</li>':""}<li class="${r.me?"me":""}" data-id="${esc(r.id)}"><span class="r">${i+1}</span>${avHTML(r.me?{nick:LG.nick,av:avData(),avk:avK(),sk:{ch:chromaNow()}}:r,"sm")}<span class="n"></span><span class="x">${r.wx}<small>XP</small></span>${!r.me&&canRx?`<button class="rxb${myRx(r.id)?" on":""}" type="button" data-rx="${esc(r.id)}" aria-label="Réagir">${myRx(r.id)?esc(myRx(r.id)):"+"}</button>`:"<span></span>"}</li>${LG.rxOpen===r.id?`<li class="rxp">${RX.map(e=>`<button type="button" data-e="${e}" data-t="${esc(r.id)}">${e}</button>`).join("")}</li>`:""}`).join("")+`</ol>`;
+    h+=`<ol class="lgl">`+rk.map((r,i)=>`<li class="${r.me?"me":""}" data-id="${esc(r.id)}"><span class="r">${i+1}</span>${avHTML(r.me?{nick:LG.nick,av:avData(),avk:avK(),sk:{ch:chromaNow()}}:r,"sm")}<span class="n"></span><span class="x">${fmtN(r.wx)}<small>${r.np} partie${r.np>1?"s":""}</small></span>${!r.me&&canRx?`<button class="rxb${myRx(r.id)?" on":""}" type="button" data-rx="${esc(r.id)}" aria-label="Réagir">${myRx(r.id)?esc(myRx(r.id)):"+"}</button>`:"<span></span>"}</li>${LG.rxOpen===r.id?`<li class="rxp">${RX.map(e=>`<button type="button" data-e="${e}" data-t="${esc(r.id)}">${e}</button>`).join("")}</li>`:""}`).join("")+`</ol>`;
   } else h+=`<p class="muted" style="margin:0">Personne encore. Rejoins la ligue, puis invite tes amis.</p>`;
   const df=P.df[TODAY_ISO],drows=LG.rows.filter(r=>r.nick&&r.jour&&r.jour.d===TODAY_ISO&&(inCur(r)||r.id===UID)).map(r=>({nick:r.nick,s:r.jour.s,ms:r.jour.ms,me:r.id===UID}));
   if(df&&!drows.find(r=>r.me)&&LG.nick)drows.push({nick:LG.nick,s:df.s,ms:df.ms,me:true});
@@ -2025,9 +2105,9 @@ function renderLigue(){
     <li><b>Défi du jour</b> : 2 XP par bonne réponse. <b>Exercice corrigé terminé</b> : 3 XP.</li>
     <li><b>Série</b> : 10 XP au premier point du jour si tu as joué la veille.</li>
     <li><b>Pièces</b> : chaque XP gagné te donne aussi 1 pièce. Les pièces s’achètent rien, elles se gagnent, et elles ne disparaissent jamais : tu les dépenses dans la boutique quand tu veux.</li>
-    <li>Plafond de ${CAP} XP par jour. Chaque lundi, la première moitié du classement monte d’une division (100 XP minimum), et ceux à 0 XP descendent.</li></ul></details>`;
+    <li>Plafond de ${CAP} XP par jour. L’XP sert au niveau et aux pièces, pas au classement.</li><li><b>Classement</b> : à l’Elo, qui ne repart jamais à zéro. Divisions : Bronze sous 1100, Argent dès 1100, Or dès 1250, Diamant dès 1400.</li></ul></details>`;
   h+=INVITE_HELP_F();
-  box.innerHTML=h;
+  box.innerHTML=h;amisBind(box);
   box.querySelectorAll(".lgl li[data-id]").forEach((li,i)=>{const r=rk[i];li.querySelector(".n").textContent=r.nick;const rx=rxFor(r.id);if(rx.length){const sp=document.createElement("span");sp.className="rxs";rx.slice(0,3).forEach(([e,n])=>{const x=document.createElement("span");x.textContent=e+(n>1?" "+n:"");sp.appendChild(x)});li.querySelector(".n").appendChild(sp)}const sm=document.createElement("small");sm.textContent=(r.me?(GUEST||LG.ro?"toi, invité · ":"toi · "):"")+DIVS[r.div||0]+(r.cl?" · "+String(r.cl).slice(0,12):"");li.querySelector(".n").appendChild(sm)});
   box.querySelectorAll(".dlist li").forEach((li,i)=>{li.querySelector(".dn").textContent=drows[i].nick+(drows[i].me?" (toi)":"")});
   if($("#lgJoin"))$("#lgJoin").onclick=async()=>{const n=cleanNick($("#lgNick").value);if(!n){$("#lgErr").textContent="Choisis un pseudo d’abord.";$("#lgNick").focus();return}
@@ -2103,7 +2183,7 @@ function mergeAll(){
   C.ech=[...(IMP.isOwner?(C.ech0||[]):[]),...IMP.ech,...gEch,...shared].filter(e=>e&&e.date);
   Object.values(FI.ext).forEach(f=>addMat(f.mat,f.matNom));
 }
-function matOn(id){if(Array.isArray(P.mats)&&P.mats.length)return P.mats.includes(id);
+function matOn(id){if(String(id).startsWith("x-"))return ADM();if(Array.isArray(P.mats)&&P.mats.length)return P.mats.includes(id);
   return Object.values(C.chaps||{}).some(c=>c.mat===id&&((c.paquets||[]).some(p=>(p.cartes||[]).length)||(c.quiz||[]).length))||(IMP.isOwner&&!!(C.M0&&C.M0[id]))||IMP.ech.some(e=>e.mat===id)}
 function rebuild(){if(!C.ready)return;mergeAll();reindex();if(view==="import"||(view==="ligue"&&LG.defi)||(view==="duel"&&inDuel))return;render()}
 async function impInit(){
@@ -2124,7 +2204,7 @@ async function impInit(){
   DB.collection("data/users/"+UID+"/cadeau").onSnapshot(s=>giftsIn(s.docs.map(d=>Object.assign({},d.data()||{},{id:d.id}))),()=>{});
 }
 function giftsIn(list){let n=0;P.gx=P.gx||{};
-  list.forEach(g=>{if(!g||!g.id||P.gx[g.id])return;const xp=Math.max(0,Math.min(1000,Math.round(+g.xp||0))),co=Math.max(0,Math.min(5000,Math.round(+g.co||0)));if(!xp&&!co)return;
+  list.forEach(g=>{if(!g||!g.id||P.gx[g.id])return;const xp=Math.max(0,Math.min(1e12,Math.round(+g.xp||0))),co=Math.max(0,Math.min(1e12,Math.round(+g.co||0)));if(!xp&&!co)return;
     P.gx[g.id]={xp,co,d:String(g.date||new Date().toISOString()).slice(0,10),r:clip(g.raison,80)};n++;
     toast(`<span class="tm">+</span><div><b>Cadeau de l’admin${xp?" : +"+fmtN(xp)+" XP":""}${co?(xp?", ":" : ")+"+"+fmtN(co)+" pièces":""}</b><span>${esc(clip(g.raison,80)||"Bravo !")}</span></div>`)});
   if(n){saveP();lgPush();checkRewards(true);if(C.ready&&!inDuel&&view!=="jeu")render()}}
@@ -2584,7 +2664,7 @@ function avParts(r){const a=r&&typeof r.av==="string"&&/^data:image\/(jpeg|png|w
 function avHTML(r,cls){const {col,inner}=avParts(r);
   const chx=r&&r.sk&&CHR.includes(r.sk.ch)?r.sk.ch:"";
   return `<span class="av ${cls||""}" style="--av:${col}"${chx?` data-ch="${chx}"`:""}>${inner}</span>`}
-function paintMyAv(){const tc=$("#tCoin");if(tc){tc.innerHTML=`<i aria-hidden="true"></i>${fmtN(coins())}`;tc.onclick=()=>go("ligue")}const t=$("#tAv");if(!t)return;const {col,inner}=avParts({nick:myNick()||"Moi",av:avData(),avk:avK()});t.style.setProperty("--av",col);t.innerHTML=inner}
+function paintMyAv(){const tc=$("#tCoin");if(tc){tc.innerHTML=`<i aria-hidden="true"></i>${fmtN(coins())}`;tc.onclick=()=>go("ligue")}if(typeof ntPaint==="function"){ntPaint();const tb=$("#tBell");if(tb)tb.onclick=()=>{amisLoad(true).then(()=>{if(view==="notifs")renderNotifs()});go("notifs")}}const t=$("#tAv");if(!t)return;const {col,inner}=avParts({nick:myNick()||"Moi",av:avData(),avk:avK()});t.style.setProperty("--av",col);t.innerHTML=inner}
 /* Lecture d'image sans blob: (la page publiée refuse les images blob:) */
 function readDataURL(f){return new Promise((ok,ko)=>{const r=new FileReader();r.onload=()=>ok(r.result);r.onerror=()=>ko(r.error||new Error("lecture"));r.readAsDataURL(f)})}
 async function loadPic(f){
@@ -3483,7 +3563,7 @@ async function admEleves(z){
      <div class="adt"><b class="adp"></b><small>${u.role==="admin"?"admin · ":""}${DIVS[Math.min(3,u.div)]||"Bronze"} · inscrit le ${esc(admDate(u.cree))} · actif ${esc(admTime(u.act))}</small></div>
      <div class="adn"><span><b>${fmtN(u.tot)}</b>XP total</span><span><b>${fmtN(u.sem)}</b>cette semaine</span><span><b>${fmtN(u.nch)}</b>chapitres</span></div>
      <button class="btn ghost adgb" type="button" data-i="${i}">${AD.give===u.id?"Fermer":"Donner XP ou pièces"}</button>
-     ${AD.give===u.id?`<div class="adgive"><div class="adrow"><label>XP<input class="inp" type="number" inputmode="numeric" min="0" max="1000" step="1" id="gXp" value="50"></label><label>Pièces<input class="inp" type="number" inputmode="numeric" min="0" max="5000" step="1" id="gCo" value="0"></label></div>
+     ${AD.give===u.id?`<div class="adgive"><div class="adrow"><label>XP<input class="inp" type="number" inputmode="numeric" min="0" step="1" id="gXp" value="50"></label><label>Pièces<input class="inp" type="number" inputmode="numeric" min="0" step="1" id="gCo" value="0"></label></div>
        <label class="lab" for="gWhy">Pourquoi <span>(il le verra)</span></label><input class="inp" id="gWhy" maxlength="80" placeholder="Ex. Gagnant du tournoi de vendredi">
        <p class="note" style="margin:8px 0 0">L’XP donné compte dans son XP total et lui donne autant de pièces. Il ne compte pas dans le classement de la semaine.</p>
        <div class="exrow"><button class="btn light" type="button" id="gGo">Envoyer le cadeau</button><span class="istat" id="gSt" role="status"></span></div></div>`:""}</li>`).join("")}</ul>`;
@@ -3492,7 +3572,7 @@ async function admEleves(z){
   z.querySelectorAll(".adgb").forEach(b=>b.onclick=()=>{const u=L[+b.dataset.i];AD.give=AD.give===u.id?null:u.id;admEleves(z);const f=$("#gXp");if(f)f.focus()});
   const go2=$("#gGo");if(go2)go2.onclick=async()=>{const u=L.find(x=>x.id===AD.give),st=$("#gSt");if(!u)return;
     const xp=Math.round(+$("#gXp").value||0),co=Math.round(+$("#gCo").value||0),why=clip($("#gWhy").value,80);
-    if(xp<0||co<0||xp>1000||co>5000||(!xp&&!co)){st.className="istat err";st.textContent="Entre 1 et 1 000 XP, ou 1 et 5 000 pièces.";return}
+    if(!Number.isFinite(xp)||!Number.isFinite(co)||xp<0||co<0||xp>1e12||co>1e12||(!xp&&!co)){st.className="istat err";st.textContent="Entre un nombre positif d’XP ou de pièces (jusqu’à mille milliards).";return}
     if(!confirm(`Donner ${xp?fmtN(xp)+" XP":""}${xp&&co?" et ":""}${co?fmtN(co)+" pièces":""} à ${u.pseudo} ?`))return;
     go2.disabled=true;st.className="istat";st.textContent="Envoi…";
     const id=Date.now().toString(36)+Math.random().toString(36).slice(2,7),g={xp,co,raison:why,par:myNick()||(window.P26&&window.P26.profile&&window.P26.profile.pseudo)||"Admin",date:new Date().toISOString()};
@@ -3550,13 +3630,13 @@ function admThemeBind(z,t){if(!t)return;const pm=t.id.slice(0,t.id.lastIndexOf("
   if($("#tBack"))$("#tBack").onclick=async()=>{const st=$("#tSt");if(!confirm("Revenir aux cartes d’origine pour ce thème ? Ta version sera effacée."))return;
     try{const sn=await DB.doc("programme/"+t.id).get(),cur=(sn.exists&&sn.data())||{},m=cur.masque||{};if(Object.keys(m).length){const doc={tid:t.id,masque:m};await DB.doc("programme/"+t.id).set(doc);PG.shared[t.id]=doc}else{await DB.doc("programme/"+t.id).delete();delete PG.shared[t.id]}mergeAll();reindex();admProg(z)}
     catch(e){st.className="istat err";st.textContent=writeErr(e)}}}
-async function admMasque(tid,ids,on){if(!tid||!/^[a-z]+-\d+$/.test(tid))throw Object.assign(new Error("Carte inconnue."),{code:"invalid_argument"});
+async function admMasque(tid,ids,on){if(!tid||!/^[a-z]+-[a-z0-9]+$/.test(tid))throw Object.assign(new Error("Carte inconnue."),{code:"invalid_argument"});
   let cur=null;const sn=await DB.doc("programme/"+tid).get();cur=(sn.exists&&sn.data())||{tid};const m=Object.assign({},cur.masque||{});ids.forEach(i=>{if(on)m[i]=1;else delete m[i]});
   const doc=Object.assign({},cur,{tid,masque:m});
   if(!(Array.isArray(doc.paquets)&&doc.paquets.length)&&!Object.keys(m).length){await DB.doc("programme/"+tid).delete();delete PG.shared[tid]}
   else{await DB.doc("programme/"+tid).set(doc);PG.shared[tid]=doc}
   mergeAll();reindex();if(view!=="admin")render()}
-const tidOfCard=id=>{const m=/^p[gab]\.([a-z]+-\d+)\./.exec(String(id||""));return m?m[1]:null};
+const tidOfCard=id=>{const m=/^p[gab]\.([a-z]+-[a-z0-9]+)\./.exec(String(id||""));return m?m[1]:null};
 
 /* ----- Signalements ----- */
 async function admSig(z){z.innerHTML=`<p class="loading">Chargement des signalements…</p>`;
@@ -3582,6 +3662,318 @@ async function admJour(z){z.innerHTML=`<p class="loading">Chargement du journal�
   z.innerHTML=L.length?`<p class="note" style="margin:14px 0 10px">Tous les cadeaux que tu as donnés, du plus récent au plus ancien.</p><ul class="adl">${L.map(()=>`<li><div class="adt"><b class="jp"></b><small class="jd"></small></div><p class="adtx"></p></li>`).join("")}</ul>`
     :`<p class="note" style="margin:14px 0">Aucun cadeau donné pour l’instant.</p>`;
   z.querySelectorAll(".adl li").forEach((li,i)=>{const g=L[i];li.querySelector(".jp").textContent=(g.pseudo||"?")+" · "+[g.xp?"+"+fmtN(g.xp)+" XP":"",g.co?"+"+fmtN(g.co)+" pièces":""].filter(Boolean).join(", ");li.querySelector(".jd").textContent=admDate(g.date);li.querySelector(".adtx").textContent=g.raison||""})}
+
+/* ================= ELO : classement permanent, calculé par la base ================= */
+const ELO={map:{},ok:false,t:0};
+const DIV_ELO=[0,1100,1250,1400];
+const eloDiv=e=>{let d=0;DIV_ELO.forEach((s,i)=>{if((+e||1000)>=s)d=i});return d};
+const myElo=()=>(ELO.map[UID]&&ELO.map[UID].elo)||1000;
+const eloOf=id=>(ELO.map[id]&&ELO.map[id].elo)||1000;
+const eloN=id=>(ELO.map[id]&&ELO.map[id].n)||0;
+async function eloLoad(force){if(!window.P26||!window.P26.elo||GUEST||!UID)return;if(!force&&Date.now()-ELO.t<15000)return;ELO.t=Date.now();
+  try{ELO.map=await window.P26.elo.list();ELO.ok=true;const d=eloDiv(myElo());if(d!==LG.div){LG.div=d;applySkin();lgPush()}if(view==="ligue"&&!LG.defi)renderLigue()}catch(e){}}
+async function eloBoot(){if(!window.P26||!window.P26.elo||GUEST||!UID)return;try{await window.P26.elo.rattrapage()}catch(e){}eloLoad(true)}
+/* Partie classée : ouverture (hôte), inscription (joueurs), score (chacun le sien), clôture */
+const EG={id:null,sent:false};
+async function eloOpen(n,sec,joue){try{return await window.P26.elo.ouvrir(Math.max(3,Math.min(50,n)),Math.max(5,Math.min(120,sec||60)),joue!==false)}catch(e){return null}}
+async function eloJoin(id){if(!id||!window.P26||!window.P26.elo)return false;let ok=false;try{ok=await window.P26.elo.rejoindre(id)}catch(e){}EG.joined=EG.joined||{};EG.joined[id]=!!ok;return ok}
+async function eloSend(id,score,sel){if(!id||!window.P26||!window.P26.elo)return;const paint=()=>{const el=$(sel);if(el)el.innerHTML=EG.html};
+  if(EG.joined&&EG.joined[id]===false){EG.html="Partie classée, mais tu es arrivé après le départ : ton Elo ne bouge pas.";paint();return}EG.html="Calcul de l’Elo…";paint();
+  try{await window.P26.elo.score(id,Math.max(0,Math.round(score)))}catch(e){}
+  const show=async(k)=>{try{await window.P26.elo.cloturer(id)}catch(e){}let r=null;try{r=await window.P26.elo.resultat(id)}catch(e){}
+    const me=r&&r.me;if(me&&typeof me.delta==="number"){eloLoad(true);EG.html=`Elo : <b>${fmtN(me.avant+me.delta)}</b> <span class="${me.delta>=0?"up":"dn"}">${me.delta>=0?"+":"−"}${Math.abs(me.delta)}</span>`;paint();return}
+    if(k<8)setTimeout(()=>show(k+1),k<3?3000:12000);else{EG.html="Elo mis à jour à ta prochaine visite.";paint()}};
+  setTimeout(()=>show(0),2500)}
+const eloPaintAgain=(id,sel)=>{if(id&&EG.id===id&&EG.html){const el=$(sel);if(el)el.innerHTML=EG.html}};
+
+/* ================= VERBES IRRÉGULIERS ================= */
+const VERB_OF={ang:"verbes-ang",angp:"verbes-ang",amc:"verbes-ang",llcer:"verbes-ang",esp:"verbes-esp",all:"verbes-all",ita:"verbes-ita"};
+const VERB_LANG={"verbes-ang":"Anglais","verbes-esp":"Espagnol","verbes-all":"Allemand","verbes-ita":"Italien"};
+const VERB_HTML_LANG={"verbes-ang":"en","verbes-esp":"es","verbes-all":"de","verbes-ita":"it"};
+function verbSets(){const s=new Set();const c=clsOk(P.cls);if(c)clsMats(c).forEach(pm=>{if(VERB_OF[pm])s.add(VERB_OF[pm])});if(ADM())Object.values(VERB_OF).forEach(v=>s.add(v));return [...s]}
+const VB={set:null,niv:1,mode:"serie",q:null,list:[],i:0,ok:0,ko:0,t0:0,timer:null,done:false};
+const vbNorm=s=>String(s||"").toLowerCase().replace(/[’']/g,"'").replace(/\s+/g," ").replace(/^to /,"").trim();
+const vbBare=s=>vbNorm(s).normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/ß/g,"ss");
+function vbCheck(user,expected){const alts=String(expected).split("/").map(vbNorm).filter(Boolean);const u=vbNorm(user);if(!u)return "vide";
+  if(alts.includes(u)||vbNorm(expected)===u)return "ok";if(alts.map(vbBare).includes(vbBare(u)))return "accent";return "ko"}
+function vbData(set){const d=PG.base[set];return d&&Array.isArray(d.verbes)?d:null}
+function vbCols(d,set){return d.cols.map((c,i)=>({c,i})).filter(x=>!(set==="verbes-ang"&&/^Base/.test(x.c)))}
+function vbPick(d,set,n){P.vb=P.vb||{};const L=d.verbes.filter(v=>(v.niv||2)<=VB.niv);
+  const w=v=>{const s=P.vb[set+":"+v.inf]||{};return (s.ko||0)*3-(s.ok||0)+(s.ok?0:2)+Math.random()*2};
+  return L.map(v=>[v,w(v)]).sort((a,b)=>b[1]-a[1]).slice(0,n).map(x=>x[0])}
+function openVerbes(set){VB.set=set||VB.set||verbSets()[0]||"verbes-ang";VB.q=null;VB.done=false;go("verbes")}
+function renderVerbes(){const box=$("#vb");if(!box)return;clearInterval(VB.timer);
+  const sets=verbSets();if(!VB.set||(!sets.includes(VB.set)&&sets.length))VB.set=sets[0]||"verbes-ang";
+  const d=vbData(VB.set);
+  if(!d){box.innerHTML=`<div class="ihead"><span></span><button class="linkbtn" type="button" id="vbBack">Retour</button></div><p class="loading">Chargement des verbes…</p>`;$("#vbBack").onclick=()=>go(LS.get("view","duel"));progFetch(VB.set,()=>{if(view==="verbes")renderVerbes()});return}
+  if(VB.q||VB.done){vbRenderQ();return}
+  const best=(P.vbb&&P.vbb[VB.set])||0,seen=Object.keys(P.vb||{}).filter(k=>k.startsWith(VB.set+":")),known=seen.filter(k=>(P.vb[k].ok||0)>=2&&!(P.vb[k].ko>P.vb[k].ok)).length;
+  box.innerHTML=`<div class="ihead"><span></span><button class="linkbtn" type="button" id="vbBack">Retour</button></div>
+   <h1 class="adh">Verbes irréguliers</h1>
+   <p class="note" style="margin:0 0 12px">Tu écris les formes toi-même : c’est comme ça qu’on les retient. Les verbes ratés reviennent plus souvent.</p>
+   ${sets.length>1?`<div class="pick sm" id="vbSet">${sets.map(s=>`<button type="button" class="${s===VB.set?"on":""}" data-s="${s}">${esc(VERB_LANG[s])}</button>`).join("")}</div>`:""}
+   <div class="vbstat"><div><b>${fmtN(known)}</b><span>sus sur ${fmtN(d.verbes.length)}</span></div><div><b>${fmtN(best)}</b><span>record au chrono</span></div></div>
+   <p class="lab">Niveau</p><div class="pick sm" id="vbNiv">${[[1,"Essentiels"],[2,"+ Courants"],[3,"Tous"]].map(([n,l])=>`<button type="button" class="${VB.niv===n?"on":""}" data-n="${n}">${l} · ${d.verbes.filter(v=>(v.niv||2)<=n).length}</button>`).join("")}</div>
+   <p class="lab">Mode</p><div class="pick sm" id="vbMode">${[["serie","Série de 15"],["chrono","Chrono 60 s"]].map(([m,l])=>`<button type="button" class="${VB.mode===m?"on":""}" data-m="${m}">${l}</button>`).join("")}</div>
+   <div class="exrow"><button class="btn light" type="button" id="vbGo">C’est parti</button></div>
+   <details class="plan"><summary>Voir le tableau</summary><div class="vbtab"><table><thead><tr><th>Verbe</th>${d.cols.map(c=>`<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${d.verbes.filter(v=>(v.niv||2)<=VB.niv).map(v=>`<tr><td><b>${esc(v.inf)}</b><small>${esc(v.fr)}</small></td>${v.f.map(f=>`<td>${esc(f)}</td>`).join("")}</tr>`).join("")}</tbody></table></div></details>`;
+  $("#vbBack").onclick=()=>go(LS.get("view","duel"));
+  box.querySelectorAll("#vbSet [data-s]").forEach(b=>b.onclick=()=>{VB.set=b.dataset.s;renderVerbes()});
+  box.querySelectorAll("#vbNiv [data-n]").forEach(b=>b.onclick=()=>{VB.niv=+b.dataset.n;renderVerbes()});
+  box.querySelectorAll("#vbMode [data-m]").forEach(b=>b.onclick=()=>{VB.mode=b.dataset.m;renderVerbes()});
+  $("#vbGo").onclick=()=>{VB.list=vbPick(d,VB.set,VB.mode==="chrono"?200:15);VB.i=0;VB.ok=0;VB.ko=0;VB.done=false;VB.paid=false;VB.t0=Date.now();VB.q=VB.list[0]||null;VB.res=null;renderVerbes()}}
+function vbRenderQ(){const box=$("#vb"),d=vbData(VB.set),cols=vbCols(d,VB.set),chrono=VB.mode==="chrono";
+  const left=chrono?Math.max(0,60-Math.floor((Date.now()-VB.t0)/1000)):0;
+  if(VB.done||!VB.q||(chrono&&left<=0)){clearInterval(VB.timer);VB.q=null;VB.done=true;if(!VB.paid){VB.paid=true;if(chrono){P.vbb=P.vbb||{};if(VB.ok>(P.vbb[VB.set]||0))P.vbb[VB.set]=VB.ok}saveP();if(VB.ok)gainXP(Math.min(30,VB.ok))}
+    box.innerHTML=`<div class="result"><div class="sc">${VB.ok}</div><p>${chrono?"verbes justes en 60 secondes":"verbes justes sur "+(VB.ok+VB.ko)}</p>${chrono&&VB.ok>=((P.vbb&&P.vbb[VB.set])||0)&&VB.ok?"<p><b>Nouveau record !</b></p>":""}
+     <div class="exrow" style="justify-content:center"><button class="btn light" type="button" id="vbAgain">Rejouer</button><button class="btn ghost" type="button" id="vbHome">Changer de mode</button></div></div>`;
+    $("#vbAgain").onclick=()=>{VB.list=vbPick(d,VB.set,chrono?200:15);VB.i=0;VB.ok=0;VB.ko=0;VB.done=false;VB.paid=false;VB.t0=Date.now();VB.q=VB.list[0];VB.res=null;renderVerbes()};
+    $("#vbHome").onclick=()=>{VB.done=false;VB.q=null;renderVerbes()};return}
+  const v=VB.q,lg=VERB_HTML_LANG[VB.set];
+  box.innerHTML=`<div class="ihead"><span class="muted">${chrono?`<b id="vbLeft">${left}</b> s · ${VB.ok} juste${VB.ok>1?"s":""}`:`${VB.i+1} / ${VB.list.length}`}</span><button class="linkbtn" type="button" id="vbStop">Arrêter</button></div>
+   <article class="qcard vbq"><div class="role"><span>${esc(VERB_LANG[VB.set])}</span><span>${["","Essentiel","Courant","Plus rare"][v.niv||2]}</span></div>
+   <h2 lang="${lg}">${esc(v.inf)}</h2><p class="muted" style="color:var(--card-mute);margin:-10px 0 14px">${esc(v.fr)}</p>
+   <form id="vbF" autocomplete="off">${cols.map(x=>`<label class="vbl"><span>${esc(x.c)}</span><input class="inp" lang="${lg}" data-i="${x.i}" autocapitalize="off" autocorrect="off" spellcheck="false" ${VB.res?"readonly":""}></label>`).join("")}
+   <div id="vbRes"></div><div class="exrow"><button class="btn" type="submit" id="vbOk">${VB.res?"Suivant":"Vérifier"}</button></div></form></article>`;
+  const inputs=[...box.querySelectorAll("#vbF input")];
+  if(VB.res){inputs.forEach((inp,k)=>{const r=VB.res[k];inp.value=r.u;inp.classList.add(r.s==="ok"?"good":"bad")});
+    $("#vbRes").innerHTML=`<p class="why">${VB.res.every(r=>r.s==="ok")?"<b>Juste.</b> ":VB.res.some(r=>r.s==="accent")?"<b>Presque : attention aux accents.</b> ":"<b>À revoir.</b> "}${cols.map(x=>esc(x.c)+" : <b>"+esc(v.f[x.i])+"</b>").join(" · ")}</p>`}
+  else setTimeout(()=>inputs[0]&&inputs[0].focus(),30);
+  inputs.forEach((inp,k)=>inp.onkeydown=e=>{if(e.key==="Enter"&&k<inputs.length-1&&!VB.res){e.preventDefault();inputs[k+1].focus()}});
+  $("#vbStop").onclick=()=>{VB.done=true;vbRenderQ()};
+  $("#vbF").onsubmit=e=>{e.preventDefault();
+    if(VB.res){VB.res=null;VB.i++;VB.q=VB.list[VB.i]||null;if(!VB.q)VB.done=true;vbRenderQ();return}
+    VB.res=inputs.map(inp=>{const i=+inp.dataset.i;return {u:inp.value,s:vbCheck(inp.value,v.f[i])}});
+    const good=VB.res.every(r=>r.s==="ok");P.vb=P.vb||{};const k=VB.set+":"+v.inf,st=P.vb[k]||{ok:0,ko:0};if(good){st.ok++;VB.ok++}else{st.ko++;VB.ko++}st.d=TODAY_ISO;P.vb[k]=st;saveP();
+    buzz(good?14:[8,60,8]);
+    if(chrono&&good){VB.res=null;VB.i++;VB.q=VB.list[VB.i]||null;vbRenderQ();return}
+    vbRenderQ();setTimeout(()=>{const b=$("#vbOk");if(b)b.focus()},30)};
+  if(chrono){clearInterval(VB.timer);VB.timer=setInterval(()=>{const l=Math.max(0,60-Math.floor((Date.now()-VB.t0)/1000)),el=$("#vbLeft");if(view!=="verbes"){clearInterval(VB.timer);return}if(el)el.textContent=l;if(l<=0){clearInterval(VB.timer);VB.res=null;vbRenderQ()}},250)}}
+
+/* ================= ARÈNE : quiz en direct à plusieurs, façon Kahoot ================= */
+const AR={g:null,code:"",host:false,unsub:null,ph:"",sel:new Set(),n:10,dur:20,ranked:true,other:false,mat:null,qs:null,i:-1,t0:0,timer:null,ans:{},score:{},nick:{},last:{},eloId:null,myAns:null,seenI:-1,seenPh:"",plays:true,err:""};
+const AR_PTS=(ms,dur)=>Math.round(1000*(1-Math.min(Math.max(ms,0),dur)/dur/2));
+const arNick=()=>cleanNick(LG.nick)||cleanNick((window.P26&&window.P26.profile&&window.P26.profile.pseudo)||"")||"";
+const arCode=()=>{const al="ABCDEFGHJKMNPQRSTUVWXYZ23456789";let c="";for(let i=0;i<5;i++)c+=al[Math.floor(Math.random()*al.length)];return c};
+function arPlayers(){return (AR.g?AR.g.peers():[]).filter(p=>p.presence&&p.presence.nick)}
+function arHostPeer(){const hs=arPlayers().filter(p=>p.presence.ah);if(AR.hk){const h=hs.find(p=>p.peer===AR.hk);if(h)return h}if(!hs.length)return null;
+  const h=AR.host?hs.find(p=>p.isMe&&p.sameTab):hs.sort((a,b)=>(+a.presence.t||9e15)-(+b.presence.t||9e15)||(a.peer<b.peer?-1:1))[0];if(h)AR.hk=h.peer;return h||null}
+const arStr=(x,n)=>clip(typeof x==="string"?x:"",n);
+function arClean(hp){const ph=["lobby","start","q","rev","end"].includes(hp.ph)?hp.ph:"lobby",n=Math.max(0,Math.min(50,+hp.n|0)),i=Math.max(0,Math.min(49,+hp.i|0));
+  const opts=Array.isArray(hp.opts)?hp.opts.slice(0,4).map(o=>arStr(o,160)):[];const ok=Math.max(0,Math.min(3,+hp.ok|0));
+  const board=Array.isArray(hp.board)?hp.board.slice(0,60).map(r=>({k:arStr(r&&r.k,80),nick:cleanNick(arStr(r&&r.nick,40))||"?",s:Math.max(0,+(r&&r.s)|0),l:Math.max(0,+(r&&r.l)|0)})):[];
+  return {ph,n,i,q:arStr(hp.q,240),opts,ok,why:arStr(hp.why,300),dur:Math.max(5000,Math.min(60000,+hp.dur|0||20000)),board,eloId:/^[0-9a-f]{18}$/.test(hp.eloId||"")?hp.eloId:null,nick:cleanNick(arStr(hp.nick,40))}}
+function arEntryHTML(){return `<div class="online arene"><h2>Arène</h2><p class="muted">Quiz en direct à plusieurs, façon Kahoot. Tout le monde a la même question au même moment : plus tu réponds vite, plus tu marques. Partie classée : ton Elo bouge.</p>
+   <div class="olrow"><button class="btn light" type="button" id="arCreate">Créer une arène</button></div>
+   <label class="lab" for="arCodeIn">Ou rejoins avec un code</label>
+   <div class="olrow"><input id="arCodeIn" class="inp code" maxlength="5" autocomplete="off" placeholder="ABCDE"><button class="btn ghost" type="button" id="arJoin">Rejoindre</button></div>
+   <div class="olrow"><label class="btn ghost qrscan"><input type="file" id="arQr" accept="image/*" capture="environment">Scanner un QR code</label></div>
+   <p class="olerr" id="arErr" role="alert">${esc(AR.err||"")}</p></div>`}
+function arEntryBind(){const need=()=>{if(!arNick()){$("#arErr").textContent="Ajoute ton pseudo dans ton profil.";return false}if(!ROOM||roomState!=="ok"){$("#arErr").textContent="Connexion au direct impossible pour l’instant.";return false}return true};
+  if($("#arCreate"))$("#arCreate").onclick=()=>{if(need())arEnter(arCode(),true)};
+  if($("#arJoin"))$("#arJoin").onclick=()=>{if(!need())return;const c=$("#arCodeIn").value.toUpperCase().replace(/[^A-Z0-9]/g,"");if(c.length!==5){$("#arErr").textContent="Le code fait 5 caractères.";return}arEnter(c,false)};
+  if($("#arQr"))$("#arQr").onchange=async e=>{const f=e.target.files[0];if(!f||!need())return;$("#arErr").textContent="Lecture du QR code…";let c="";try{c=await qrRead(f)}catch(x){}const m=/([A-Z0-9]{5})$/i.exec(c||"");if(!m){$("#arErr").textContent="QR code illisible. Tape le code.";return}arEnter(m[1].toUpperCase(),false)};
+  const m=/arene=([A-Z0-9]{5})/i.exec(location.hash||"");if(m&&!AR.autoTried&&!AR.g){$("#arCodeIn").value=m[1].toUpperCase();if(arNick()&&ROOM&&roomState==="ok"){history.replaceState(null,"",location.pathname+location.search);arEnter(m[1].toUpperCase(),false)}}}
+addEventListener("hashchange",()=>{const m=/arene=([A-Z0-9]{5})/i.exec(location.hash||"");if(m){AR.autoTried=false;ntFollow("#arene="+m[1].toUpperCase())}});
+async function arEnter(code,host){AR.err="";if(AR.g)await arLeave();if(typeof OL!=="undefined"&&OL.g)await leaveRoom();AR.autoTried=true;try{AR.g=await ROOM.join("arene-"+code.toLowerCase())}catch(e){AR.g=null;AR.err="Impossible de rejoindre l’arène. Réessaie.";renderSeries();return}
+  Object.assign(AR,{code,host,ph:"lobby",qs:null,i:-1,ans:{},score:{},nick:{},last:{},eloId:null,myAns:null,seenI:-1,seenPh:"",sel:AR.sel||new Set()});inDuel=true;
+  AR.hk=null;AR.t0c=Date.now();AR.mine=0;AR.got={};await AR.g.presence(host?{nick:arNick(),ah:true,ph:"lobby",t:AR.t0c}:{nick:arNick(),prop:[]}).catch(()=>{});
+  AR.unsub=AR.g.onPeers(arPeers,()=>arLeave("La connexion à l’arène a été perdue."));arRender()}
+async function arLeave(msg){clearInterval(AR.timer);if(AR.unsub)AR.unsub();AR.unsub=null;if(AR.g)await AR.g.leave().catch(()=>{});AR.g=null;inDuel=false;AR.err=msg||"";renderSeries()}
+function arPeers(){if(!AR.g)return;
+  if(AR.host){if(AR.ph==="q")arCollect();if(AR.ph==="lobby"||AR.ph==="start")arRender();return}
+  const h=arHostPeer();if(!h){if(AR.ph!=="lobby"){AR.ph="lobby";arRender()}else arRender();return}
+  const hp=arClean(h.presence);
+  if(hp.eloId&&hp.eloId!==AR.eloId){AR.eloId=hp.eloId;AR.mine=0;AR.got={};if(!GUEST&&hp.ph==="start")eloJoin(hp.eloId);else{EG.joined=EG.joined||{};EG.joined[hp.eloId]=false}}
+  if(hp.ph==="q"&&hp.i!==AR.seenI){AR.seenI=hp.i;AR.myAns=null;AR.cur={i:hp.i,n:hp.n,q:hp.q,opts:hp.opts,dur:hp.dur,tl:performance.now()};AR.ph="q";arRender();return}
+  if(hp.ph==="rev"&&AR.myAns&&AR.myAns.i===hp.i&&!(AR.got||{})[hp.i]){AR.got=AR.got||{};AR.got[hp.i]=1;if(AR.myAns.c===hp.ok)AR.mine=(AR.mine||0)+AR_PTS(AR.myAns.ms,AR.cur?AR.cur.dur:hp.dur)}
+  if(hp.ph!==AR.seenPh||(hp.ph==="rev"&&AR.revI!==hp.i)){AR.seenPh=hp.ph;AR.revI=hp.i;AR.ph=hp.ph==="q"&&!AR.cur?"lobby":hp.ph;AR.hp=hp;arRender();return}
+  AR.hp=hp;if(AR.ph==="lobby")arRender()}
+/* --- côté hôte --- */
+function arThemes(){const out=[];const own=new Set();
+  (C.mats||[]).forEach(m=>{chapsOf2(m.id).forEach(ch=>{(ch.quiz||[]).forEach((s,si)=>{if((s.qs||[]).length){const k=ch._tid?"p:"+ch._tid:"c:"+ch.id+"#"+si;if(own.has(k))return;own.add(k);out.push({k,mat:m.id,matNom:m.court||m.nom,t:ch.court||ch.titre,n:s.qs.length})}})})});
+  return out}
+function chapsOf2(mid){return Object.values(C.chaps).filter(c=>c.mat===mid).sort((a,b)=>(isProg(a)?0:1)-(isProg(b)?0:1)||(a.ordre||0)-(b.ordre||0))}
+function arOtherThemes(){const mine=new Set(arThemes().map(x=>x.k));const out=[];Object.entries(MATDEF).forEach(([pm,M])=>M.themes.forEach(t=>{const k="p:"+t.id;if(!mine.has(k))out.push({k,mat:"o-"+pm,matNom:M.court+" ("+CLS_OF(pm).join(", ")+")",t:t.c})}));
+  Object.entries(VERB_LANG).forEach(([v,l])=>{const k="p:"+v;if(!mine.has(k))out.push({k,mat:"o-verbes",matNom:"Verbes irréguliers",t:l})});return out}
+const arLabel=k=>{const a=[...arThemes(),...arOtherThemes()].find(x=>x.k===k);return a?a.matNom+" · "+a.t:k};
+async function arBuild(){const pool=[];
+  for(const k of AR.sel){if(k.startsWith("c:")){const [c,s]=k.slice(2).split("#"),ch=C.chaps[c];if(ch&&ch.quiz[+s])ch.quiz[+s].qs.forEach(q=>pool.push(q));continue}
+    const tid=k.slice(2),pm=tid.startsWith("verbes-")?tid:tid.slice(0,tid.lastIndexOf("-"));await progFetchAll(pm);const d=progDocOf(tid).d;if(d)(d.quiz||[]).forEach(z=>(z.qs||[]).forEach(q=>pool.push(q)))}
+  return shuffle(pool.filter(q=>q&&q.q&&q.ok&&(q.no||[]).length>=2)).slice(0,AR.n).map(q=>{const o=shuffle([q.ok,...q.no.slice(0,3)]);return {q:q.q,opts:o,ok:o.indexOf(q.ok),why:q.why||""}})}
+async function arStart(){const st=$("#arSt");if(AR.starting)return;if(!AR.sel.size){st.textContent="Choisis au moins un thème.";return}
+  AR.starting=true;$("#arGo").disabled=true;st.textContent="Préparation des questions…";const qs=await arBuild();
+  if(qs.length<3){AR.starting=false;const s2=$("#arSt");if(s2)s2.textContent="Pas assez de questions dans ces thèmes (3 minimum).";if($("#arGo"))$("#arGo").disabled=false;return}
+  AR.qs=qs;AR.score={};AR.last={};AR.i=-1;AR.eloId=null;
+  const nb=arPlayers().filter(p=>!p.presence.ah).length+(AR.plays?1:0);AR.mine=0;AR.got={};if(AR.ranked&&nb>=2&&!GUEST){AR.eloId=await eloOpen(qs.length,AR.dur,AR.plays);EG.joined=EG.joined||{};if(AR.eloId)EG.joined[AR.eloId]=AR.plays}AR.starting=false;
+  AR.ph="start";await AR.g.presence({nick:arNick(),ah:true,ph:"start",n:qs.length,eloId:AR.eloId}).catch(()=>{});arRender();
+  setTimeout(()=>arNext(),3200)}
+async function arNext(){if(!AR.g||!AR.host)return;AR.i++;
+  if(AR.i>=AR.qs.length){AR.ph="end";const board=arBoard();await AR.g.presence({nick:arNick(),ah:true,ph:"end",n:AR.qs.length,eloId:AR.eloId,board}).catch(()=>{});arRender();return}
+  const Q=AR.qs[AR.i];AR.ans={};AR.ph="q";AR.t0=performance.now();AR.myAns=null;
+  AR.cur={i:AR.i,n:AR.qs.length,q:Q.q,opts:Q.opts,dur:AR.dur*1000,tl:performance.now()};
+  await AR.g.presence({nick:arNick(),ah:true,ph:"q",i:AR.i,n:AR.qs.length,q:Q.q,opts:Q.opts,dur:AR.dur*1000,eloId:AR.eloId,ans:null}).catch(()=>{});
+  arRender();clearInterval(AR.timer);AR.timer=setInterval(()=>{if(performance.now()-AR.t0>AR.dur*1000+800)arReveal();else arTick()},250)}
+function arGather(){arPlayers().forEach(p=>{const a=p.presence.ans;if(!p.presence.ah&&a&&a.i===AR.i&&!AR.ans[p.peer])AR.ans[p.peer]=a});
+  if(AR.plays&&AR.myAns&&AR.myAns.i===AR.i&&!AR.ans.__host)AR.ans.__host=AR.myAns}
+function arCollect(){if(AR.ph!=="q")return;arGather();
+  const need=arPlayers().filter(p=>!p.presence.ah).length+(AR.plays?1:0),got=Object.keys(AR.ans).length;
+  const el=$("#arGot");if(el)el.textContent=got+" / "+need+" réponses";if(got>=need&&need>0)arReveal()}
+async function arReveal(){if(AR.ph!=="q")return;AR.ph="rev";clearInterval(AR.timer);arGather();const Q=AR.qs[AR.i],dur=AR.dur*1000;
+  const ps=arPlayers();ps.forEach(p=>{if(!p.presence.ah)AR.nick[p.peer]=cleanNick(p.presence.nick)});if(AR.plays)AR.nick.__host=arNick();
+  Object.keys(AR.nick).forEach(k=>{const a=AR.ans[k];const pts=a&&a.c===Q.ok?AR_PTS(Number.isFinite(+a.ms)?+a.ms:dur,dur):0;AR.last[k]=pts;AR.score[k]=(AR.score[k]||0)+pts});
+  const board=arBoard();
+  await AR.g.presence({nick:arNick(),ah:true,ph:"rev",i:AR.i,n:AR.qs.length,ok:Q.ok,why:Q.why,q:Q.q,opts:Q.opts,eloId:AR.eloId,board}).catch(()=>{});
+  arRender();clearTimeout(AR.nt);AR.nt=setTimeout(()=>{if(AR.ph==="rev")arNext()},6000)}
+function arBoard(){return Object.keys(AR.nick).filter(k=>k!=="__host"||AR.plays).map(k=>({k:k==="__host"?"h:"+(AR.g&&AR.g.peers().find(p=>p.isMe&&p.sameTab)||{}).peer:k,nick:AR.nick[k],s:AR.score[k]||0,l:AR.last[k]||0})).sort((a,b)=>b.s-a.s||a.nick.localeCompare(b.nick)).slice(0,60)}
+function arTick(){const el=$("#arBar");if(!el||!AR.cur)return;const left=Math.max(0,AR.cur.dur-(performance.now()-AR.cur.tl));el.style.setProperty("--p",(left/AR.cur.dur).toFixed(3));const s=$("#arSec");if(s)s.textContent=Math.ceil(left/1000)}
+/* --- rendu (hôte et joueurs) --- */
+function arRender(){const box=$("#duel");if(!box||!AR.g)return;const me=(AR.g.peers().find(p=>p.isMe&&p.sameTab)||{}).peer;
+  if(AR.ph==="lobby"||AR.ph==="start"){const ps=arPlayers(),h=arHostPeer();
+    box.innerHTML=`<div class="olhead"><div><span class="muted">Code de l’arène</span><div class="bigcode">${esc(AR.code)}</div><button class="linkbtn" type="button" id="arQuit">Quitter</button></div><div class="qrbox" id="arQrImg" aria-label="QR code de l’arène"></div></div>
+     <p class="muted" style="margin:0 0 10px">Scanne le QR code avec l’appareil photo, ou va sur le site et tape le code dans Duel › Arène.</p>
+     <h2 class="solo">Dans l’arène · ${ps.length}</h2><ul class="olplayers">${ps.map(p=>`<li><span class="arn"></span>${p.presence.ah?"<em>hôte</em>":""}${p.isMe&&p.sameTab?"<em>toi</em>":""}</li>`).join("")}</ul>
+     ${AR.ph==="start"?`<div class="arbig"><b>Prêts ?</b><span>${AR.host?AR.qs.length:arClean(AR.hp||{}).n} questions${AR.eloId?" · partie classée":""}</span></div>`:AR.host?arHostLobbyHTML():arPlayerLobbyHTML(h)}`;
+    box.querySelectorAll(".olplayers .arn").forEach((s,i)=>s.textContent=cleanNick(ps[i].presence.nick));
+    const url=HUB_URL+"#arene="+AR.code;loadLib(QR_GEN,"qrcode").then(qrcode=>{const q=qrcode(0,"M");q.addData(url);q.make();const el=$("#arQrImg");if(el)el.innerHTML=q.createSvgTag({cellSize:4,margin:2,scalable:true})}).catch(()=>{const el=$("#arQrImg");if(el)el.textContent="QR code indisponible."});
+    $("#arQuit").onclick=()=>arLeave();if(AR.ph==="lobby")(AR.host?arHostLobbyBind:arPlayerLobbyBind)();return}
+  if(AR.ph==="q"&&AR.cur){const c=AR.cur,mine=AR.myAns;
+    box.innerHTML=`<div class="qcard arq"><div class="role"><span>Arène ${esc(AR.code)}</span><span>${c.i+1} / ${c.n}</span></div>
+     <div class="arbar" id="arBar" style="--p:1"><i></i><b id="arSec">${Math.ceil(c.dur/1000)}</b></div>
+     <h2>${tex(c.q)}</h2><div class="argrid">${c.opts.map((o,k)=>`<button type="button" class="aro a${k}${mine&&mine.c===k?" pick":""}" data-k="${k}" ${mine?"disabled":""}><i aria-hidden="true">${"▲◆●■"[k]}</i><span>${tex(o)}</span></button>`).join("")}</div>
+     <p class="why" id="arGot">${mine?"Réponse envoyée. On attend les autres…":""}</p>${AR.host?`<div class="exrow"><button class="btn ghost" type="button" id="arSkip">Révéler maintenant</button></div>`:""}</div>`;
+    box.querySelectorAll(".aro").forEach(b=>b.onclick=()=>{if(AR.myAns)return;const ms=Math.round(performance.now()-c.tl);AR.myAns={i:c.i,c:+b.dataset.k,ms};buzz(12);if(AR.host&&+b.dataset.k===AR.qs[AR.i].ok){AR.got=AR.got||{};}
+      if(AR.host){arCollect()}else AR.g.presence({nick:arNick(),prop:[],ans:AR.myAns}).catch(()=>{});arRender()});
+    if($("#arSkip"))$("#arSkip").onclick=()=>arReveal();
+    if(!AR.host){clearInterval(AR.timer);AR.timer=setInterval(()=>{if(AR.ph!=="q"){clearInterval(AR.timer);return}arTick()},250)}arTick();if(AR.host)arCollect();return}
+  if(AR.ph==="rev"){const hp=AR.host?{ok:AR.qs[AR.i].ok,why:AR.qs[AR.i].why,q:AR.qs[AR.i].q,opts:AR.qs[AR.i].opts,board:arBoard(),i:AR.i,n:AR.qs.length}:arClean(AR.hp||{});
+    const myKey=AR.host?"__host":me,myRow=(hp.board||[]).find(r=>r.k===myKey||(AR.host&&String(r.k).startsWith("h:"))),mine=AR.myAns&&AR.myAns.i===hp.i?AR.myAns:null,good=mine&&mine.c===hp.ok;
+    box.innerHTML=`<div class="qcard arq"><div class="role"><span>${good?"Bonne réponse":"Réponse"}</span><span>${(hp.i||0)+1} / ${hp.n||""}</span></div>
+     <h2>${tex(hp.q||"")}</h2><div class="argrid">${(hp.opts||[]).map((o,k)=>`<div class="aro a${k}${k===hp.ok?" right":" dim"}${mine&&mine.c===k&&k!==hp.ok?" wrong":""}"><i aria-hidden="true">${"▲◆●■"[k]}</i><span>${tex(o)}</span></div>`).join("")}</div>
+     ${hp.why?`<p class="why">${tex(hp.why)}</p>`:""}<p class="arme">${mine?(good?"+"+fmtN(myRow?myRow.l:0)+" points":"Raté : 0 point"):"Pas de réponse : 0 point"}</p></div>
+     ${arBoardHTML(hp.board||[],myKey,5)}${AR.host?`<div class="exrow"><button class="btn light" type="button" id="arNextB">${AR.i+1>=AR.qs.length?"Voir le podium":"Question suivante"}</button></div>`:""}`;
+    if($("#arNextB"))$("#arNextB").onclick=()=>{clearTimeout(AR.nt);arNext()};return}
+  if(AR.ph==="end"){const hp=AR.host?{board:arBoard(),eloId:AR.eloId}:arClean(AR.hp||{});const myKey=AR.host?"__host":me;const B=hp.board||[];
+    const myRow=B.find(r=>r.k===myKey||(AR.host&&String(r.k).startsWith("h:")));
+    box.innerHTML=`<h1 style="font-size:2rem;margin-bottom:6px">Podium</h1><div class="arpod">${[1,0,2].filter(i=>B[i]).map(i=>`<div class="p${i+1}"><b class="pn"></b><span>${fmtN(B[i].s)}</span><i>${i+1}</i></div>`).join("")}</div>
+     ${arBoardHTML(B,myKey,60)}<p class="arelo" id="arElo">${hp.eloId?"":"Partie non classée."}</p>
+     <div class="exrow">${AR.host?`<button class="btn light" type="button" id="arAgain">Nouvelle partie</button>`:""}<button class="btn ghost" type="button" id="arOut">Quitter l’arène</button></div>`;
+    box.querySelectorAll(".arpod .pn").forEach((el,j)=>{const i=[1,0,2].filter(i=>B[i])[j];el.textContent=B[i].nick});
+    $("#arOut").onclick=()=>arLeave();if($("#arAgain"))$("#arAgain").onclick=async()=>{AR.ph="lobby";AR.qs=null;AR.eloId=null;await AR.g.presence({nick:arNick(),ah:true,ph:"lobby"}).catch(()=>{});arRender()};
+    const mineS=AR.host?(AR.score.__host||0):(AR.mine||0);if(hp.eloId&&(!AR.host||AR.plays)&&!GUEST&&EG.id!==hp.eloId){EG.id=hp.eloId;eloSend(hp.eloId,mineS,"#arElo")}else eloPaintAgain(hp.eloId,"#arElo");
+    if(myRow&&myRow===B[0]&&!AR.paid){AR.paid=1;gainXP(10)}return}}
+function arBoardHTML(B,myKey,max){return `<ol class="endlist">${B.slice(0,max).map((r,i)=>`<li class="${r.k===myKey||(myKey==="__host"&&String(r.k).startsWith("h:"))?"me":""}"><span class="rk">${i+1}</span><span class="bn">${esc(r.nick)}</span><span>${r.l?"+"+fmtN(r.l):""}</span><b>${fmtN(r.s)}</b></li>`).join("")}</ol>`}
+function arHostLobbyHTML(){const ps=arPlayers(),props={};ps.forEach(p=>(Array.isArray(p.presence.prop)?p.presence.prop:[]).slice(0,5).forEach(k=>{if(typeof k==="string"&&/^p:[a-z]+-[a-z0-9]+$/.test(k)){props[k]=props[k]||[];props[k].push(cleanNick(p.presence.nick))}}));
+  const T=AR.other?arOtherThemes():arThemes(),mats=[...new Map(T.map(x=>[x.mat,x.matNom])).entries()];if(!AR.mat||!mats.find(m=>m[0]===AR.mat))AR.mat=mats[0]?mats[0][0]:null;
+  return `${Object.keys(props).length?`<h2 class="solo">Propositions des joueurs</h2><div class="onbch" id="arProps">${Object.entries(props).map(([k,who])=>`<button type="button" class="${AR.sel.has(k)?"on":""}" data-k="${esc(k)}">${esc(arLabel(k))}<small>${esc(who.slice(0,3).join(", "))}</small></button>`).join("")}</div>`:""}
+   <h2 class="solo">Thèmes choisis · ${AR.sel.size}</h2>${AR.sel.size?`<div class="onbch" id="arSel">${[...AR.sel].map(k=>`<button type="button" class="on" data-k="${esc(k)}">${esc(arLabel(k))} ✕</button>`).join("")}</div>`:`<p class="muted">Touche des thèmes ci-dessous.</p>`}
+   <div class="pick sm" id="arWhich" style="margin-top:12px"><button type="button" class="${AR.other?"":"on"}" data-o="0">Mes matières</button><button type="button" class="${AR.other?"on":""}" data-o="1">Toutes les classes</button></div>
+   <div class="pick sm" id="arMats">${mats.map(([id,nm])=>`<button type="button" class="${id===AR.mat?"on":""}" data-m="${esc(id)}">${esc(nm)}</button>`).join("")}</div>
+   <div class="onbch" id="arThs">${T.filter(x=>x.mat===AR.mat).map(x=>`<button type="button" class="${AR.sel.has(x.k)?"on":""}" data-k="${esc(x.k)}">${esc(x.t)}</button>`).join("")||'<p class="muted">Aucun quiz dans cette matière.</p>'}</div>
+   <h2 class="solo">Questions</h2><div class="onbch" id="arN">${[5,10,15,20].map(n=>`<button type="button" class="${AR.n===n?"on":""}" data-n="${n}">${n}</button>`).join("")}</div>
+   <h2 class="solo">Temps par question</h2><div class="onbch" id="arD">${[10,20,30].map(n=>`<button type="button" class="${AR.dur===n?"on":""}" data-d="${n}">${n} s</button>`).join("")}</div>
+   ${arInviteHTML()}
+   <label class="share"><input type="checkbox" id="arRk" ${AR.ranked?"checked":""}> Partie classée (l’Elo bouge, 2 joueurs minimum)</label>
+   <label class="share"><input type="checkbox" id="arPl" ${AR.plays?"checked":""}> Je joue aussi</label>
+   <div class="exrow"><button class="btn light" type="button" id="arGo" ${AR.sel.size&&(ps.length>1||AR.plays)&&!AR.starting?"":"disabled"}>Lancer la partie</button><span class="istat" id="arSt" role="status"></span></div>`}
+function arHostLobbyBind(){const box=$("#duel"),tog=k=>{AR.sel.has(k)?AR.sel.delete(k):AR.sel.add(k);arRender()};
+  box.querySelectorAll("#arProps [data-k],#arSel [data-k],#arThs [data-k]").forEach(b=>b.onclick=()=>tog(b.dataset.k));
+  box.querySelectorAll("#arWhich [data-o]").forEach(b=>b.onclick=()=>{AR.other=b.dataset.o==="1";AR.mat=null;arRender()});
+  box.querySelectorAll("#arMats [data-m]").forEach(b=>b.onclick=()=>{AR.mat=b.dataset.m;arRender()});
+  box.querySelectorAll("#arN [data-n]").forEach(b=>b.onclick=()=>{AR.n=+b.dataset.n;arRender()});
+  box.querySelectorAll("#arD [data-d]").forEach(b=>b.onclick=()=>{AR.dur=+b.dataset.d;arRender()});
+  arInviteBind();$("#arRk").onchange=e=>{AR.ranked=e.target.checked};$("#arPl").onchange=e=>{AR.plays=e.target.checked;arRender()};$("#arGo").onclick=arStart}
+function arPlayerLobbyHTML(h){const T=arThemes().filter(x=>x.k.startsWith("p:")),mine=AR.prop||[];
+  return `<p class="waitmsg">${h?"En attente du lancement par "+esc(cleanNick(h.presence.nick))+"…":"En attente de l’hôte…"}</p>
+   <h2 class="solo">Proposer des thèmes</h2><p class="muted" style="margin:0 0 8px">L’hôte voit tes propositions (5 au plus).</p>
+   <div class="onbch" id="arProp">${T.slice(0,80).map(x=>`<button type="button" class="${mine.includes(x.k)?"on":""}" data-k="${esc(x.k)}">${esc(x.matNom)} · ${esc(x.t)}</button>`).join("")||'<p class="muted">Choisis ta classe dans ton profil pour proposer des thèmes.</p>'}</div>`}
+function arPlayerLobbyBind(){$("#duel").querySelectorAll("#arProp [data-k]").forEach(b=>b.onclick=()=>{AR.prop=AR.prop||[];const k=b.dataset.k,i=AR.prop.indexOf(k);if(i>=0)AR.prop.splice(i,1);else if(AR.prop.length<5)AR.prop.push(k);AR.g.presence({nick:arNick(),prop:AR.prop.slice()}).catch(()=>{});arRender()})}
+
+/* ================= NOTIFICATIONS ET AMIS ================= */
+const VAPID_PUBLIC="BEW1nBhPDKrfBBj3ILf_ShIl-Lk6hgqdjINGv8s-KC9SQfmn0WVXdU0q3kiqGlZMjdhbqMcnMh9tUMs9ly2X-Ks";
+const NT={list:[],t:null,seen:+LS.get("ntSeen",0)||0,amis:[],amisT:0,busy:false};
+const SOC=()=>window.P26&&window.P26.social&&!GUEST&&UID;
+async function ntLoad(){if(!SOC())return;try{const L=await window.P26.social.notifs();const nw=L.filter(n=>!n.lu&&n.id>NT.seen);NT.list=L;
+    if(nw.length&&NT.loaded){nw.slice(0,3).forEach(n=>toast(`<span class="tm">${n.type==="duel"?"⚔":n.type==="cadeau"?"+":"♥"}</span><div><b>${esc(n.texte)}</b><span>Touche la cloche pour répondre</span></div>`));buzz([10,40,10])}
+    NT.loaded=true;if(L[0])NT.seen=Math.max(NT.seen,L[0].id);LS.set("ntSeen",NT.seen);ntPaint();if(view==="notifs")renderNotifs()}catch(e){}}
+function ntStart(){if(NT.t||!SOC())return;ntLoad();pushResync();NT.t=setInterval(()=>{if(!document.hidden)ntLoad()},30000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)ntLoad()})}
+function ntPaint(){const b=$("#tBell");if(!b)return;const n=NT.list.filter(x=>!x.lu).length;b.hidden=!SOC();b.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.5L4.5 15v1h15v-1L18 12.5V9a6 6 0 0 0-6-6zm-2 14a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>${n?`<span class="nb2">${n>9?"9+":n}</span>`:""}`;b.setAttribute("aria-label",n?n+" notification"+(n>1?"s":"")+" non lue"+(n>1?"s":""):"Notifications")}
+async function amisLoad(force){if(!SOC())return NT.amis;if(!force&&Date.now()-NT.amisT<20000)return NT.amis;NT.amisT=Date.now();try{NT.amis=await window.P26.social.amis()}catch(e){}return NT.amis}
+const PUSH={st:"?"};
+function pushSupport(){return "serviceWorker" in navigator&&"PushManager" in window&&"Notification" in window}
+const isIOS=()=>/iPhone|iPad|iPod/.test(navigator.userAgent),standalone=()=>matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+async function pushState(){if(!pushSupport())return isIOS()&&!standalone()?"ios":"non";if(Notification.permission==="denied")return "bloque";
+  try{const r=await navigator.serviceWorker.getRegistration();const s=r&&await r.pushManager.getSubscription();return s?"on":"off"}catch(e){return "off"}}
+async function pushOn(st){try{if(Notification.permission!=="granted"){const p=await Notification.requestPermission();if(p!=="granted"){st.textContent="Tu as refusé. Pour changer d’avis, autorise les notifications dans les réglages du navigateur.";return}}
+    const reg=await navigator.serviceWorker.register("sw.js");await navigator.serviceWorker.ready;
+    const key=Uint8Array.from(atob(VAPID_PUBLIC.replace(/-/g,"+").replace(/_/g,"/")+"=".repeat((4-VAPID_PUBLIC.length%4)%4)),c=>c.charCodeAt(0));
+    const sub=(await reg.pushManager.getSubscription())||await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:key});
+    await window.P26.social.abonner(sub);st.textContent="C’est activé sur cet appareil.";renderNotifs()}
+  catch(e){st.textContent="Impossible d’activer ici : "+(e&&e.message?e.message:"erreur")+"."}}
+async function pushOff(st){try{const r=await navigator.serviceWorker.getRegistration();const s=r&&await r.pushManager.getSubscription();if(s){await window.P26.social.desabonner(s.endpoint).catch(()=>{});await s.unsubscribe()}st.textContent="Désactivé sur cet appareil.";renderNotifs()}catch(e){st.textContent="Impossible pour l’instant."}}
+async function renderNotifs(){const box=$("#nt");if(!box)return;const ps=await pushState();PUSH.st=ps;if(view!=="notifs")return;
+  const L=NT.list,recus=(NT.amis||[]).filter(a=>a.recu);
+  box.innerHTML=`<div class="ihead"><span></span><button class="linkbtn" type="button" id="ntBack">Retour</button></div><h1 class="adh">Notifications</h1>
+   <div class="ntpush">${ps==="on"?`<p><b>Notifications du téléphone : activées.</b> Tu es prévenu même quand le site est fermé.</p><button class="linkbtn" type="button" id="ntOff">Désactiver sur cet appareil</button>`
+     :ps==="ios"?`<p><b>Sur iPhone</b>, ajoute d’abord le site à ton écran d’accueil : bouton Partager, puis « Sur l’écran d’accueil ». Ouvre-le depuis l’icône, et reviens ici pour activer.</p>`
+     :ps==="bloque"?`<p>Les notifications sont bloquées pour ce site. Autorise-les dans les réglages du navigateur, puis reviens ici.</p>`
+     :ps==="non"?`<p>Ce navigateur ne sait pas recevoir de notifications. Essaie Chrome, ou sur iPhone le site ajouté à l’écran d’accueil.</p>`
+     :`<p><b>Reçois les demandes d’amis, les défis et les cadeaux sur ton téléphone</b>, comme une appli.</p><button class="btn light" type="button" id="ntOn">Activer les notifications</button>`}<p class="istat" id="ntSt" role="status"></p></div>
+   ${recus.length?`<div class="sec"><h2>Demandes d’amis</h2></div><ul class="adl">${recus.map((a,i)=>`<li class="ntam"><b class="nn" data-i="${i}"></b><div class="exrow"><button class="btn light" type="button" data-acc="${esc(a.id)}">Accepter</button><button class="btn ghost" type="button" data-ref="${esc(a.id)}">Refuser</button></div></li>`).join("")}</ul>`:""}
+   <div class="sec"><h2>Récentes</h2></div>${L.length?`<ul class="ntl">${L.map((n,i)=>`<li class="${n.lu?"":"new"}"><i>${n.type==="duel"?"⚔":n.type==="cadeau"?"+":n.type==="info"?"i":"♥"}</i><div><b class="nt" data-i="${i}"></b><small>${esc(admTime(Date.parse(n.cree)))}</small></div>${n.type==="duel"&&n.lien?`<button class="btn light" type="button" data-go="${esc(n.lien)}">Rejoindre</button>`:""}</li>`).join("")}</ul>`:`<p class="muted">Rien pour l’instant. Ajoute des amis dans Ligue › Mes amis.</p>`}`;
+  box.querySelectorAll(".nn").forEach(el=>el.textContent=recus[+el.dataset.i].pseudo+" veut t’ajouter en ami");
+  box.querySelectorAll(".ntl .nt").forEach(el=>el.textContent=L[+el.dataset.i].texte);
+  $("#ntBack").onclick=()=>go(LS.get("view","table"));
+  if($("#ntOn"))$("#ntOn").onclick=()=>pushOn($("#ntSt"));if($("#ntOff"))$("#ntOff").onclick=()=>pushOff($("#ntSt"));
+  box.querySelectorAll("[data-acc],[data-ref]").forEach(b=>b.onclick=async()=>{b.disabled=true;const id=b.dataset.acc||b.dataset.ref;try{await window.P26.social.repondre(id,!!b.dataset.acc);await amisLoad(true);toast(`<span class="tm">${b.dataset.acc?"♥":"·"}</span><div><b>${b.dataset.acc?"Vous êtes amis":"Demande refusée"}</b></div>`)}catch(e){}renderNotifs()});
+  box.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>ntFollow(b.dataset.go));
+  const unread=L.filter(n=>!n.lu).map(n=>n.id);if(unread.length){try{await window.P26.social.lues(unread)}catch(e){}L.forEach(n=>n.lu=true);ntPaint()}}
+function ntFollow(lien){const m=/^#arene=([A-Z0-9]{5})$/.exec(lien||"");if(m){if(AR.g&&AR.code===m[1])return;if(AR.g&&!confirm("Quitter l’arène en cours pour rejoindre ce défi ?"))return;go("duel");setTimeout(()=>{if(arNick()&&ROOM&&roomState==="ok")arEnter(m[1],false);else{history.replaceState(null,"",location.pathname+lien);AR.autoTried=false}},50);return}
+  const v=(lien||"").slice(1);if(views.includes(v))go(v)}
+/* Liste d'amis (onglet Ligue) */
+function amisHTML(){if(!SOC())return "";const A=NT.amis||[],ok=A.filter(a=>a.ok).sort((a,b)=>eloOf(b.id)-eloOf(a.id)),env=A.filter(a=>!a.ok&&!a.recu),rec=A.filter(a=>a.recu);
+  return `<div class="sec"><h2>Mes amis</h2><span>${ok.length}</span></div>
+   <div class="olrow"><input id="amP" class="inp" maxlength="16" autocomplete="off" autocapitalize="off" placeholder="Pseudo de ton ami"><button class="btn" type="button" id="amAdd">Ajouter</button></div><p class="istat" id="amSt" role="status">${esc(NT.amMsg||"")}</p>
+   ${rec.length?`<p class="lab">Demandes reçues</p><ul class="adl">${rec.map(a=>`<li class="ntam"><b class="ap" data-id="${esc(a.id)}"></b><div class="exrow"><button class="btn light" type="button" data-acc="${esc(a.id)}">Accepter</button><button class="btn ghost" type="button" data-ref="${esc(a.id)}">Refuser</button></div></li>`).join("")}</ul>`:""}
+   ${ok.length?`<ul class="aml">${ok.map(a=>`<li><b class="ap" data-id="${esc(a.id)}"></b><span>${fmtN(eloOf(a.id))}<small>Elo</small></span><button class="btn light" type="button" data-def="${esc(a.id)}">Défier</button><button class="linkbtn" type="button" data-del="${esc(a.id)}" aria-label="Retirer">✕</button></li>`).join("")}</ul>`:`<p class="muted" style="margin:6px 0 0">Ajoute tes amis avec leur pseudo : ils reçoivent une demande.</p>`}
+   ${env.length?`<p class="muted" style="margin:8px 0 0">En attente : ${env.map(a=>`<span class="ap" data-id="${esc(a.id)}"></span>`).join(", ")}</p>`:""}`}
+function amisBind(box){if(!$("#amAdd"))return;const A=NT.amis||[];box.querySelectorAll(".ap").forEach(el=>{const a=A.find(x=>x.id===el.dataset.id);el.textContent=a?a.pseudo:"?"});
+  const add=async()=>{const p=$("#amP").value.trim(),st=$("#amSt");if(!p)return;$("#amAdd").disabled=true;let r="";try{r=await window.P26.social.demander(p)}catch(e){r="erreur"}
+    NT.amMsg=st.textContent={envoye:"Demande envoyée.",ok:"Vous êtes amis !",deja:"Vous êtes déjà amis.",attente:"Demande déjà envoyée.",introuvable:"Aucun compte avec ce pseudo.",toi:"C’est toi !",limite:"Trop de demandes aujourd’hui."}[r]||"Impossible pour l’instant.";
+    await amisLoad(true);renderLigue()};
+  $("#amAdd").onclick=add;$("#amP").onkeydown=e=>{if(e.key==="Enter")add()};
+  box.querySelectorAll(".aml [data-def]").forEach(b=>b.onclick=()=>amDefier([b.dataset.def]));
+  box.querySelectorAll(".aml [data-del]").forEach(b=>b.onclick=async()=>{const a=A.find(x=>x.id===b.dataset.del);if(!confirm("Retirer "+(a?a.pseudo:"cet ami")+" de tes amis ?"))return;try{await window.P26.social.retirer(b.dataset.del)}catch(e){}await amisLoad(true);renderLigue()});
+  box.querySelectorAll("[data-acc],[data-ref]").forEach(b=>b.onclick=async()=>{b.disabled=true;try{await window.P26.social.repondre(b.dataset.acc||b.dataset.ref,!!b.dataset.acc)}catch(e){}await amisLoad(true);renderLigue()})}
+async function amDefier(ids){if(!arNick()||!ROOM||roomState!=="ok"){toast(`<span class="tm">!</span><div><b>Défi impossible pour l’instant</b><span>Ajoute ton pseudo dans ton profil.</span></div>`);return}
+  const code=arCode();go("duel");await arEnter(code,true);if(!AR.g)return;let n=0;for(const id of ids){try{if(await window.P26.social.defier(id,code))n++}catch(e){}}
+  toast(`<span class="tm">⚔</span><div><b>${n?"Défi envoyé":"Défi non envoyé"}</b><span>${n?"Ton ami reçoit une notification avec le code "+code+".":"Réessaie dans une minute."}</span></div>`)}
+function arInviteHTML(){const ok=(NT.amis||[]).filter(a=>a.ok);if(!SOC()||!ok.length)return "";return `<h2 class="solo">Inviter des amis</h2><div class="onbch" id="arInv">${ok.map(a=>`<button type="button" data-inv="${esc(a.id)}" class="${AR.inv&&AR.inv[a.id]?"on":""}"></button>`).join("")}</div>`}
+function arInviteBind(){const ok=(NT.amis||[]).filter(a=>a.ok);$("#duel").querySelectorAll("#arInv [data-inv]").forEach(b=>{const a=ok.find(x=>x.id===b.dataset.inv);b.textContent=(AR.inv&&AR.inv[a.id]?"Invité · ":"")+(a?a.pseudo:"?");
+  b.onclick=async()=>{AR.inv=AR.inv||{};if(AR.inv[a.id])return;b.disabled=true;let ok2=false;try{ok2=await window.P26.social.defier(a.id,AR.code)}catch(e){}if(ok2)AR.inv[a.id]=1;arRender()}})}
+
+/* ================= Programme : verbes, et toutes les classes pour l'admin ================= */
+const CLS_SHORT=pm=>CLS_OF(pm).map(x=>x==="Générale"?"1G":x==="Bac pro MELEC"?"MELEC":x).join(", ");
+function progChapOf(tid,mid,meta,hide,local){const pd=progDocOf(tid,local),d=pd.d,mq=pd.masque;
+  return Object.assign({id:"prog."+tid,mat:mid,origin:"prog",src:"programme",_tid:tid,_gen:!!d,_corr:pd.corrige,
+    paquets:d?(d.paquets||[]).map(p=>({...p,cartes:(p.cartes||[]).filter(x=>!hide[x.id]&&!mq[x.id])})).filter(p=>p.cartes.length):[],
+    quiz:d?(d.quiz||[]).map(z=>({...z,qs:(z.qs||[]).filter(q=>!mq[q.id])})):[]},meta)}
+function progAdd8(c,addMat,hide,local){const done=new Set();
+  clsMats(c).forEach(pm=>{const v=VERB_OF[pm];if(!v||done.has(v))return;done.add(v);const mid=pgId(pm);
+    C.chaps["prog."+v]=progChapOf(v,mid,{_pm:v,titre:"Verbes irréguliers · "+VERB_LANG[v],court:"Verbes irréguliers",notions:"formes des verbes irréguliers",ordre:99,_verbes:true},hide,local)});
+  if(!ADM())return;const own=new Set(clsMats(c));
+  Object.entries(MATDEF).forEach(([pm,M])=>{if(own.has(pm))return;const mid="x-"+pm;addMat(mid,M.nom+" ("+CLS_SHORT(pm)+")",M.court+" "+CLS_SHORT(pm).split(",")[0],M.suit);
+    M.themes.forEach((t,ti)=>{C.chaps["prog."+t.id]=progChapOf(t.id,mid,{_pm:pm,titre:t.t,court:t.c,notions:t.n,ordre:ti,_cls:"Première "+CLS_OF(pm).join(" / ")},hide,local)})});
+  Object.keys(VERB_LANG).forEach(v=>{if(done.has(v))return;const mid="x-"+v;addMat(mid,"Verbes "+VERB_LANG[v].toLowerCase(),"Verbes "+VERB_LANG[v].slice(0,3)+".","#6B3FA0");
+    C.chaps["prog."+v]=progChapOf(v,mid,{_pm:v,titre:"Verbes irréguliers · "+VERB_LANG[v],court:"Verbes irréguliers",notions:"formes des verbes irréguliers",ordre:0,_verbes:true},hide,local)})}
+function progLoad8(c){const L=new Set();clsMats(c).forEach(pm=>{if(VERB_OF[pm])L.add(VERB_OF[pm])});
+  if(ADM()){Object.keys(MATDEF).forEach(pm=>L.add(pm));Object.keys(VERB_LANG).forEach(v=>L.add(v))}
+  L.forEach(pm=>{if(!PG.req[pm]&&!(PG.fail&&Date.now()-(PG.fail[pm]||0)<60000))progFetch(pm)})}
+function verbCoursHTML(ch){return `<div class="vbcta"><p><b>Verbes irréguliers</b> : les cartes ci-dessous pour réviser, et l’entraînement où tu écris toi-même les formes (série ou chrono).</p><button class="btn light" type="button" id="vbGoC">S’entraîner à écrire les formes</button></div>`}
+function arEntryPaint(){const a=$("#arEntry");if(a){a.innerHTML=arEntryHTML();arEntryBind()}
+  const v=$("#vbEntry"),sets=verbSets();if(v){v.innerHTML=sets.length?`<div class="vbcard"><div><b>Verbes irréguliers</b><span>${sets.map(s=>VERB_LANG[s]).join(" · ")} : écris les formes, en série ou au chrono.</span></div><button class="btn light" type="button" id="vbOpen">S’entraîner</button></div>`:"";if($("#vbOpen"))$("#vbOpen").onclick=()=>openVerbes()}}
+
+async function pushResync(){try{if(!pushSupport()||Notification.permission!=="granted")return;const r=await navigator.serviceWorker.getRegistration();const sub=r&&await r.pushManager.getSubscription();if(sub)await window.P26.social.abonner(sub)}catch(e){}}
 
 /* ================= PROGRAMME OFFICIEL ET CLASSE ================= */
 const AXES_LV=[["Identités et échanges","Identités","migrations, frontières, échanges culturels, mondialisation"],["Espace privé et espace public","Privé / public","vie privée, réseaux sociaux, place de l’individu dans la société"],["Art et pouvoir","Art et pouvoir","art engagé, propagande, censure, mécénat"],["Citoyenneté et mondes virtuels","Mondes virtuels","citoyenneté numérique, fake news, participation en ligne"],["Fictions et réalités","Fictions","mythes, utopies, héros, frontières entre réel et imaginaire"],["Innovations scientifiques et responsabilité","Innovations","progrès scientifique, éthique, environnement"],["Diversité et inclusion","Diversité","discriminations, égalité, minorités, inclusion"],["Territoire et mémoire","Mémoire","lieux de mémoire, héritage historique, identité régionale"]];
@@ -3641,7 +4033,7 @@ function progFetch(pm,cb){if(PG.req[pm]===2){if(cb)cb();return}PG.wait=PG.wait||
   const done=ok=>{PG.req[pm]=ok?2:0;if(!ok)(PG.fail=PG.fail||{})[pm]=Date.now();const w=PG.wait[pm]||[];PG.wait[pm]=[];w.forEach(f=>{try{if(f)f()}catch(e){}})};
   if(typeof fetch!=="function"){done(false);return}
   fetch("prog/"+pm+".json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(j&&typeof j==="object")Object.entries(j).forEach(([k,v])=>{if(v&&Array.isArray(v.paquets))PG.base[k]=v});done(!!j);if(j)rebuild()}).catch(()=>done(false))}
-function progLoad(){const c=clsOk(P.cls);if(!c)return;clsMats(c).forEach(pm=>{if(!PG.req[pm]&&!(PG.fail&&Date.now()-(PG.fail[pm]||0)<60000))progFetch(pm)})}
+function progLoad(){const c=clsOk(P.cls);if(!c)return;clsMats(c).forEach(pm=>{if(!PG.req[pm]&&!(PG.fail&&Date.now()-(PG.fail[pm]||0)<60000))progFetch(pm)});progLoad8(c)}
 function progDocOf(tid,local){const ov=PG.shared[tid]||null;local=local||GL.get("prog");const corr=!!(ov&&ov.corr===true&&Array.isArray(ov.paquets)&&ov.paquets.length);
   const d=(corr?ov:null)||PG.base[tid]||PG.mine[tid]||local[tid]||(ov&&Array.isArray(ov.paquets)&&ov.paquets.length?ov:null)||null;
   return {d,masque:(ov&&ov.masque&&typeof ov.masque==="object")?ov.masque:{},corrige:corr}}
@@ -3653,7 +4045,7 @@ function progAdd(addMat){const c=clsOk(P.cls);if(!c)return;const hide=P.hide||{}
   clsMats(c).forEach((pm,mi)=>{const M=MATDEF[pm],mid=pgId(pm);addMat(mid,M.nom,M.court,M.suit);if(C.M[mid]&&C.M[mid].ordre>=100)C.M[mid].ordre=50+mi;
     M.themes.forEach((t,ti)=>{if(!c.th[pm].includes(t.id))return;const pd=progDocOf(t.id,local),d=pd.d,mq=pd.masque,cid="prog."+t.id;
       C.chaps[cid]={id:cid,mat:mid,_pm:pm,titre:t.t,court:t.c,notions:t.n,origin:"prog",src:"programme",ordre:ti,_tid:t.id,_gen:!!d,
-        paquets:d?(d.paquets||[]).map(p=>({...p,cartes:(p.cartes||[]).filter(x=>!hide[x.id]&&!mq[x.id])})).filter(p=>p.cartes.length):[],quiz:d?(d.quiz||[]).map(z=>({...z,qs:(z.qs||[]).filter(q=>!mq[q.id])})):[],_corr:pd.corrige}})})}
+        paquets:d?(d.paquets||[]).map(p=>({...p,cartes:(p.cartes||[]).filter(x=>!hide[x.id]&&!mq[x.id])})).filter(p=>p.cartes.length):[],quiz:d?(d.quiz||[]).map(z=>({...z,qs:(z.qs||[]).filter(q=>!mq[q.id])})):[],_corr:pd.corrige}})});progAdd8(c,addMat,hide,local)}
 function progInit(){if(!DB||PG.subs)return;PG.subs=true;
   DB.collection("programme").onSnapshot(s=>{PG.shared={};s.docs.forEach(d=>{const v=d.data();if(v)PG.shared[d.id]=v});rebuild()},()=>{});
   if(UID)DB.collection("data/users/"+UID+"/prog").onSnapshot(s=>{PG.mine={};s.docs.forEach(d=>{const v=d.data();if(v)PG.mine[d.id]=v});rebuild()},()=>{})}
@@ -3680,10 +4072,10 @@ function srcSeg(el,mid,cb){if(!el)return;if(!mid||mid[0]==="@"||!hasSrc(mid,true
   el.innerHTML=`<span class="segi" aria-hidden="true"></span><button type="button" data-s="cours" class="${s==="cours"?"on":""}">Mon cours · ${nC}</button><button type="button" data-s="prog" class="${s==="prog"?"on":""}">Programme · ${nP}</button>`;
   const pos=()=>{const on=el.querySelector("button.on"),i=el.querySelector(".segi");if(on&&i){i.style.width=on.offsetWidth+"px";i.style.transform=`translateX(${on.offsetLeft}px)`}};requestAnimationFrame(pos);
   el.querySelectorAll("button").forEach(b=>b.onclick=()=>{if(b.dataset.s===s)return;P.srcm=P.srcm||{};P.srcm[mid]=b.dataset.s;saveP();el.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));pos();setTimeout(cb,reduce?0:180)})}
-function progCoursHTML(ch){if(!isProg(ch))return "";
-  return `<p class="note progn">Programme officiel de ${esc(CLS[clsOk(P.cls).niv].nom)}, le même pour tout le monde${ch._corr?" (corrigé par l’administrateur)":""}. Ton prof a peut-être fait d’autres choix : masque les cartes qui ne te concernent pas, elles ne reviendront plus pour toi. Tes propres cours sont dans « Mon cours ».${ADM()?" <b>Mode admin</b> : « Masquer pour tous » retire la carte du Programme de tout le monde.":""}</p>
+function progCoursHTML(ch){if(!isProg(ch))return "";if(ch._verbes)return verbCoursHTML(ch);
+  return `<p class="note progn">Programme officiel de ${esc(ch._cls||CLS[clsOk(P.cls).niv].nom)}, le même pour tout le monde${ch._corr?" (corrigé par l’administrateur)":""}. Ton prof a peut-être fait d’autres choix : masque les cartes qui ne te concernent pas, elles ne reviendront plus pour toi. Tes propres cours sont dans « Mon cours ».${ADM()?" <b>Mode admin</b> : « Masquer pour tous » retire la carte du Programme de tout le monde.":""}</p>
    ${ch._gen?"":`<div class="empty2"><h2>Cartes à préparer</h2><p>Au programme : ${esc(ch.notions)}.</p><div class="exrow" style="justify-content:center"><button class="btn light" type="button" id="pgGo">Préparer les cartes de ce thème</button></div><p class="istat" id="pgSt" role="status"></p></div>`}`}
-function progBind(ch){if(!isProg(ch))return;const b=$("#pgGo");if(b)b.onclick=()=>progGen(ch,b,$("#pgSt"));
+function progBind(ch){if(!isProg(ch))return;if(ch._verbes&&$("#vbGoC"))$("#vbGoC").onclick=()=>openVerbes(ch._tid);const b=$("#pgGo");if(b)b.onclick=()=>progGen(ch,b,$("#pgSt"));
   document.querySelectorAll("#cours .lc .hidec").forEach(x=>x.onclick=async()=>{if(ADM()){x.disabled=true;try{await admMasque(ch._tid,[x.dataset.id],true);toast(`<span class="tm">−</span><div><b>Carte retirée du Programme</b><span>Pour tout le monde.</span></div>`)}catch(e){x.disabled=false;toast(`<span class="tm">!</span><div><b>Refusé</b><span>${esc(writeErr(e))}</span></div>`)}return}P.hide=P.hide||{};P.hide[x.dataset.id]=1;saveP();toast(`<span class="tm">−</span><div><b>Carte masquée</b><span>Elle ne reviendra plus.</span></div>`);mergeAll();reindex();renderCours()})}
 
 /* ---------- Questionnaire de départ ---------- */
@@ -3757,11 +4149,11 @@ function onContent(){mergeAll();reindex();C.ready=true;render();onbCheck()}
     }catch(e){remoteOK=false}}
   PLOADED=true;if(C.ready){mergeAll();reindex();render();onbCheck()}
   if(!UID)guestOn(true);
-  ligueInit();impInit();paintMyAv();
+  ligueInit();impInit();paintMyAv();eloBoot();ntStart();amisLoad(true).then(()=>{ntPaint();if(view==="ligue"&&!LG.defi)renderLigue()});
   if(C.ready)render();
 })();
-(async()=>{try{ROOM=await window.claude?.use?.("room")}catch(e){ROOM=null}roomState=ROOM?"ok":"off";if(view==="duel"&&!inDuel)renderOnlineEntry()})();
-document.body.dataset.view="table";document.body.dataset.dos=P.dos||"classique";applySkin();applyTheme();const h0=location.hash.slice(1);go(views.includes(h0)?h0:LS.get("view","table"));
+(async()=>{try{ROOM=await window.claude?.use?.("room")}catch(e){ROOM=null}roomState=ROOM?"ok":"off";if(view==="duel"&&!inDuel){renderOnlineEntry();arEntryPaint()}})();
+document.body.dataset.view="table";document.body.dataset.dos=P.dos||"classique";applySkin();applyTheme();const h0=location.hash.slice(1);go(/^arene=/i.test(h0)?"duel":(views.includes(h0)&&!["verbes","notifs","admin"].includes(h0))?h0:LS.get("view","table"));
 requestAnimationFrame(()=>{dockTo(view);const hl=$("#dockHl");if(hl)requestAnimationFrame(()=>hl.classList.add("ready"))});
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>dockTo(view));
 </script>
