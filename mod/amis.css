@@ -1,0 +1,20 @@
+/* Paquet 1, Entre amis (T5) : fil, bascule du classement, rappel, fenêtre de signalement (utilisée par signaler.js) */
+[data-p1="amis"]{margin:6px 0 4px}
+[data-p1="amis"] .p1lgf{margin:4px 0 6px}
+[data-p1="amis"] .p1sec{margin-top:14px}
+.p1vide{font-size:.86rem;margin:6px 0}
+.p1fil{list-style:none;padding:0;margin:4px 0 0;display:grid;gap:6px}
+.p1fil li{background:rgba(var(--fw),.06);box-shadow:inset 0 0 0 1px var(--felt-line);border-radius:12px;padding:8px 12px;font-size:.9rem;overflow-wrap:anywhere}
+.p1fil li small{display:block;color:var(--felt-mute);font-size:.76rem}
+[data-p1="amis"] select.inp{appearance:auto;width:100%}
+.p1modal{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.55);display:grid;place-items:center;padding:16px}
+.p1modal .p1dlg{background:var(--card);color:var(--card-ink);border-radius:18px;padding:18px;width:min(420px,100%);max-height:90vh;overflow:auto;box-shadow:0 20px 50px -10px rgba(0,0,0,.6)}
+.p1modal h2{margin:0 0 8px;font-size:1.3rem}
+.p1modal p{margin:6px 0}
+.p1modal select,.p1modal .p1mot{width:100%}
+.p1modal .p1mot{display:grid;gap:6px;margin:10px 0}
+.p1modal .p1mot label{display:flex;gap:10px;align-items:center;font-weight:600;font-size:.95rem}
+.p1modal .p1mot input{width:20px;height:20px;margin:0}
+.p1modal .istat{color:var(--card-mute)}
+.p1modal .istat.err{color:var(--red)}
+.p1modal .btn.ghost{color:var(--card-ink)}

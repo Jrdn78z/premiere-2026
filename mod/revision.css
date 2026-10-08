@@ -1,0 +1,82 @@
+/* Paquet 1, Réviser (T2) : compte à rebours, maîtrise, « Écrire la réponse », réglages d'affichage, liens Pronote.
+   Police OpenDyslexic (fichier opendyslexic.woff2, version compilée du dépôt antijingoist/opendyslexic) :
+   Copyright (c) 2019 Abbie Gonzalez, nom de police réservé « OpenDyslexic ». Licence SIL Open Font License 1.1 (OFL),
+   texte complet : https://openfontlicense.org/open-font-license-official-text/ */
+@font-face{font-family:"OpenDyslexic";src:url("opendyslexic.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+body[data-police="dys"]{--sans:"OpenDyslexic",system-ui,sans-serif;--didone:"OpenDyslexic",Georgia,serif;font-family:"OpenDyslexic",system-ui,sans-serif;letter-spacing:.01em;word-spacing:.08em}
+body[data-police="dys"] input,body[data-police="dys"] button,body[data-police="dys"] textarea,body[data-police="dys"] select{font-family:inherit}
+
+/* Texte agrandi ou police large : la barre du haut passe sur deux lignes au lieu de déborder ;
+   le menu du bas garde sa taille (en px) pour que ses 6 onglets tiennent sur un téléphone. */
+html[data-p1txt] .top h1,body[data-police="dys"] .top h1{flex:1 1 100%}
+html[data-p1txt] .ihead,body[data-police="dys"] .ihead{flex-wrap:wrap}
+html[data-p1txt] .ihead h1,body[data-police="dys"] .ihead h1{font-size:min(2.2rem,8vw);min-width:0;overflow-wrap:anywhere}
+html[data-p1txt] .pndl,body[data-police="dys"] .pndl{grid-template-columns:minmax(0,1fr)}
+html[data-p1txt] .top .who,body[data-police="dys"] .top .who{flex-wrap:wrap;justify-content:flex-end;min-width:0}
+html[data-p1txt] .seg button,body[data-police="dys"] .seg button{font-size:13.4px;min-width:0;padding-inline:2px;overflow-wrap:anywhere;line-height:1.15}
+html[data-p1txt] .dock button,html[data-p1txt] nav.dock .hl i{font-size:14.4px}
+body[data-police="dys"] .dock button,body[data-police="dys"] nav.dock .hl i{font-size:12.5px;padding-inline:7px;letter-spacing:0;word-spacing:0}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Compte à rebours des épreuves anticipées (accueil, sous les contrôles) */
+.p1bac{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 14px}
+.p1pas{display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:16px;background:rgba(var(--fw),.07);box-shadow:inset 0 0 0 1px var(--felt-line);min-width:0}
+.p1pas .j{font-family:var(--didone);font-weight:900;font-size:1.9rem;line-height:1;color:var(--gold);font-variant-numeric:lining-nums tabular-nums;flex:none}
+.p1pas .t{display:grid;gap:2px;min-width:0}
+.p1pas b{font-weight:800;line-height:1.2;font-size:.92rem}
+.p1pas small{color:var(--felt-mute);font-size:.76rem;line-height:1.3}
+.p1bacgo{grid-column:1/-1;justify-self:start}
+@media (max-width:420px){.p1bac{grid-template-columns:1fr}}
+
+/* Maîtrise par matière */
+.p1sec{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:18px 0 8px}
+.p1sec h3{margin:0;font-family:var(--didone);font-weight:900;font-size:1.15rem}
+.p1sec span{font-size:.8rem;color:var(--felt-mute)}
+.p1mai{display:grid;gap:7px;margin:0 0 14px}
+.p1m{display:grid;grid-template-columns:minmax(70px,9em) 1fr 3.4em;gap:10px;align-items:center;font-size:.86rem}
+.p1m .n{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.p1m .b{height:8px;border-radius:5px;background:rgba(var(--fw),.12);overflow:hidden}
+.p1m .b i{display:block;height:100%;width:calc(var(--p) * 100%);background:var(--suit);border-radius:5px}
+.p1m>b{text-align:right;font-variant-numeric:tabular-nums}
+
+/* Jeu : 2 minutes, Écrire la réponse */
+.p1jeu{margin-top:10px}
+#p1ecr:empty{display:none}
+#p1ecr{margin:-26px 0 18px}
+.p1ecrf label{display:block;font-weight:700;font-size:.85rem;margin:0 0 6px;color:var(--felt-mute)}
+.p1ecrf .r{display:flex;gap:8px}
+.p1ecrf .inp{flex:1}
+.p1ecrf .btn{flex:none}
+.p1ecrv{margin:8px 0 0;font-weight:800;font-size:.92rem;min-height:1.2em}
+.p1ecrv.ok{color:var(--ok)}
+.p1ecrv.ko{color:var(--gold)}
+.p1ecrl{margin:0;font-size:.88rem;color:var(--felt-mute)}
+
+/* Profil : réglages, lien Pronote */
+.p1lab{margin:12px 0 6px;font-weight:700;font-size:.88rem}
+.p1dys label b{display:block}
+.p1dys label small{color:var(--felt-mute);font-size:.8rem}
+.p1lien{display:grid;gap:3px;width:100%;text-align:left;border:0;border-radius:16px;padding:13px 16px;margin:6px 0 10px;background:rgba(var(--fw),.06);box-shadow:inset 0 0 0 1px var(--felt-line);color:var(--felt-ink)}
+.p1lien b{font-weight:800}
+.p1lien span{font-size:.84rem;color:var(--felt-mute);line-height:1.4}
+.p1lien:hover{box-shadow:inset 0 0 0 1px var(--hair)}
+.p1lien:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* Duel : carte de l'épreuve anticipée */
+.epcard .eprow{display:flex;flex-wrap:wrap;gap:8px}
+
+/* Vue « Relier Pronote » (pronote.js) */
+.pnetat{margin:0 0 14px}
+.pnst{margin:0;padding:11px 14px;border-radius:12px;background:rgba(var(--fw),.07);font-weight:700;font-size:.9rem}
+.pnst.ok{box-shadow:inset 0 0 0 1px var(--ok)}
+.pndl{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pnos{display:grid;gap:6px;align-content:start;padding:14px;border-radius:16px;background:var(--card);color:var(--card-ink);box-shadow:0 14px 30px -20px rgba(0,0,0,.7)}
+.pnos b{font-family:var(--didone);font-weight:900;font-size:1.2rem}
+.pnos span{font-size:.8rem;color:var(--card-mute);min-height:2.4em}
+.pnos .btn{justify-self:start;text-decoration:none}
+.pnos .btn:disabled{opacity:.45;cursor:not-allowed}
+.pnlim{margin:12px 0 0;font-size:.86rem;color:var(--felt-mute)}
+.pnguide{margin:0;padding-left:1.3em;display:grid;gap:10px;font-size:.92rem;line-height:1.5}
+.pnguide b{font-weight:800}
+@media (max-width:360px){.pndl{grid-template-columns:1fr}}

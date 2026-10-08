@@ -1,0 +1,6 @@
+/* Paquet 1 (T3) : Survie */
+.svrec{font-size:1rem;margin:0 0 12px}
+.svrec b{font-family:var(--didone);font-size:1.4rem;font-variant-numeric:lining-nums tabular-nums}
+.svbar{margin:6px 0 12px}
+.svam{margin-top:6px}
+.svfin .why{text-align:left}
