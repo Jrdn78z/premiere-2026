@@ -3,9 +3,9 @@
    en y inscrivant BUILD et la liste des assets versionnés. Ne pas éditer site/sw.js à la main.
    Cache versionné p26-<BUILD> pour ouvrir le site sans réseau, plus les notifications.
    L'API Supabase (*.supabase.co, et /__api, /__rt du serveur de test) n'est jamais interceptée. */
-const BUILD = "d7190f3a2b";
-const ASSETS = ["app.css?v=0a185206e6", "app.js?v=3adf31304f", "p26-runtime.js?v=e4d8ca5c3a", "supabase.js?v=59d39487c3", "config.js?v=20a5773b71"];
-const MODS = ["ambiance.js", "amis.css", "amis.js", "annonce.css", "annonce.js", "boutique.css", "boutique.js", "duelx.css", "duelx.js", "epreuve.css", "epreuve.js", "opendyslexic.woff2", "partage.js", "progression.css", "progression.js", "pronote.js", "revision.css", "revision.js", "signaler.js", "survie.css", "survie.js", "vraifaux.css", "vraifaux.js"]; // fichiers de site/mod (split.py) : précachés avec ?v=BUILD, comme P26mod les demande
+const BUILD = "3c7dbe2a0b";
+const ASSETS = ["app.css?v=0a185206e6", "app.js?v=2838bf2879", "p26-runtime.js?v=26d9447486", "supabase.js?v=183ff90999", "config.js?v=8564bfacbf"];
+const MODS = ["ambiance.js", "amis.css", "amis.js", "annonce.css", "annonce.js", "boutique.css", "boutique.js", "boutique2.css", "boutique2.js", "duelx.css", "duelx.js", "epreuve.css", "epreuve.js", "jeux2.css", "jeux2.js", "opendyslexic.woff2", "partage.js", "progression.css", "progression.js", "pronote.js", "revision.css", "revision.js", "royale-amis.css", "royale-amis.js", "saison.css", "saison.js", "signaler.js", "skins.css", "skins.js", "survie.css", "survie.js", "vraifaux.css", "vraifaux.js"]; // fichiers de site/mod (split.py) : précachés avec ?v=BUILD, comme P26mod les demande
 const CACHE = "p26-" + BUILD;
 const PRE = ["./", "index.html", ...ASSETS, "manifest.webmanifest", "icons/icon-192.png", "icons/badge-96.png",
   // Une police (woff2) est demandée par la feuille de style sans ?v= : on la précache à cette adresse-là.

@@ -1,0 +1,106 @@
+/* Lot P2 : progression et saisons (passe de saison, objectifs par matière, trophées secrets, saisons Elo). */
+/* Cadres : « Passe complet » et cadres de saison Elo (es-AAMM-division), même anneau que les autres cadres (boutique.css) */
+.av[data-cadre="passe"]{box-shadow:0 0 0 var(--cw,3px) #7BE0A4,0 0 0 calc(var(--cw,3px) + 1.5px) #E7C66B,0 0 0 calc(var(--cw,3px) + 3px) #0E2A1F}
+.av[data-cadre^="es-"][data-cadre$="-argent"]{box-shadow:0 0 0 var(--cw,3px) #DDE6EC,0 0 0 calc(var(--cw,3px) + 1.5px) #6E7B85,0 0 0 calc(var(--cw,3px)*2 + 1px) rgba(221,230,236,.45)}
+.av[data-cadre^="es-"][data-cadre$="-or"]{box-shadow:0 0 0 var(--cw,3px) #F6DC8C,0 0 0 calc(var(--cw,3px) + 1.5px) #8E6B1F,0 0 0 calc(var(--cw,3px)*2 + 1px) rgba(246,220,140,.5),0 0 9px 2px rgba(243,210,122,.35)}
+.av[data-cadre^="es-"][data-cadre$="-diamant"]{box-shadow:0 0 0 var(--cw,3px) #B9F0FF,0 0 0 calc(var(--cw,3px) + 1.5px) #7A6CF0,0 0 0 calc(var(--cw,3px)*2 + 1px) rgba(185,240,255,.5),0 0 12px 3px rgba(160,200,255,.55);animation:saDia 3.2s ease-in-out infinite}
+@keyframes saDia{50%{box-shadow:0 0 0 var(--cw,3px) #E2FAFF,0 0 0 calc(var(--cw,3px) + 1.5px) #C79BFF,0 0 0 calc(var(--cw,3px)*2 + 1px) rgba(226,250,255,.6),0 0 16px 4px rgba(199,155,255,.6)}}
+
+/* Accueil : carte du passe */
+.sa-acc{margin:10px 0}
+.sa-card{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;gap:8px 12px;align-items:center;width:100%;border:0;border-radius:16px;padding:12px 14px;font:inherit;text-align:left;color:var(--felt-ink);
+  background:linear-gradient(135deg,rgba(231,198,107,.16),rgba(var(--fw),.04) 60%);box-shadow:inset 0 0 0 1px rgba(231,198,107,.4)}
+.sa-card b{display:block;font-size:.98rem;font-weight:800}
+.sa-card small{display:block;font-size:.78rem;color:var(--felt-mute);margin-top:1px}
+.sa-k{font-size:1.5rem;font-weight:900;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1}
+.sa-k em{font-style:normal;font-size:.8rem;color:var(--felt-mute);font-weight:700}
+.sa-card .bar{grid-column:1/-1}
+.sa-card:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* Vue */
+.sa{display:block}
+.sa .bar,.sa-card .bar{display:block;height:6px;border-radius:999px;background:rgba(var(--fw),.12);overflow:hidden}
+.sa .bar i,.sa-card .bar i{display:block;height:100%;width:calc(var(--p,0)*100%);background:var(--gold);border-radius:inherit}
+.sa-head{padding:16px;border-radius:20px;background:radial-gradient(120% 90% at 0% 0%,rgba(231,198,107,.22),transparent 60%),rgba(var(--fw),.05);box-shadow:inset 0 0 0 1px rgba(231,198,107,.35)}
+.sa-head .eyebrow{display:block;font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.sa-big{display:flex;align-items:baseline;gap:6px;margin:6px 0 10px}
+.sa-big b{font-size:2rem;font-weight:900;color:var(--felt-ink);letter-spacing:-.01em}
+.sa-big span{font-size:1rem;font-weight:800;color:var(--felt-mute)}
+.sa-bar{height:10px;border-radius:999px}
+.sa-head p{margin:10px 0 2px;font-size:.88rem;color:var(--felt-ink);font-variant-numeric:tabular-nums}
+.sa-head small{font-size:.78rem;color:var(--felt-mute)}
+.sa-grille{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin:12px 0 8px}
+.sa-p{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;aspect-ratio:5/6;min-width:0;border:0;border-radius:10px;font:inherit;color:var(--felt-mute);
+  background:rgba(var(--fw),.05);box-shadow:inset 0 0 0 1px var(--felt-line)}
+.sa-p b{font-size:.78rem;font-weight:800;font-variant-numeric:tabular-nums}
+.sa-p i{font-style:normal;font-size:.82rem;line-height:1}
+.sa-p.spe{box-shadow:inset 0 0 0 1px rgba(231,198,107,.45)}
+.sa-p.spe i{color:var(--gold)}
+.sa-p.fait{color:#14231C;background:linear-gradient(160deg,#F3D27A,#D9B357);box-shadow:none}
+.sa-p.fait i{color:#14231C}
+.sa-p.cur{box-shadow:inset 0 0 0 2px var(--gold);color:var(--felt-ink)}
+.sa-p.sel{outline:2px solid #FAFAF7;outline-offset:1px}
+.sa-p:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.sa-det{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;align-items:baseline;padding:10px 12px;border-radius:14px;background:rgba(var(--fw),.05);margin-bottom:14px}
+.sa-det b{font-size:.86rem;font-weight:800;color:var(--gold)}
+.sa-det span{font-size:.9rem;font-weight:700;color:var(--felt-ink)}
+.sa-det small{grid-column:2;font-size:.76rem;color:var(--felt-mute)}
+/* Objectifs */
+.sa-obj{list-style:none;margin:0 0 6px;padding:0;display:grid;gap:8px}
+.sa-obj li{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto auto;gap:4px 10px;align-items:center;padding:10px 12px;border-radius:14px;background:rgba(var(--fw),.05);box-shadow:inset 0 0 0 1px var(--felt-line)}
+.sa-obj li b{font-size:.9rem;font-weight:800;color:var(--felt-ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sa-obj li .bar{grid-column:1}
+.sa-obj li small{grid-column:1;font-size:.76rem;color:var(--felt-mute);font-variant-numeric:tabular-nums}
+.sa-obj li.ok{box-shadow:inset 0 0 0 1.5px #7BE0A4}
+.sa-obj li.ok .bar i{background:#7BE0A4}
+.sa-obj li.ok small{color:#9FE8C1}
+.sa-step{grid-column:2;grid-row:1/4;display:flex;align-items:center;gap:6px}
+.sa-step output{min-width:2.2em;text-align:center;font-weight:800;font-variant-numeric:tabular-nums;color:var(--felt-ink)}
+.sa-pm{width:40px;height:40px;border:0;border-radius:12px;font:inherit;font-size:1.2rem;font-weight:800;color:var(--felt-ink);background:rgba(var(--fw),.09);box-shadow:inset 0 0 0 1px var(--felt-line)}
+.sa-pm:disabled{opacity:.35}
+.sa-pm:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+/* Trophées secrets */
+.sa-sec{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:6px}
+.sa-s{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;gap:1px 10px;align-items:center;padding:10px;border-radius:14px;background:rgba(0,0,0,.14);box-shadow:inset 0 0 0 1px rgba(var(--fw),.1)}
+.sa-s i{grid-row:1/3;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;font-style:normal;font-weight:900;color:var(--felt-mute);background:rgba(var(--fw),.07)}
+.sa-s b{font-size:.82rem;font-weight:800;color:var(--felt-mute);overflow:hidden;text-overflow:ellipsis}
+.sa-s small{font-size:.7rem;color:var(--felt-mute);line-height:1.3}
+.sa-s.ok{background:linear-gradient(150deg,rgba(231,198,107,.18),rgba(var(--fw),.04));box-shadow:inset 0 0 0 1px rgba(231,198,107,.5)}
+.sa-s.ok i{color:#14231C;background:var(--gold)}
+.sa-s.ok b{color:var(--felt-ink)}
+/* Saisons Elo */
+.sa-es{display:grid;gap:8px}
+.sa-e{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 12px;border-radius:14px;background:rgba(var(--fw),.05)}
+.sa-e .av{width:40px;height:40px}
+.sa-e b{display:block;font-size:.88rem;font-weight:800;color:var(--felt-ink)}
+.sa-e small{font-size:.76rem;color:var(--felt-mute)}
+.sa-e .s2mini[aria-pressed="true"]{color:var(--gold);box-shadow:inset 0 0 0 1.5px var(--gold)}
+@media (max-width:370px){.sa-grille{grid-template-columns:repeat(5,minmax(0,1fr))}.sa-sec{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.av[data-cadre^="es-"]{animation:none!important}}
+/* Musique pour réviser (lecteur YouTube, mode sans cookie) */
+.sa-ytr{display:grid;gap:4px;margin:6px 0 14px}
+.sa-ytr>b{font-size:.95rem;color:var(--felt-ink)}
+.sa-ytf{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 8px;align-items:end}
+.sa-ytf .lab{grid-column:1/-1}
+.sa-ytf .inp{min-width:0;width:100%}
+.sa-yterr{margin:2px 0 0;font-size:.8rem;color:#FFB4A8;min-height:0}
+.sa-yt{position:fixed;right:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:30;width:min(300px,calc(100vw - 24px));border-radius:16px;overflow:hidden;
+  background:#0B1D15;box-shadow:0 10px 30px -10px rgba(0,0,0,.8),inset 0 0 0 1px rgba(231,198,107,.45)}
+.sa-yth{display:flex;align-items:center;gap:6px;padding:6px 6px 6px 12px}
+.sa-yth b{flex:1;font-size:.82rem;font-weight:800;color:var(--gold);letter-spacing:.02em}
+.sa-ytb{width:32px;height:32px;border:0;border-radius:10px;font:inherit;font-size:1.05rem;font-weight:800;color:var(--felt-ink);background:rgba(var(--fw),.1)}
+.sa-ytb:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.sa-yt iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
+.sa-yt.petit iframe{height:1px;aspect-ratio:auto;opacity:0}
+/* Récompenses à récupérer, cadeau de retour, nouveau trophée secret */
+.sa-new{display:inline-block;margin-top:5px;font-style:normal;font-size:.72rem;font-weight:800;color:#14231C;background:var(--gold);padding:2px 8px;border-radius:999px}
+.sa-p.pret{color:var(--felt-ink);background:rgba(231,198,107,.14);box-shadow:inset 0 0 0 2px var(--gold)}
+.sa-p.pret i{color:var(--gold);font-weight:900}
+.sa-rec{margin-top:12px}
+.sa-ret{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px;margin:0 0 10px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(231,198,107,.24),rgba(var(--fw),.05));box-shadow:inset 0 0 0 1.5px rgba(231,198,107,.6)}
+.sa-ret>i{font-style:normal;font-size:1.6rem;line-height:1}
+.sa-ret b{display:block;font-size:.95rem;font-weight:800;color:var(--felt-ink)}
+.sa-ret span{font-size:.8rem;color:var(--felt-ink)}
+.sa-ret .btn{padding:8px 14px;font-size:.86rem}
+@media (max-width:370px){.sa-ret{grid-template-columns:auto minmax(0,1fr)}.sa-ret .btn{grid-column:1/-1;justify-self:start}}

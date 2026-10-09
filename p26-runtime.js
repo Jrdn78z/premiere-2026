@@ -1197,7 +1197,8 @@ body.p26locked{overflow:hidden}
     champion: "Champion", ami: "Défi relevé", bac: "Mention", plan: "Bien préparé", quete: "Trois sans-faute",
     survivant: "Survivant", eclair: "Éclair", stratege: "Stratège", centverbes: "Cent verbes",
   };
-  const EV_RECORDS = { verbes: "au chrono des verbes", defi: "au défi du jour", arene: "dans l’Arène", quiz: "en quiz", survie: "en Survie", vf: "au Vrai ou faux express" };
+  const EV_RECORDS = { verbes: "au chrono des verbes", defi: "au défi du jour", arene: "dans l’Arène", quiz: "en quiz", survie: "en Survie", vf: "au Vrai ou faux express",
+    memory: "au Memory, en coups", royale: "de victoires à la Bataille royale", trous: "aux Cartes à trous, sur 8", pendu: "au Pendu, sur 5", qui: "à « Qui suis-je ? », sur 20" };
   const own = (o, k) => (typeof k === "string" && Object.prototype.hasOwnProperty.call(o, k) ? o[k] : null);
   const evNum = (v) => { const n = Math.round(+v); return Number.isFinite(n) ? Math.max(0, Math.min(n, 1e9)) : 0; };
   function evPhrase(type, d, moi) {

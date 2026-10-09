@@ -89,7 +89,7 @@
       ${fini&&d.son_score!=null?`<p class="muted">${p} : ${bonnes(d.son_score)} sur ${n} (score ${fmtN(d.son_score)}).</p>`:""}
       ${d.etat==="attente"&&d.moi_createur?`<p class="muted">Ton ami a 48 heures pour jouer.</p>`:""}
       <div class="exrow"><button class="btn light" type="button" id="dxRe">Nouveau duel</button><button class="btn ghost" type="button" id="dxL2">Mes duels</button></div></div>`;
-    c.querySelector("#dxRe").onclick=()=>creer(box,d.adversaire);c.querySelector("#dxL2").onclick=()=>liste(box);
+    c.querySelector("#dxRe").onclick=()=>creer(box,d.adversaire);c.querySelector("#dxL2").onclick=()=>liste(box);P26ui.emit("duelx.rendu",{el:c,d,phase:d.etat});
     if(fini&&!vus().includes(d.id)){const v=vus();v.push(d.id);P.p1.dx=v.slice(-100);saveP();if((+d.mon_score||0)>(+d.son_score||0))P26ui.emit("victoire",{type:"duelx",el:c})}}
   /* ---------- Partie ---------- */
   async function jouer(box,d){const c=tete(box,"Duel à distance");box.dataset.dxv="jeu";c.innerHTML=`<p class="loading">Préparation des questions…</p>`;
@@ -102,7 +102,7 @@
     c.innerHTML=`<div class="qcard"><div class="role"><span>Contre <b class="dxp"></b></span><span>${J.i+1} / ${J.qs.length}</span></div>
       <div class="arbar" id="dxBar" style="--p:1"><i></i><b id="dxSec">20</b></div><h2>${tex(q.q)}</h2>
       ${opts.map((o,i)=>`<button class="opt" type="button" data-i="${i}">${tex(o.t)}</button>`).join("")}</div>`;
-    c.querySelector(".dxp").textContent=J.d.pseudo||"?";
+    c.querySelector(".dxp").textContent=J.d.pseudo||"?";P26ui.emit("duelx.rendu",{el:c,d:J.d,phase:"jeu",i:J.i});   // lot P2 : la main de l'ami, de dos
     const btns=[...c.querySelectorAll(".opt")];btns.forEach(b=>b.onclick=()=>rep(btns,b));
     clearInterval(J.timer);J.timer=setInterval(()=>{if(D.jeu!==J)return clearInterval(J.timer);const left=Math.max(0,DUREE-(Date.now()-J.tq));
       const bar=c.querySelector("#dxBar");if(bar)bar.style.setProperty("--p",(left/DUREE).toFixed(3));const s=c.querySelector("#dxSec");if(s)s.textContent=Math.ceil(left/1000);

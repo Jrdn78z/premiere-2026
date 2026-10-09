@@ -56,7 +56,7 @@ const P26ui=(()=>{
     ongletsBoutique(){const L=[];U.emit("boutique.onglets",L);const vus=new Set(["dos","w","b","ch"]);
       return L.filter(t=>Array.isArray(t)&&ID.test(t[0])&&typeof t[1]==="string"&&!vus.has(t[0])&&(vus.add(t[0]),true)).map(t=>[t[0],t[1].slice(0,30)])},
 
-    precharger:["progression","boutique","revision","amis","annonce"],
+    precharger:["progression","boutique","revision","amis","annonce","skins","boutique2","saison","jeux2"],
 
     /* ---------- Appels internes de l'application (ne pas appeler depuis un module) ---------- */
     _cadre(r){try{const s=U.cadre(r||{});return typeof s==="string"&&/^ data-cadre="[a-z0-9-]{1,24}"$/.test(s)?s:""}catch(e){log("cadre",e);return ""}},
@@ -79,8 +79,11 @@ const P26ui=(()=>{
   };
   /* ----- état interne ----- */
   const VUES={},ROUTES={},LIGNE=[],SOUS=[],FUS={};let COUR=null,PREC="table",DIST=null,PRECH=null;
-  const CHAMPS=["cad","tit","niv","sv","vf"];
-  function norme(k,v){if(k==="cad"||k==="tit")return typeof v==="string"&&ID.test(v)?v:"";const n=Math.round(+v);
+  const CHAMPS=["cad","tit","niv","sv","vf","skn","acc","pc","j2"];       // skn : skin du Personnage ; acc : accessoire ; pc : couleur du pseudo ; j2 : records des jeux de cartes (lot P2, revérifiés à l'affichage)
+  const J2=["mem","br","bp","ct","pe","qs"];
+  function norme(k,v){if(k==="cad"||k==="tit"||k==="skn"||k==="acc"||k==="pc")return typeof v==="string"&&ID.test(v)?v:"";
+    if(k==="j2"){const o={};if(v&&typeof v==="object"&&!Array.isArray(v))for(const c of J2){const n=Math.round(+v[c]);if(Number.isFinite(n)&&n>0)o[c]=Math.min(10000,n)}return o}
+    const n=Math.round(+v);
     if(k==="niv")return Number.isFinite(n)?Math.max(1,Math.min(100,n)):1;return Number.isFinite(n)?Math.max(0,Math.min(10000,n)):0}
   function fusionne(k,dist){P.p1=P.p1&&typeof P.p1==="object"&&!Array.isArray(P.p1)?P.p1:{};const loc=P.p1[k];let v;
     if(FUS[k]){try{v=FUS[k](loc===undefined?undefined:JSON.parse(JSON.stringify(loc)),JSON.parse(JSON.stringify(dist)))}catch(e){log("fusion « "+k+" »",e);return false}}
@@ -649,7 +652,7 @@ async function enterRoom(code,host){
   $("#olErr").textContent="Connexion à la partie…";
   try{OL.g=await ROOM.join("duel-"+code.toLowerCase())}catch(e){OL.g=null;$("#olErr").textContent=e&&e.code==="limit_reached"?"Trop de parties ouvertes, réessaie dans un instant.":"Impossible de rejoindre la partie. Réessaie.";return}
   OL.code=code;OL.host=host;OL.epoch=0;OL.game=null;inDuel=true;
-  await OL.g.presence({nick:OL.nick,host,epoch:0,qi:0,score:0,ms:0,done:false,cid:null,si:null,seed:null}).catch(()=>{});
+  {const x={nick:OL.nick,host,epoch:0,qi:0,score:0,ms:0,done:false,cid:null,si:null,seed:null};P26ui.emit("duel.pres",x);await OL.g.presence(x).catch(()=>{})}
   OL.unsub=OL.g.onPeers(onPeersChange,()=>{leaveRoom("La connexion à la partie a été perdue.")});
   renderLobby();
 }
@@ -671,6 +674,7 @@ function renderLobby(){
   $("#olLeave").onclick=()=>leaveRoom();
   qrShow($("#olQrImg"),OL.code);
   if(OL.host)mixBind(renderLobby);
+  P26ui.emit("duel.salle",{el:$("#duel")});
 }
 /* ---------- Duel mixte : plusieurs chapitres, plusieurs matières, QR code ---------- */
 const MIX={mats:null,sel:new Set(),n:10};
@@ -743,6 +747,7 @@ function ranking(){return players().filter(p=>p.presence.epoch===OL.epoch).map(p
 function renderBoard(){
   const el=$("#board");if(!el)return;const N=OL.game?OL.game.qs.length:10;
   el.innerHTML=ranking().map(p=>`<div class="bp${p.me?" me":""}"><span class="bn">${esc(p.nick)}${p.me?" (toi)":""}</span><span class="bs">${p.score}</span><span class="bq">${p.done?"fini":p.qi+"/"+N}</span></div>`).join("");
+  P26ui.emit("duel.plateau",{el});
   if($("#endlist"))renderEnd();
 }
 function renderEnd(){
@@ -755,6 +760,7 @@ function renderEnd(){
   if(OL.eloId){if(EG.id!==OL.eloId){EG.id=OL.eloId;eloSend(OL.eloId,Math.max(0,OL.score*1000-Math.min(999,Math.round(OL.ms/100))),"#olElo")}else eloPaintAgain(OL.eloId,"#olElo")}
   if(all&&rk[0]&&rk[0].me&&rk.length>1&&OL.p1v!==OL.game){OL.p1v=OL.game;P26ui.emit("victoire",{type:"duel",el:$("#duel")})}
   if($("#olRe"))$("#olRe").onclick=()=>{OL.game=null;OL.g.presence({done:false,qi:0,score:0,ms:0}).catch(()=>{});renderLobby()};
+  P26ui.emit("duel.fin",{el:$("#duel")});
 }
 
 /* ================= COURS ================= */
@@ -2868,7 +2874,7 @@ const AR_PTS=(ms,dur)=>Math.round(1000*(1-Math.min(Math.max(ms,0),dur)/dur/2));
 const AR_QM={gg:"GG",rev:"Revanche ?",bravo:"Bien joué !",oups:"Oups",merci:"Merci"};
 const AR_X2=st=>st>3?2:1;                 // st = bonnes réponses de suite, celle-ci comprise : la 4e et les suivantes comptent double
 function arPres(o){if(!AR.g)return Promise.resolve();AR.lp=Object.assign({},o);const x=Object.assign({},o);
-  if(AR.qm&&Object.prototype.hasOwnProperty.call(AR_QM,AR.qm)){x.qm=AR.qm;x.qt=AR.qt}let c="";try{c=P26ui._champs().cad||""}catch(e){}if(c)x.cad=c;return AR.g.presence(x)}
+  if(AR.qm&&Object.prototype.hasOwnProperty.call(AR_QM,AR.qm)){x.qm=AR.qm;x.qt=AR.qt}let c="";try{c=P26ui._champs().cad||""}catch(e){}if(c)x.cad=c;P26ui.emit("arene.pres",x);return AR.g.presence(x)}
 function arPx(p){const s=(p&&p.presence)||{};return {qm:typeof s.qm==="string"&&Object.prototype.hasOwnProperty.call(AR_QM,s.qm)?s.qm:"",qt:Math.max(0,Math.min(9e15,Math.round(+s.qt)||0)),cad:typeof s.cad==="string"&&/^[a-z0-9-]{1,24}$/.test(s.cad)?s.cad:""}}
 const arCadOf=k=>{const pk=String(k||"").replace(/^h:/,""),p=arPlayers().find(x=>x.peer===pk);return p?P26ui._cadre({cad:arPx(p).cad}):""};
 function arMsgs(){const t=Date.now();AR.bul=AR.bul||{};AR.vus=AR.vus||{};
@@ -2892,7 +2898,7 @@ const arStr=(x,n)=>clip(typeof x==="string"?x:"",n);
 function arClean(hp){const ph=["lobby","start","q","rev","end"].includes(hp.ph)?hp.ph:"lobby",n=Math.max(0,Math.min(50,+hp.n|0)),i=Math.max(0,Math.min(49,+hp.i|0));
   const opts=Array.isArray(hp.opts)?hp.opts.slice(0,4).map(o=>arStr(o,160)):[];const ok=Math.max(0,Math.min(3,+hp.ok|0));
   const board=Array.isArray(hp.board)?hp.board.slice(0,60).map(r=>({k:arStr(r&&r.k,80),nick:cleanNick(arStr(r&&r.nick,40))||"?",s:Math.max(0,+(r&&r.s)|0),l:Math.max(0,+(r&&r.l)|0),x:Math.max(0,Math.min(50,+(r&&r.x)|0)),f:r&&r.f===1?1:0})):[];
-  return {ph,n,i,q:arStr(hp.q,240),opts,ok,why:arStr(hp.why,300),dur:Math.max(5000,Math.min(60000,+hp.dur|0||20000)),board,eloId:/^[0-9a-f]{18}$/.test(hp.eloId||"")?hp.eloId:null,nick:cleanNick(arStr(hp.nick,40)),qid:/^[A-Za-z0-9._:-]{1,100}$/.test(hp.qid||"")?hp.qid:""}}
+  return {ph,n,i,q:arStr(hp.q,240),opts,ok,why:arStr(hp.why,300),dur:Math.max(5000,Math.min(60000,+hp.dur|0||20000)),board,pid:/^[a-z0-9]{1,12}$/.test(hp.pid||"")?hp.pid:"",eloId:/^[0-9a-f]{18}$/.test(hp.eloId||"")?hp.eloId:null,nick:cleanNick(arStr(hp.nick,40)),qid:/^[A-Za-z0-9._:-]{1,100}$/.test(hp.qid||"")?hp.qid:""}}
 function arEntryHTML(){return `<div class="online arene"><h2>Arène</h2><p class="muted">Quiz en direct à plusieurs, façon Kahoot. Tout le monde a la même question au même moment : plus tu réponds vite, plus tu marques. Partie classée : ton Elo bouge.</p>
    <div class="olrow"><button class="btn light" type="button" id="arCreate">Créer une arène</button></div>
    <label class="lab" for="arCodeIn">Ou rejoins avec un code</label>
@@ -2910,12 +2916,12 @@ async function arEnter(code,host){AR.err="";if(AR.g)await arLeave();if(typeof OL
   AR.hk=null;AR.t0c=Date.now();AR.mine=0;AR.got={};AR.mst=0;AR.st={};AR.nx={};AR.qm=null;AR.qt=0;AR.bul={};AR.vus={};AR.revanche=0;await arPres(host?{nick:arNick(),ah:true,ph:"lobby",t:AR.t0c}:{nick:arNick(),prop:[]}).catch(()=>{});
   AR.unsub=AR.g.onPeers(arPeers,()=>arLeave("La connexion à l’arène a été perdue."));arRender()}
 async function arLeave(msg){clearInterval(AR.timer);clearTimeout(AR.bt);if(AR.unsub)AR.unsub();AR.unsub=null;if(AR.g)await AR.g.leave().catch(()=>{});AR.g=null;inDuel=false;AR.err=msg||"";renderSeries()}
-function arPeers(){if(!AR.g)return;arMsgs();
+function arPeers(){if(!AR.g)return;arMsgs();P26ui.emit("arene.pairs",{el:$("#duel")});
   if(AR.host){if(AR.ph==="q")arCollect();if(AR.ph==="lobby"||AR.ph==="start")arRender();return}
   const h=arHostPeer();if(!h){if(AR.ph!=="lobby"){AR.ph="lobby";arRender()}else arRender();return}
   const hp=arClean(h.presence);
   if(hp.eloId&&hp.eloId!==AR.eloId){AR.eloId=hp.eloId;AR.mine=0;AR.got={};if(!GUEST&&hp.ph==="start")eloJoin(hp.eloId);else{EG.joined=EG.joined||{};EG.joined[hp.eloId]=false}}
-  if(hp.ph==="q"&&hp.i!==AR.seenI){AR.seenI=hp.i;AR.myAns=null;AR.cur={i:hp.i,n:hp.n,q:hp.q,opts:hp.opts,dur:hp.dur,tl:performance.now(),qid:hp.qid};AR.ph="q";arRender();return}
+  if(hp.ph==="q"&&(hp.i!==AR.seenI||hp.pid!==AR.seenP)){AR.seenI=hp.i;AR.seenP=hp.pid;AR.myAns=null;AR.cur={i:hp.i,n:hp.n,q:hp.q,opts:hp.opts,dur:hp.dur,tl:performance.now(),qid:hp.qid};AR.cur.pid=hp.pid;AR.ph="q";arRender();return}
   if(hp.ph==="start"&&AR.seenPh!=="start"){AR.mst=0;AR.got={};if(!hp.eloId)AR.mine=0}
   if(hp.ph==="rev"&&AR.myAns&&AR.myAns.i===hp.i&&!(AR.got||{})[hp.i]){AR.got=AR.got||{};AR.got[hp.i]=1;jrn(arQid(hp.q,AR.cur&&AR.cur.qid),AR.myAns.c===hp.ok,AR.myAns.ms,"arene");if(AR.myAns.c===hp.ok)AR.mine=(AR.mine||0)+AR_PTS(AR.myAns.ms,AR.cur?AR.cur.dur:hp.dur)*AR_X2(AR.mst=(AR.mst||0)+1);else AR.mst=0}
   else if(hp.ph==="rev"&&!(AR.got||{})[hp.i]){AR.got=AR.got||{};AR.got[hp.i]=1;AR.mst=0}   /* pas de réponse : la série s'arrête */
@@ -2936,17 +2942,17 @@ async function arBuild(){const pool=[];
 async function arStart(){const st=$("#arSt");if(AR.starting)return;if(!AR.sel.size){st.textContent="Choisis au moins un thème.";return}
   AR.starting=true;$("#arGo").disabled=true;st.textContent="Préparation des questions…";const qs=await arBuild();
   if(qs.length<3){AR.starting=false;const s2=$("#arSt");if(s2)s2.textContent="Pas assez de questions dans ces thèmes (3 minimum).";if($("#arGo"))$("#arGo").disabled=false;return}
-  AR.qs=qs;AR.score={};AR.last={};AR.st={};AR.nx={};AR.i=-1;AR.eloId=null;AR.revanche=0;
+  AR.qs=qs;AR.pid=Date.now().toString(36).slice(-6)+Math.floor(Math.random()*1296).toString(36);/* identifiant de partie : une réponse d'une autre partie est ignorée */AR.score={};AR.last={};AR.st={};AR.nx={};AR.i=-1;AR.eloId=null;AR.revanche=0;
   const nb=arPlayers().filter(p=>!p.presence.ah).length+(AR.plays?1:0);AR.mine=0;AR.got={};if(AR.ranked&&nb>=2&&!GUEST){AR.eloId=await eloOpen(qs.length,AR.dur,AR.plays);EG.joined=EG.joined||{};if(AR.eloId)EG.joined[AR.eloId]=AR.plays}AR.starting=false;
-  AR.ph="start";await arPres({nick:arNick(),ah:true,ph:"start",n:qs.length,eloId:AR.eloId}).catch(()=>{});arRender();
+  AR.ph="start";await arPres({nick:arNick(),ah:true,ph:"start",n:qs.length,eloId:AR.eloId,pid:AR.pid}).catch(()=>{});arRender();
   setTimeout(()=>arNext(),3200)}
 async function arNext(){if(!AR.g||!AR.host)return;AR.i++;
   if(AR.i>=AR.qs.length){AR.ph="end";const board=arBoard();await arPres({nick:arNick(),ah:true,ph:"end",n:AR.qs.length,eloId:AR.eloId,board}).catch(()=>{});arRender();return}
   const Q=AR.qs[AR.i];AR.ans={};AR.ph="q";AR.t0=performance.now();AR.myAns=null;
   AR.cur={i:AR.i,n:AR.qs.length,q:Q.q,opts:Q.opts,dur:AR.dur*1000,tl:performance.now(),qid:Q.id||""};
-  await arPres({nick:arNick(),ah:true,ph:"q",i:AR.i,n:AR.qs.length,q:Q.q,qid:Q.id||"",opts:Q.opts,dur:AR.dur*1000,eloId:AR.eloId,ans:null}).catch(()=>{});
+  await arPres({nick:arNick(),ah:true,pid:AR.pid,ph:"q",i:AR.i,n:AR.qs.length,q:Q.q,qid:Q.id||"",opts:Q.opts,dur:AR.dur*1000,eloId:AR.eloId,ans:null}).catch(()=>{});
   arRender();clearInterval(AR.timer);AR.timer=setInterval(()=>{if(performance.now()-AR.t0>AR.dur*1000+800)arReveal();else arTick()},250)}
-function arGather(){arPlayers().forEach(p=>{const a=p.presence.ans;if(!p.presence.ah&&a&&a.i===AR.i&&!AR.ans[p.peer])AR.ans[p.peer]=a});
+function arGather(){arPlayers().forEach(p=>{const a=p.presence.ans;if(!p.presence.ah&&a&&a.i===AR.i&&a.p===AR.pid&&!AR.ans[p.peer])AR.ans[p.peer]=a});
   if(AR.plays&&AR.myAns&&AR.myAns.i===AR.i&&!AR.ans.__host)AR.ans.__host=AR.myAns}
 function arCollect(){if(AR.ph!=="q")return;arGather();
   const need=arPlayers().filter(p=>!p.presence.ah).length+(AR.plays?1:0),got=Object.keys(AR.ans).length;
@@ -2961,7 +2967,8 @@ async function arReveal(){if(AR.ph!=="q")return;AR.ph="rev";clearInterval(AR.tim
 function arBoard(){return Object.keys(AR.nick).filter(k=>k!=="__host"||AR.plays).map(k=>({k:k==="__host"?"h:"+(AR.g&&AR.g.peers().find(p=>p.isMe&&p.sameTab)||{}).peer:k,nick:AR.nick[k],s:AR.score[k]||0,l:AR.last[k]||0,x:(AR.nx||{})[k]||0,f:((AR.st||{})[k]||0)>=3?1:0})).sort((a,b)=>b.s-a.s||a.nick.localeCompare(b.nick)).slice(0,60)}
 function arTick(){const el=$("#arBar");if(!el||!AR.cur)return;const left=Math.max(0,AR.cur.dur-(performance.now()-AR.cur.tl));el.style.setProperty("--p",(left/AR.cur.dur).toFixed(3));const s=$("#arSec");if(s)s.textContent=Math.ceil(left/1000)}
 /* --- rendu (hôte et joueurs) --- */
-function arRender(){const box=$("#duel");if(!box||!AR.g)return;/* P26ui */if(AR.ph!=="end")AR.p1fin=0;const me=(AR.g.peers().find(p=>p.isMe&&p.sameTab)||{}).peer;
+function arRender(){try{arRender0()}finally{P26ui.emit("arene.rendu",{el:$("#duel"),ph:AR.ph})}}
+function arRender0(){const box=$("#duel");if(!box||!AR.g)return;/* P26ui */if(AR.ph!=="end")AR.p1fin=0;const me=(AR.g.peers().find(p=>p.isMe&&p.sameTab)||{}).peer;
   if(AR.ph==="lobby"||AR.ph==="start"){const ps=arPlayers(),h=arHostPeer();
     box.innerHTML=`<div class="olhead"><div><span class="muted">Code de l’arène</span><div class="bigcode">${esc(AR.code)}</div><button class="linkbtn" type="button" id="arQuit">Quitter</button></div><div class="qrbox" id="arQrImg" aria-label="QR code de l’arène"></div></div>
      <p class="muted" style="margin:0 0 10px">Scanne le QR code avec l’appareil photo, ou va sur le site et tape le code dans Duel › Arène.</p>
@@ -2975,7 +2982,7 @@ function arRender(){const box=$("#duel");if(!box||!AR.g)return;/* P26ui */if(AR.
      <div class="arbar" id="arBar" style="--p:1"><i></i><b id="arSec">${Math.ceil(c.dur/1000)}</b></div>
      <h2>${tex(c.q)}</h2><div class="argrid">${c.opts.map((o,k)=>`<button type="button" class="aro a${k}${mine&&mine.c===k?" pick":""}" data-k="${k}" ${mine?"disabled":""}><i aria-hidden="true">${"▲◆●■"[k]}</i><span>${tex(o)}</span></button>`).join("")}</div>
      <p class="why" id="arGot">${mine?"Réponse envoyée. On attend les autres…":""}</p>${AR.host?`<div class="exrow"><button class="btn ghost" type="button" id="arSkip">Révéler maintenant</button></div>`:""}</div>`;
-    box.querySelectorAll(".aro").forEach(b=>b.onclick=()=>{if(AR.myAns)return;const ms=Math.round(performance.now()-c.tl);AR.myAns={i:c.i,c:+b.dataset.k,ms};buzz(12);if(AR.host&&+b.dataset.k===AR.qs[AR.i].ok){AR.got=AR.got||{};}
+    box.querySelectorAll(".aro").forEach(b=>b.onclick=()=>{if(AR.myAns)return;const ms=Math.round(performance.now()-c.tl);AR.myAns={i:c.i,c:+b.dataset.k,ms,p:c.pid||AR.pid||""};buzz(12);if(AR.host&&+b.dataset.k===AR.qs[AR.i].ok){AR.got=AR.got||{};}
       if(AR.host){arCollect()}else arPres({nick:arNick(),prop:[],ans:AR.myAns}).catch(()=>{});arRender()});
     if($("#arSkip"))$("#arSkip").onclick=()=>arReveal();
     if(!AR.host){clearInterval(AR.timer);AR.timer=setInterval(()=>{if(AR.ph!=="q"){clearInterval(AR.timer);return}arTick()},250)}arTick();if(AR.host)arCollect();return}
