@@ -56,7 +56,7 @@ const P26ui=(()=>{
     ongletsBoutique(){const L=[];U.emit("boutique.onglets",L);const vus=new Set(["dos","w","b","ch"]);
       return L.filter(t=>Array.isArray(t)&&ID.test(t[0])&&typeof t[1]==="string"&&!vus.has(t[0])&&(vus.add(t[0]),true)).map(t=>[t[0],t[1].slice(0,30)])},
 
-    precharger:["progression","boutique","revision","amis","annonce","skins","boutique2","saison","jeux2"],
+    precharger:["progression","boutique","revision","amis","annonce","skins","boutique2","saison","jeux2","musique","carte","compagnon","themes"],
 
     /* ---------- Appels internes de l'application (ne pas appeler depuis un module) ---------- */
     _cadre(r){try{const s=U.cadre(r||{});return typeof s==="string"&&/^ data-cadre="[a-z0-9-]{1,24}"$/.test(s)?s:""}catch(e){log("cadre",e);return ""}},
@@ -79,9 +79,12 @@ const P26ui=(()=>{
   };
   /* ----- état interne ----- */
   const VUES={},ROUTES={},LIGNE=[],SOUS=[],FUS={};let COUR=null,PREC="table",DIST=null,PRECH=null;
-  const CHAMPS=["cad","tit","niv","sv","vf","skn","acc","pc","j2"];       // skn : skin du Personnage ; acc : accessoire ; pc : couleur du pseudo ; j2 : records des jeux de cartes (lot P2, revérifiés à l'affichage)
+  const CHAMPS=["cad","tit","niv","sv","vf","skn","acc","pc","j2","mus","cpg"];       // skn : skin du Personnage ; acc : accessoire ; pc : couleur du pseudo ; j2 : records des jeux de cartes (lot P2, revérifiés à l'affichage)
+  // mus : lien Spotify publié pour la ligue (lot P3, expression stricte) ; cpg : compagnon « espece-stade » (lot P3, liste blanche du module)
   const J2=["mem","br","bp","ct","pe","qs"];
-  function norme(k,v){if(k==="cad"||k==="tit"||k==="skn"||k==="acc"||k==="pc")return typeof v==="string"&&ID.test(v)?v:"";
+  const SPOTIFY=/^https:\/\/open\.spotify\.com\/(track|album|playlist|episode)\/[A-Za-z0-9]{22}$/;
+  function norme(k,v){if(k==="cad"||k==="tit"||k==="skn"||k==="acc"||k==="pc"||k==="cpg")return typeof v==="string"&&ID.test(v)?v:"";
+    if(k==="mus")return typeof v==="string"&&SPOTIFY.test(v)?v:"";
     if(k==="j2"){const o={};if(v&&typeof v==="object"&&!Array.isArray(v))for(const c of J2){const n=Math.round(+v[c]);if(Number.isFinite(n)&&n>0)o[c]=Math.min(10000,n)}return o}
     const n=Math.round(+v);
     if(k==="niv")return Number.isFinite(n)?Math.max(1,Math.min(100,n)):1;return Number.isFinite(n)?Math.max(0,Math.min(10000,n)):0}
@@ -773,6 +776,7 @@ function renderCours(){
   const chs=chapsOf(sel.mat);
   if(!sel.chap||!chs.find(c=>c.id===sel.chap))sel.chap=chs[0]?chs[0].id:null;
   pickRow($("#cChap"),chs.length>1?chs.map(c=>({k:c.id,l:c.court||c.titre})):[],sel.chap,k=>{sel.chap=k;renderCours()});
+  P26ui.slot("cours.haut",document.querySelector('#v-cours [data-slot="cours.haut"]'));
   const ch=C.chaps[sel.chap];
   if(!ch){box.innerHTML=srcOf(sel.mat)==="cours"&&hasSrc(sel.mat,true)?`<div class="empty2"><h2>Pas encore de cours importé</h2><p>Crée tes cartes avec ton cours de ${esc(matName(sel.mat))}. Dans Pronote, ouvre Cahier de textes › Contenu des cours, puis fais une capture, une vidéo d’écran, ou copie le texte. Tes cartes restent séparées du programme officiel.</p><div class="exrow" style="justify-content:center"><button class="btn light" type="button" id="cImp2">Importer depuis Pronote</button></div></div>`:`<div class="empty2"><h2>Aucun chapitre</h2><p>Importe ton cours de ${esc(matName(sel.mat))} avec une photo, une capture ou un PDF.</p></div>`;if($("#cImp2"))$("#cImp2").onclick=()=>openImport("cours");return}
   const parts=(ch.cours&&ch.cours.length)?ch.cours:(ch.paquets||[]).filter(p=>(p.cartes||[]).length).map(p=>({t:p.nom,cartes:p.cartes.map(c=>({id:c.id,k:c.r,v:c.v,s:c.s,w:c.w,n:c.n}))}));
@@ -2143,11 +2147,11 @@ function shopHTML(tot,head){const k=P.sk||{},tab=LG.shop||"dos",lock=(it)=>!owne
      <div class="shop"><h4>Effet au toucher</h4>${BX.map(x=>item("bx",x,`<i class="bxv">${x.id==="etincelles"?"✦":x.id==="vib"?"≋":x.id==="rebond"?"◠":"·"}</i>`)).join("")}</div>
      <p class="shopnote">Un thème chromatique remplace la couleur des boutons.</p>`;
   else if(P26ui.ongletsBoutique().some(t=>t[0]===tab))h+=`<div data-slot="boutique.rayon" data-t="${esc(tab)}"></div>`;
-  else{const dv=LG.nick&&!LG.ro?(LG.div||0):0;h+=`<div class="shop wide">${[{id:"",nom:"Aucun"},...CHR.map((c,i)=>({id:c,nom:DIVS[i],dv:i}))].map(c=>{const lk=c.id&&c.dv>dv,on=(k.ch||"")===c.id;
+  else{const dv=LG.nick&&!LG.ro?(LG.div||0):0;h+=`<div data-slot="boutique.themes"></div><div class="shop wide">${[{id:"",nom:"Aucun"},...CHR.map((c,i)=>({id:c,nom:DIVS[i],dv:i}))].map(c=>{const lk=c.id&&c.dv>dv,on=(k.ch||"")===c.id;
       return `<button type="button" class="${on?"on":""}${lk?" lock":""}" data-kind="ch" data-id="${c.id}" ${lk?'aria-disabled="true"':""}><i class="chv" data-c="${c.id}">${c.id?esc(c.nom):"Sans thème"}</i>${on?"Choisi":lk?"Division "+esc(c.nom):c.id?"Thème "+esc(c.nom):"Normal"}</button>`}).join("")}</div>
      <p class="shopnote">Chaque division débloque son thème et ceux du dessous. Si tu redescends, tu gardes seulement les thèmes de ta nouvelle division.${k.ch&&chromaNow()!==k.ch&&chromaNow()?" Ton thème "+esc(DIVS[CHR.indexOf(k.ch)])+" revient quand tu remontes.":""}</p>`}
   return h}
-function bindShop(){const box=$("#lg");if(!box)return;P26ui.slot("boutique.rayon",box.querySelector('[data-slot="boutique.rayon"]'));
+function bindShop(){const box=$("#lg");if(!box)return;P26ui.slot("boutique.rayon",box.querySelector('[data-slot="boutique.rayon"]'));P26ui.slot("boutique.themes",box.querySelector('[data-slot="boutique.themes"]'));
   box.querySelectorAll("#shopTabs button").forEach(b=>b.onclick=()=>{LG.shop=b.dataset.t;if(LG.ok)renderLigue();else{LG.ok=false;renderLigue()}});
   box.querySelectorAll(".shop button[data-kind]").forEach(b=>b.onclick=()=>{
     const L={dos:DOS,w:WALLS,bf:BF,bc:BC,bx:BX}[b.dataset.kind],it=L&&L.find(x=>x.id===b.dataset.id);

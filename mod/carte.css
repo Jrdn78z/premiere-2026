@@ -1,0 +1,46 @@
+/* Lot P3 : carte du Programme façon jeu vidéo (onglet Cours) */
+.p3c{margin:4px 0 14px}
+.p3chead{display:flex;align-items:center;gap:10px;margin:6px 0 8px}
+.p3chead span{font-size:.82rem;color:var(--felt-mute)}
+.p3cbtn{padding:9px 16px;font-size:.88rem}
+.p3cbtn[aria-pressed="true"]{box-shadow:inset 0 0 0 1.5px var(--gold);color:var(--gold)}
+.p3carte{border-radius:18px;padding:10px 0 8px;background:radial-gradient(120% 90% at 50% 0%,rgba(var(--fw),.07),rgba(var(--fw),.02));box-shadow:inset 0 0 0 1px var(--felt-line);overflow:hidden}
+.p3cres{margin:0 14px 2px;font-size:.84rem;color:var(--felt-mute)}
+.p3cres b{color:var(--felt-ink)}
+/* Le cadre défile, pas la page */
+.p3cwrap{max-width:100%;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.p3cwrap:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.p3cplan{position:relative;min-width:100%}
+.p3csvg{display:block}
+.p3cr{fill:none;stroke:rgba(var(--fw),.32);stroke-width:3;stroke-dasharray:4 8;stroke-linecap:round}
+.p3cr.fait{stroke:var(--gold);stroke-dasharray:none;stroke-width:3.5}
+.p3cs{fill:rgba(0,0,0,.3)}
+.p3cb{fill:rgba(var(--fw),.16);stroke:rgba(var(--fw),.3);stroke-width:1.5}
+.p3ci[data-k="vide"] .p3cb{fill:rgba(var(--fw),.05);stroke:rgba(var(--fw),.3);stroke-dasharray:4 4}
+.p3ci[data-k="vide"] .p3cs{display:none}
+.p3ci[data-k="cours"] .p3cb{fill:var(--suit);fill-opacity:calc(.62 + var(--p,0)*.38);stroke:rgba(var(--fw),.45)}
+.p3ci[data-k="brille"] .p3cb,.p3ci[data-k="fini"] .p3cb{fill:var(--suit);stroke:var(--gold);stroke-width:2.5}
+.p3cg{fill:none;stroke:var(--gold);stroke-width:7;opacity:.45;filter:blur(5px);animation:p3cpulse 2.6s ease-in-out infinite}
+@keyframes p3cpulse{0%,100%{opacity:.3}50%{opacity:.7}}
+.p3cn{font-family:var(--didone);font-weight:900;font-size:17px;fill:#FAFAF7;paint-order:stroke;stroke:rgba(0,0,0,.45);stroke-width:2px}
+.p3ci[data-k="vide"] .p3cn,.p3ci[data-k="gris"] .p3cn{fill:var(--felt-ink);stroke:none;opacity:.8}
+/* Zones (boutons posés sur les îles) et étiquettes */
+.p3cz{position:absolute;transform:translate(-50%,-50%);width:76px;height:60px;border:0;background:transparent;padding:0;border-radius:40px;cursor:pointer}
+.p3cz:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.p3cz[aria-current="true"]{box-shadow:0 0 0 3px rgba(231,198,107,.55)}
+.p3cl{position:absolute;left:50%;top:38px;transform:translateX(-50%);width:116px;font-size:.72rem;font-weight:700;line-height:1.15;text-align:center;color:var(--felt-ink);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-shadow:0 1px 2px rgba(0,0,0,.45)}
+.p3cz[data-k="vide"] .p3cl,.p3cz[data-k="gris"] .p3cl{color:var(--felt-mute)}
+.p3cpill{position:absolute;left:50%;top:-48px;transform:translateX(-50%);font-size:.68rem;font-weight:800;padding:2px 8px;border-radius:999px;white-space:nowrap;
+  color:var(--card-ink);background:var(--card);box-shadow:0 2px 6px -3px rgba(0,0,0,.5)}
+.p3cz[data-k="brille"] .p3cpill,.p3cz[data-k="fini"] .p3cpill{color:var(--gold-ink,#2A2008);background:var(--gold);box-shadow:none}
+.p3cz[data-k="fini"] .p3cpill{top:-58px}
+.p3cav{position:absolute;transform:translate(-50%,-50%);pointer-events:none;filter:drop-shadow(0 6px 8px rgba(0,0,0,.5));animation:p3cbob 2.4s ease-in-out infinite}
+.p3cav .av{width:40px;height:40px;font-size:1rem}
+@keyframes p3cbob{0%,100%{margin-top:0}50%{margin-top:-5px}}
+.p3cleg{margin:8px 14px 0;font-size:.72rem;color:var(--felt-mute);display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.p3cleg i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:4px;vertical-align:-1px;background:rgba(var(--fw),.16);box-shadow:inset 0 0 0 1px rgba(var(--fw),.3)}
+.p3cleg i[data-k="cours"]{background:var(--suit);opacity:.85}
+.p3cleg i[data-k="brille"]{background:var(--suit);box-shadow:0 0 0 1.5px var(--gold),0 0 6px var(--gold)}
+.p3cleg i[data-k="fini"]{background:var(--gold);box-shadow:none}
+@media (prefers-reduced-motion:reduce){.p3cg,.p3cav{animation:none}}

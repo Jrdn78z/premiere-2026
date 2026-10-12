@@ -453,6 +453,7 @@
       <ul class="j2recs">${JEUX.map(([g,t,k])=>{const lui=recTexte(k,o),moi=recTexte(k,mo),plus=recPlus(k,o),mplus=recPlus(k,mo);
         return `<li><b>${esc(t)}</b><span class="${lui?"":"vide"}">${esc(lui||"Pas encore de record")}</span><small>${plus?esc(plus)+" · ":""}Toi : ${esc(moi?moi+(mplus?", "+mplus:""):"pas encore de record")}</small></li>`}).join("")}</ul>
       <p class="j2note">Records publiés dans le classement, revérifiés à l’affichage.</p></div>`;
-    box.querySelector(".j2amin").textContent=nick;box.querySelector("[data-j2back]").onclick=()=>P26ui.retour()}});
+    box.querySelector(".j2amin").textContent=nick;box.querySelector("[data-j2back]").onclick=()=>P26ui.retour();
+    P26ui.emit("ami.rendu",{el:box,id,r})}});   // lot P3 : compagnon.js y ajoute le compagnon de l'ami
 })();
 P26mod.ok("jeux2");

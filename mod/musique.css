@@ -1,0 +1,38 @@
+/* Lot P3 : musique pour réviser avec Spotify (lecteur flottant, réglages du profil, playlist de la ligue) */
+.p3m{position:fixed;right:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:30;width:min(340px,calc(100vw - 24px));border-radius:16px;overflow:hidden;
+  background:#0B1D15;box-shadow:0 10px 30px -10px rgba(0,0,0,.8),inset 0 0 0 1px rgba(231,198,107,.45)}
+.p3mh{display:flex;align-items:center;gap:6px;padding:6px 6px 6px 12px}
+.p3mh b{font-size:.82rem;font-weight:800;color:#E7C66B;letter-spacing:.02em}   /* fond du lecteur fixe (#0B1D15) : couleurs fixes, quel que soit le thème */
+.p3mt{flex:1;font-size:.74rem;color:#A9C7B8;font-weight:600}
+.p3mb{width:32px;height:32px;border:0;border-radius:10px;font:inherit;font-size:.95rem;font-weight:800;color:#EAF3EE;background:rgba(255,255,255,.1)}
+.p3mb:focus-visible{outline:2px solid #E7C66B;outline-offset:2px}
+.p3m iframe{display:block;width:100%;height:152px;border:0;background:#121212}
+.p3m.petit iframe{height:1px;opacity:0}
+/* Réglages du profil */
+.p3mr .p3mh2{display:block;margin-top:14px;font-size:.92rem;color:var(--felt-ink)}
+.p3merr{margin:2px 0 0;font-size:.8rem;font-weight:700;color:var(--ko);min-height:0}
+.p3mats{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:8px}
+.p3mats li{display:grid;gap:3px}
+.p3mrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center}
+.p3mrow .inp{min-width:0;width:100%;font-size:.9rem;padding:9px 12px}
+.p3mrow .s2mini{height:38px;padding:0 14px}
+/* Ligue */
+.p3ml{margin:0 0 16px;padding:12px 14px;border-radius:16px;background:rgba(var(--fw),.06);box-shadow:inset 0 0 0 1px var(--felt-line)}
+.p3mlh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}
+.p3mlh b{font-size:1rem}
+.p3mlh span{font-size:.8rem;color:var(--felt-mute)}
+.p3mll{list-style:none;margin:0;padding:0}
+.p3mll li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center;padding:7px 0;border-top:1px solid var(--felt-line)}
+.p3mll li:first-child{border-top:0}
+.p3mll .p3mln{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.p3mll li.moi .p3mln{color:var(--gold)}
+.p3mll small{font-size:.76rem;color:var(--felt-mute)}
+.p3ml .p1note{margin:4px 0 0}
+.p3mlnote{font-size:.78rem}
+/* Vie privée : avertissement et confirmation au premier partage */
+.p3mpriv{margin:6px 0 8px;padding:8px 10px;border-radius:12px;font-size:.8rem;line-height:1.35;color:var(--felt-ink);background:rgba(var(--fw),.07);box-shadow:inset 3px 0 0 var(--gold)}
+.p3mconf{margin:8px 0 4px;padding:10px 12px;border-radius:14px;background:var(--card);color:var(--card-ink);box-shadow:0 10px 24px -14px rgba(0,0,0,.7)}
+.p3mconf p{margin:0 0 8px;font-size:.84rem;line-height:1.35}
+.p3mconfb{display:flex;flex-wrap:wrap;gap:8px}
+.p3mconf .btn.light{background:var(--card-ink);color:var(--card)}
+.p3mconf .btn.ghost{color:var(--card-ink);box-shadow:inset 0 0 0 1.5px var(--card-ink)}

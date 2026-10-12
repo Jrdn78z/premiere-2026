@@ -1,0 +1,116 @@
+/* Lot P3 : thèmes complets. Chaque thème redéfinit les variables de :root (base.html) sur [data-th] : le corps de la page
+   (body[data-th]) et les vignettes de la boutique (<i data-th>). Palette sombre d'abord, palette claire sous data-theme="clair".
+   --p3motif : motif de fond, posé en body::after (sous le contenu, au-dessus du tapis teinté) et dans la vignette. */
+
+/* ---------- Casino : tapis rouge, or, lettres de néon ---------- */
+[data-th="casino"]{--felt:#4A1020;--felt-hi:#5E1729;--felt-lo:#2A0710;--felt-ink:#FBEFE6;--felt-mute:#E4C6C1;--fw:251,239,230;--felt-line:rgba(251,239,230,.16);
+  --gold:#F3D27A;--gold-ink:#1A1408;--dock:rgba(42,7,16,.92);--ok:#8FE3A8;--ko:#FF9C9C;--card:#FFFCF4;--card-ink:#2A1A10;--card-mute:#6B5A50;--card-line:#EADFC8;
+  --didone:"Bebas Neue","Bodoni Moda",Georgia,serif;
+  --p3motif:repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0 2px,transparent 2px 18px),repeating-linear-gradient(-45deg,rgba(255,255,255,.04) 0 2px,transparent 2px 18px),radial-gradient(70% 45% at 50% 0%,rgba(243,210,122,.2),transparent 70%)}
+body[data-th="casino"][data-theme="clair"]{--felt:#F6E4E8;--felt-hi:#FCF3F5;--felt-lo:#EBCCD3;--felt-ink:#3A0E18;--felt-mute:#5F2D38;--fw:58,14,24;--felt-line:rgba(58,14,24,.16);
+  --gold:#5F330E;--gold-ink:#FFFFFF;--dock:rgba(252,243,245,.94);--ok:#1C7446;--ko:#B3261E;--card:#FFFBF2;--card-ink:#2A1A10;--card-mute:#6B5A50;--card-line:#EADFC8;
+  --p3motif:repeating-linear-gradient(45deg,rgba(58,14,24,.05) 0 2px,transparent 2px 18px),repeating-linear-gradient(-45deg,rgba(58,14,24,.05) 0 2px,transparent 2px 18px)}
+body[data-th="casino"] :is(h1,h2){font-weight:400;letter-spacing:.04em}
+body[data-th="casino"] .adh,body[data-th="casino"] .hello h1{font-size:2.6rem}
+
+/* ---------- Bibliothèque : bois sombre, parchemin ---------- */
+[data-th="bibliotheque"]{--felt:#3B2A1E;--felt-hi:#4A3626;--felt-lo:#241810;--felt-ink:#F4E9D8;--felt-mute:#E8DAC5;--fw:244,233,216;--felt-line:rgba(244,233,216,.16);
+  --gold:#EBCA88;--gold-ink:#1A1408;--dock:rgba(36,24,16,.92);--ok:#9BD9A0;--ko:#F0A090;--card:#FFFDF8;--card-ink:#2A1E12;--card-mute:#6E5B45;--card-line:#E6D8BF;
+  --didone:"Bodoni Moda","Didot",Georgia,serif;
+  --p3motif:repeating-linear-gradient(0deg,rgba(0,0,0,.26) 0 3px,rgba(255,255,255,.03) 3px 4px,transparent 4px 72px),repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 1px,transparent 1px 11px)}
+body[data-th="bibliotheque"][data-theme="clair"]{--felt:#F1E6D3;--felt-hi:#F9F3E8;--felt-lo:#E1D2B8;--felt-ink:#2A1E12;--felt-mute:#4A3B2B;--fw:42,30,18;--felt-line:rgba(42,30,18,.16);
+  --gold:#533A00;--gold-ink:#FFFFFF;--dock:rgba(249,243,232,.94);--ok:#1C7446;--ko:#B3261E;--card:#FFFBF3;--card-ink:#2A1E12;--card-mute:#6E5B45;--card-line:#E6D8BF;
+  --p3motif:repeating-linear-gradient(0deg,rgba(42,30,18,.1) 0 2px,transparent 2px 72px)}
+
+/* ---------- Espace : nuit bleue, étoiles ---------- */
+[data-th="espace"]{--felt:#141A3A;--felt-hi:#1E2652;--felt-lo:#090D22;--felt-ink:#E9EEFF;--felt-mute:#B9C2E6;--fw:233,238,255;--felt-line:rgba(233,238,255,.16);
+  --gold:#FFD166;--gold-ink:#1A1408;--dock:rgba(9,13,34,.92);--ok:#8FE3C0;--ko:#FF9FB0;--card:#FDFDFF;--card-ink:#141A33;--card-mute:#55608A;--card-line:#DDE2F3;
+  --didone:"Space Mono","Bodoni Moda",monospace;
+  --p3motif:radial-gradient(circle,rgba(255,255,255,.85) 0 1px,transparent 1.6px) 0 0/97px 89px,radial-gradient(circle,rgba(255,209,102,.8) 0 1.1px,transparent 1.7px) 40px 31px/131px 113px,radial-gradient(circle,rgba(255,255,255,.5) 0 .8px,transparent 1.3px) 17px 61px/53px 47px,radial-gradient(60% 50% at 80% 20%,rgba(120,90,220,.22),transparent 70%)}
+body[data-th="espace"][data-theme="clair"]{--felt:#E8ECF8;--felt-hi:#F5F7FD;--felt-lo:#D4DAEE;--felt-ink:#141A33;--felt-mute:#37405F;--fw:20,26,51;--felt-line:rgba(20,26,51,.16);
+  --gold:#4F4100;--gold-ink:#FFFFFF;--dock:rgba(245,247,253,.94);--ok:#1C7446;--ko:#B3261E;--card:#FFFFFF;--card-ink:#141A33;--card-mute:#55608A;--card-line:#DDE2F3;
+  --p3motif:radial-gradient(circle,rgba(20,26,51,.35) 0 1px,transparent 1.6px) 0 0/97px 89px,radial-gradient(circle,rgba(90,74,0,.4) 0 1.1px,transparent 1.7px) 40px 31px/131px 113px}
+body[data-th="espace"] :is(h1,h2){letter-spacing:-.03em}
+
+/* ---------- Néon : violet profond, rose et cyan ---------- */
+[data-th="neon"]{--felt:#160F26;--felt-hi:#26183F;--felt-lo:#0A0714;--felt-ink:#F6F0FF;--felt-mute:#C9B8E6;--fw:246,240,255;--felt-line:rgba(246,240,255,.16);
+  --gold:#FF80EA;--gold-ink:#1A1033;--dock:rgba(10,7,20,.92);--ok:#6BF2D0;--ko:#FF8FA3;--card:#FCFAFF;--card-ink:#1A1033;--card-mute:#5D5280;--card-line:#E3DAF5;
+  --didone:"Righteous","Bodoni Moda",sans-serif;
+  --p3motif:radial-gradient(90% 40% at 50% 105%,rgba(255,70,200,.24),transparent 70%),linear-gradient(rgba(255,70,200,.12) 1px,transparent 1px) 0 0/36px 36px,linear-gradient(90deg,rgba(70,220,255,.12) 1px,transparent 1px) 0 0/36px 36px}
+body[data-th="neon"][data-theme="clair"]{--felt:#F2EAFF;--felt-hi:#FAF6FF;--felt-lo:#E2D6FA;--felt-ink:#241444;--felt-mute:#4A386C;--fw:36,20,68;--felt-line:rgba(36,20,68,.16);
+  --gold:#7D006B;--gold-ink:#FFFFFF;--dock:rgba(250,246,255,.94);--ok:#1C7446;--ko:#B3261E;--card:#FFFFFF;--card-ink:#1A1033;--card-mute:#5D5280;--card-line:#E3DAF5;
+  --p3motif:linear-gradient(rgba(164,0,140,.12) 1px,transparent 1px) 0 0/36px 36px,linear-gradient(90deg,rgba(0,140,180,.14) 1px,transparent 1px) 0 0/36px 36px}
+body[data-th="neon"] :is(h1,h2){font-weight:400;letter-spacing:0;text-shadow:0 0 14px rgba(255,107,230,.45)}
+body[data-th="neon"][data-theme="clair"] :is(h1,h2){text-shadow:none}
+
+/* ---------- Papier : cahier, encre, titres à la main (clair par nature ; kraft en mode sombre) ---------- */
+[data-th="papier"]{--felt:#E4DAC4;--felt-hi:#F0E9D9;--felt-lo:#D6CAAE;--felt-ink:#2B2018;--felt-mute:#43372C;--fw:43,32,24;--felt-line:rgba(43,32,24,.18);
+  --gold:#4C3706;--gold-ink:#FFFFFF;--dock:rgba(240,233,217,.94);--ok:#1C7446;--ko:#B3261E;--card:#FFFDF7;--card-ink:#1F1B18;--card-mute:#605850;--card-line:#E7E0D2;
+  --didone:"Caveat","Bodoni Moda",cursive;color-scheme:light;
+  --p3motif:linear-gradient(rgba(43,32,24,.06) 1px,transparent 1px) 0 0/22px 22px,linear-gradient(90deg,rgba(43,32,24,.06) 1px,transparent 1px) 0 0/22px 22px}
+body[data-th="papier"][data-theme="clair"]{--felt:#F3EEE2;--felt-hi:#FBF8F1;--felt-lo:#E6DFCF;--felt-ink:#2B2520;--felt-mute:#4C443C;--gold:#5A420B;--gold-ink:#FFFFFF;--dock:rgba(251,248,241,.94);--fw:43,37,32;--felt-line:rgba(43,37,32,.16);
+  --p3motif:linear-gradient(rgba(60,90,160,.1) 1px,transparent 1px) 0 0/22px 22px,linear-gradient(90deg,rgba(60,90,160,.1) 1px,transparent 1px) 0 0/22px 22px}
+body[data-th="papier"] :is(h1,h2){font-weight:700;letter-spacing:0}
+body[data-th="papier"] .adh,body[data-th="papier"] .hello h1{font-size:2.5rem}
+/* Sur papier, les boutons sombres et les puces choisies restent lisibles (encre sur papier, comme le mode clair du site) */
+body[data-th="papier"] .btn.light,body[data-th="papier"] .pick button.on,body[data-th="papier"] .per button.on{background:#2B2018;color:#FAFAF7}
+
+/* ---------- Commun : texte sur fond or, barre du bas, barre du haut ---------- */
+/* --gold-ink : couleur du texte posé sur var(--gold) (sombre si l'or est clair, blanc si l'or est foncé). Les modules du site
+   l'utilisent avec leur ancienne couleur en secours ; ici les éléments de l'application qui écrivent sur l'or. */
+body[data-th]:not([data-th=""]) :is(.pill.pause,.av:not([style*="--av"])){color:var(--gold-ink)}
+body[data-th]:not([data-th=""]) ::selection{color:var(--gold-ink)}
+/* Médailles des trophées et pastille des messages : toujours en or métal (le texte foncé fixe ne se lit pas sur l'or foncé des palettes) */
+body[data-th]:not([data-th=""]) :is(.tro.got i,.toast .tm){background:radial-gradient(circle at 35% 30%,#F6E3A6,#E7C66B 55%,#B8913A);color:#3B2C08}
+/* Barre du bas : fond de la palette (l'ancien fond sombre fixe rendait le texte illisible sur les palettes claires) */
+body[data-th]:not([data-th=""]) nav.dock div{background:var(--dock)}
+body[data-th]:not([data-th=""]) nav.dock::before{background:linear-gradient(rgba(0,0,0,0),var(--felt-lo) 75%);opacity:.85}
+/* Même défaut sur le mode clair de base : barre claire, texte foncé */
+body[data-theme="clair"]:not([data-th]) nav.dock div,body[data-theme="clair"][data-th=""] nav.dock div{background:rgba(244,248,244,.94)}
+body[data-theme="clair"]:not([data-th]) nav.dock::before,body[data-theme="clair"][data-th=""] nav.dock::before{background:linear-gradient(rgba(0,0,0,0),var(--felt-lo) 75%);opacity:.85}
+/* Barre du haut : la date peut passer à la ligne plutôt que de pousser le Personnage hors de l'écran (polices larges) */
+.top .who{min-width:0}
+.top .date{min-width:0;overflow-wrap:anywhere;line-height:1.15}
+/* Fonds noirs translucides de l'application (pastilles, choix du paquet) : sur une palette claire, voile de l'encre à la place */
+body[data-th="papier"] :is(#jPaq,.pill),body[data-th]:not([data-th=""])[data-theme="clair"] :is(#jPaq,.pill){background:rgba(var(--fw),.08)}
+/* Calendrier, jour à une réponse : voile de l'encre de la palette (le blanc fixe à 30 % éclaircissait trop les tapis bruns) */
+body[data-th]:not([data-th=""]) .cal i.l1{background:rgba(var(--fw),.2)}
+body[data-th="espace"] .top h1{font-size:1.75rem}
+body[data-th="bibliotheque"] .top h1,body[data-th="neon"] .top h1{font-size:2rem}
+
+/* ---------- Commun : motif de fond, tapis teinté atténué, aperçu ---------- */
+body[data-th]:not([data-th=""])::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:var(--p3motif)}
+body[data-th]:not([data-th=""]) .dye.on{opacity:.35}
+body[data-th-essai] .wrap{outline:2px dashed var(--gold);outline-offset:-2px}
+.p3tess{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translateX(-50%);z-index:41;display:flex;align-items:center;gap:10px;padding:8px 10px 8px 14px;border-radius:999px;
+  background:var(--card);color:var(--card-ink);box-shadow:0 18px 40px -16px rgba(0,0,0,.8);max-width:calc(100vw - 32px)}
+.p3tess b{font-size:.86rem}
+.p3tcpt{font-size:.8rem;font-variant-numeric:tabular-nums;color:var(--card-mute);min-width:3ch}
+.p3tess .s2mini{color:var(--card-ink);background:rgba(0,0,0,.08);box-shadow:none}
+
+/* ---------- Boutique : rayon Thèmes complets ---------- */
+.p3t{margin:0 0 12px}
+.p3th4{margin:14px 0 6px;font-family:var(--didone);font-weight:900;font-size:1.05rem}
+.p3t .b2note{font-size:.8rem;color:var(--felt-mute);margin:0 0 10px;line-height:1.4}
+.p3tgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.p3tt{display:grid;gap:3px;justify-items:start;padding:6px 6px 8px;border:0;border-radius:14px;background:rgba(var(--fw),.06);box-shadow:inset 0 0 0 1px var(--felt-line);color:var(--felt-ink);text-align:left;min-width:0;width:100%}
+.p3tt.on{box-shadow:inset 0 0 0 2px var(--gold)}
+.p3tt.lock{opacity:.85}
+.p3tt:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.p3tt>b{font-size:.82rem;line-height:1.15;margin-top:2px}
+.p3tt>small{font-size:.7rem;color:var(--felt-mute)}
+.p3tt .b2r{font-size:.62rem}
+.p3tv{display:block;width:100%;height:64px;border-radius:10px;position:relative;overflow:hidden;background:radial-gradient(130% 80% at 50% 0%,var(--felt-hi),var(--felt) 60%,var(--felt-lo));box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
+.p3tv::after{content:"";position:absolute;inset:0;background:var(--p3motif,none)}
+.p3tvc{position:absolute;left:8px;top:8px;width:36px;height:46px;border-radius:7px;background:var(--card);color:var(--card-ink);font-family:var(--didone);font-weight:900;display:grid;place-items:center;align-content:center;gap:3px;z-index:1;box-shadow:0 6px 12px -6px rgba(0,0,0,.6)}
+.p3tvc b{font-size:1rem;line-height:1}
+.p3tvc em{display:block;width:18px;height:3px;border-radius:2px;background:var(--card-mute);opacity:.5}
+.p3tvb{position:absolute;right:8px;bottom:8px;width:34px;height:12px;border-radius:999px;background:var(--gold);z-index:1}
+.p3td{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;margin:10px 0 4px;padding:12px 14px;border-radius:16px;background:rgba(var(--fw),.06);box-shadow:inset 0 0 0 1px var(--felt-line)}
+.p3td b{font-size:1rem}
+.p3td p{margin:2px 0 0;font-size:.8rem;color:var(--felt-mute)}
+.p3tact{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.p3tact .btn{padding:9px 14px;font-size:.84rem}
+.p3tact .btn.buy{box-shadow:inset 0 0 0 2px var(--gold);color:var(--gold);background:transparent}
+@media (max-width:400px){.p3td{grid-template-columns:1fr}.p3tact{justify-content:flex-start}}
+@media (prefers-reduced-motion:reduce){body[data-th="neon"] :is(h1,h2){text-shadow:none}}

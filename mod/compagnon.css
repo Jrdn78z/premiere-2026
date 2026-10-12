@@ -1,0 +1,52 @@
+/* Lot P3 : compagnon qui grandit (carte d'accueil, vue, profil d'un ami) */
+.p3cpv{display:block;width:84px;height:84px;flex:0 0 auto;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
+.p3cpv[data-h="dort"]{filter:drop-shadow(0 6px 10px rgba(0,0,0,.35)) saturate(.7)}
+.p3cpv.p3cpmini{width:56px;height:56px;filter:none}
+.p3cpv.p3cpbig{width:120px;height:120px}
+.p3cpz{animation:p3cpz 2.4s ease-in-out infinite}
+.p3cpz2{animation-delay:.6s}
+@keyframes p3cpz{0%,100%{opacity:.2;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+/* Carte d'accueil */
+.p3cpa{margin:0 0 14px}
+.p3cpc{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;width:100%;text-align:left;border:0;padding:12px 14px;border-radius:18px;color:var(--felt-ink);
+  background:linear-gradient(135deg,rgba(var(--fw),.1),rgba(var(--fw),.04));box-shadow:inset 0 0 0 1px var(--felt-line);transition:transform .15s var(--ease)}
+.p3cpc:active{transform:scale(.985)}
+.p3cpc:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.p3cpc span{display:grid;gap:2px;min-width:0}
+.p3cpc b{font-family:var(--didone);font-weight:900;font-size:1.2rem;line-height:1.1}
+.p3cpc small{font-size:.8rem;color:var(--felt-mute)}
+.p3cpc em{font-style:normal;font-size:.76rem;font-weight:700;color:var(--gold)}
+.p3cpnew b{font-size:1.1rem}
+/* Vue */
+.p3cp .p1note{margin-top:8px}
+.p3cph{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center;margin:14px 0 8px;padding:14px;border-radius:18px;background:rgba(var(--fw),.06);box-shadow:inset 0 0 0 1px var(--felt-line)}
+.p3cph>div{display:grid;gap:4px;min-width:0}
+.p3cph .p3cpn{font-family:var(--didone);font-weight:900;font-size:1.5rem;line-height:1.05}
+.p3cph span{font-size:.84rem;color:var(--felt-mute)}
+.p3cph .bar{display:block;height:8px;border-radius:6px;background:rgba(0,0,0,.25);overflow:hidden;margin:4px 0 2px}
+.p3cph .bar i{display:block;height:100%;width:calc(var(--p,0)*100%);background:var(--gold);border-radius:inherit}
+.p3cph small{font-size:.8rem;color:var(--felt-ink)}
+.p3cph em{font-style:normal;font-size:.78rem;font-weight:700;color:var(--gold)}
+.p3cpst{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:10px 0 4px}
+.p3cpst>div{display:grid;justify-items:center;gap:2px;padding:8px 4px;border-radius:14px;background:rgba(var(--fw),.05);box-shadow:inset 0 0 0 1px var(--felt-line)}
+.p3cpst>div:not(.ok) .p3cpv{opacity:.45;filter:grayscale(.6)}   /* stade pas encore atteint : dessin estompé, texte lisible */
+.p3cpst>div.ok{box-shadow:inset 0 0 0 1.5px var(--gold)}
+.p3cpst b{font-size:.8rem}
+.p3cpst small{font-size:.68rem;color:var(--felt-mute)}
+.p3cph2{font-family:var(--didone);font-weight:900;font-size:1.15rem;margin:18px 0 6px}
+.p3cprow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}
+.p3cprow .inp{min-width:0}
+.p3cprow .s2mini{height:40px;padding:0 16px}
+.p3cpg{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin:8px 0}
+.p3cpt{display:grid;justify-items:center;gap:2px;padding:10px 6px 8px;border:0;border-radius:16px;background:rgba(var(--fw),.06);box-shadow:inset 0 0 0 1px var(--felt-line);color:var(--felt-ink);text-align:center}
+.p3cpt b{font-size:.84rem}
+.p3cpt small{font-size:.68rem;color:var(--felt-mute);line-height:1.2}
+.p3cpt.on{box-shadow:inset 0 0 0 2px var(--gold);background:rgba(231,198,107,.12)}
+.p3cpt:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.p3cp .btn.buy{box-shadow:inset 0 0 0 2px var(--gold);color:var(--gold)}
+/* Profil d'un ami */
+.p3cpami{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:center;margin:0 0 16px;padding:10px 12px;border-radius:14px;background:rgba(var(--fw),.06);box-shadow:inset 0 0 0 1px var(--felt-line)}
+.p3cpami b{display:block;font-size:.9rem}
+.p3cpami span{font-size:.8rem;color:var(--felt-mute)}
+@media (max-width:370px){.p3cpst{grid-template-columns:repeat(2,minmax(0,1fr))}.p3cpg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){.p3cpz{animation:none;opacity:1}}
