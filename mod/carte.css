@@ -27,7 +27,7 @@
 /* Zones (boutons posés sur les îles) et étiquettes */
 .p3cz{position:absolute;transform:translate(-50%,-50%);width:76px;height:60px;border:0;background:transparent;padding:0;border-radius:40px;cursor:pointer}
 .p3cz:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
-.p3cz[aria-current="true"]{box-shadow:0 0 0 3px rgba(231,198,107,.55)}
+.p3cz[aria-current="true"]{box-shadow:0 0 0 3px rgba(var(--gold-rgb,231,198,107),.55)}
 .p3cl{position:absolute;left:50%;top:38px;transform:translateX(-50%);width:116px;font-size:.72rem;font-weight:700;line-height:1.15;text-align:center;color:var(--felt-ink);
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-shadow:0 1px 2px rgba(0,0,0,.45)}
 .p3cz[data-k="vide"] .p3cl,.p3cz[data-k="gris"] .p3cl{color:var(--felt-mute)}

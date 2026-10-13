@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-y4t07PeQyA+3sqDYnBff1G7h4Pd7R7phMbMqC1Al0W8=' https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/ https://cdn.jsdelivr.net/npm/jsqr@1.4.0/ https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/ https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/ https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' https://qwdptatkmzrkvvypbokx.supabase.co wss://qwdptatkmzrkvvypbokx.supabase.co; worker-src 'self' blob:; manifest-src 'self'; frame-src https://www.youtube-nocookie.com https://open.spotify.com; object-src 'none'; base-uri 'self'; form-action 'self'"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-VqOEfej+qpPMu/swhTO7KwGEJ0/40WEYyEJLTj9LiNA=' https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/ https://cdn.jsdelivr.net/npm/jsqr@1.4.0/ https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/ https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/ https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' https://qwdptatkmzrkvvypbokx.supabase.co wss://qwdptatkmzrkvvypbokx.supabase.co; worker-src 'self' blob:; manifest-src 'self'; frame-src https://www.youtube-nocookie.com https://open.spotify.com; object-src 'none'; base-uri 'self'; form-action 'self'"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Première 2026</title>
 <meta name="description" content="Hub de révision de Première : cartes, quiz, fiches et ligue entre amis.">
 <meta name="theme-color" content="#123526">
@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700;6..96,900&family=Figtree:wght@400;500;600;700;800&family=Fredoka:wght@600&family=Pacifico&family=Permanent+Marker&family=Press+Start+2P&family=Bebas+Neue&family=Caveat:wght@700&family=Righteous&family=Space+Mono:wght@700&display=swap">
-<link rel="stylesheet" href="app.css?v=0a185206e6">
+<link rel="stylesheet" href="app.css?v=37188c61f1">
 <div class="dye" id="dyeA" aria-hidden="true"></div><div class="dye" id="dyeB" aria-hidden="true"></div><div class="wall" aria-hidden="true"></div>
 <div class="wrap">
 
@@ -39,7 +39,7 @@
   <div class="sec"><h2>Tes soirs</h2><span id="calMonth"></span></div>
   <p class="streak" id="streak"></p>
   <div class="cal" id="nights"></div>
-  <div class="calk"><span><i style="background:rgba(250,250,247,.3)"></i>quelques cartes</span><span><i style="background:rgba(250,250,247,.62)"></i>15 et plus</span><span><i style="background:var(--card)"></i>40 et plus</span></div>
+  <div class="calk"><span><i style="background:rgba(var(--card-rgb,250,250,247),.3)"></i>quelques cartes</span><span><i style="background:rgba(var(--card-rgb,250,250,247),.62)"></i>15 et plus</span><span><i style="background:var(--card)"></i>40 et plus</span></div>
   <div class="sec"><h2>Ta semaine</h2><span id="wkSum"></span></div>
   <div class="wk" id="wk"></div>
   <details class="tip"><summary>Sur ton téléphone, comme une appli</summary>
@@ -121,9 +121,9 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="supabase.js?v=183ff90999"></script>
 <script src="config.js?v=8564bfacbf"></script>
-<script src="p26-runtime.js?v=26d9447486"></script>
+<script src="p26-runtime.js?v=02f0a4d56f"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-<script>window.P26_BUILD="91383f769f";window.P26_MODS=["ambiance.js", "amis.css", "amis.js", "annonce.css", "annonce.js", "boutique.css", "boutique.js", "boutique2.css", "boutique2.js", "carte.css", "carte.js", "compagnon.css", "compagnon.js", "duelx.css", "duelx.js", "epreuve.css", "epreuve.js", "jeux2.css", "jeux2.js", "musique.css", "musique.js", "opendyslexic.woff2", "partage.js", "progression.css", "progression.js", "pronote.js", "revision.css", "revision.js", "royale-amis.css", "royale-amis.js", "saison.css", "saison.js", "signaler.js", "skins.css", "skins.js", "survie.css", "survie.js", "themes.css", "themes.js", "vraifaux.css", "vraifaux.js"];
+<script>window.P26_BUILD="abfd1c11c5";window.P26_MODS=["ambiance.js", "amis.css", "amis.js", "annonce.css", "annonce.js", "boutique.css", "boutique.js", "boutique2.css", "boutique2.js", "carte.css", "carte.js", "compagnon.css", "compagnon.js", "duelx.css", "duelx.js", "epreuve.css", "epreuve.js", "jeux2.css", "jeux2.js", "musique.css", "musique.js", "opendyslexic.woff2", "partage.js", "progression.css", "progression.js", "pronote.js", "revision.css", "revision.js", "royale-amis.css", "royale-amis.js", "saison.css", "saison.js", "signaler.js", "skins.css", "skins.js", "survie.css", "survie.js", "themes.css", "themes.js", "vraifaux.css", "vraifaux.js"];
 /* Chargeur de modules à la demande. Injecté en ligne par split.py avant app.js.
    P26mod("nom")            -> charge mod/nom.js?v=BUILD une seule fois (même promesse à chaque appel)
    P26mod("nom",{css:true}) -> charge aussi mod/nom.css?v=BUILD
@@ -155,6 +155,6 @@
   window.P26mod=P26mod;
 })();
 </script>
-<script src="app.js?v=d5e18f1403"></script>
+<script src="app.js?v=1329225863"></script>
 
 </body></html>

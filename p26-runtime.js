@@ -271,25 +271,25 @@
 
   /* ================= ÉCRAN DE CONNEXION ================= */
   const CSS = `
-#p26auth{position:fixed;inset:0;z-index:1000;overflow:auto;background:radial-gradient(130% 70% at 50% 0%,#2A6B52 0%,#1B4A38 45%,#123526 100%);color:#EAF3EE;font-family:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+#p26auth{position:fixed;inset:0;z-index:1000;overflow:auto;background:radial-gradient(130% 70% at 50% 0%,var(--felt-hi,#2A6B52) 0%,var(--felt,#1B4A38) 45%,var(--felt-lo,#123526) 100%);color:var(--felt-ink,#EAF3EE);font-family:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
 #p26auth .p26box{max-width:420px;margin:0 auto;padding:max(28px,6vh) 20px 40px}
-#p26auth h1{font-family:"Bodoni Moda","Didot",Georgia,serif;font-weight:900;font-size:2.4rem;line-height:1.05;margin:0 0 6px;letter-spacing:-.01em}
-#p26auth .sub{color:#A9C7B8;margin:0 0 22px;font-size:.95rem}
-#p26auth .card{background:#FAFAF7;color:#1A1C1E;border-radius:20px;padding:20px 18px;box-shadow:0 24px 50px -24px rgba(0,0,0,.8)}
-#p26auth .tabs{display:flex;gap:4px;padding:4px;border-radius:999px;background:#ECECE6;margin:0 0 16px}
+#p26auth h1{font-family:var(--didone,"Bodoni Moda","Didot",Georgia,serif);font-weight:900;font-size:2.4rem;line-height:1.05;margin:0 0 6px;letter-spacing:-.01em}
+#p26auth .sub{color:var(--felt-mute,#A9C7B8);margin:0 0 22px;font-size:.95rem}
+#p26auth .card{background:var(--card,#FAFAF7);color:var(--card-ink,#1A1C1E);border-radius:20px;padding:20px 18px;box-shadow:0 24px 50px -24px rgba(0,0,0,.8)}
+#p26auth .tabs{display:flex;gap:4px;padding:4px;border-radius:999px;background:var(--card-soft2,#ECECE6);margin:0 0 16px}
 #p26auth .tabs button{flex:1;border:0;border-radius:999px;padding:9px 10px;font:inherit;font-weight:800;font-size:.9rem;background:transparent;color:#5E6166;cursor:pointer}
-#p26auth .tabs button.on{background:#1A1C1E;color:#FAFAF7}
+#p26auth .tabs button.on{background:var(--card-ink,#1A1C1E);color:var(--card,#FAFAF7)}
 #p26auth label{display:block;font-weight:700;font-size:.88rem;margin:12px 0 6px}
-#p26auth input{width:100%;box-sizing:border-box;font:inherit;font-size:16px;color:#1A1C1E;background:#EFEFE9;border:2px solid transparent;border-radius:12px;padding:11px 14px}
+#p26auth input{width:100%;box-sizing:border-box;font:inherit;font-size:16px;color:#1A1C1E;background:var(--card-soft,#EFEFE9);border:2px solid transparent;border-radius:12px;padding:11px 14px}
 #p26auth input:focus{outline:none;border-color:#1A1C1E}
 #p26auth .hint{font-size:.8rem;color:#5E6166;margin:4px 0 0}
-#p26auth .btn{border:0;border-radius:999px;padding:12px 20px;font:inherit;font-weight:800;font-size:.95rem;background:#1A1C1E;color:#FAFAF7;cursor:pointer;width:100%;margin-top:16px}
+#p26auth .btn{border:0;border-radius:999px;padding:12px 20px;font:inherit;font-weight:800;font-size:.95rem;background:var(--card-ink,#1A1C1E);color:var(--card,#FAFAF7);cursor:pointer;width:100%;margin-top:16px}
 #p26auth .btn:disabled{opacity:.5}
 #p26auth .btn.ghost{background:transparent;color:#1A1C1E;box-shadow:inset 0 0 0 1.5px #CFCFC8;margin-top:8px}
 #p26auth .err{color:#C1272D;font-size:.88rem;margin:10px 0 0;min-height:1.2em}
 #p26auth .link{border:0;background:transparent;color:#5E6166;font:inherit;font-size:.84rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:6px 0;margin-top:10px}
-#p26auth .code{font-family:"Bodoni Moda",Georgia,serif;font-weight:900;font-size:1.9rem;letter-spacing:.12em;text-align:center;background:#EFEFE9;border-radius:12px;padding:14px;margin:12px 0;user-select:all;-webkit-user-select:all}
-#p26auth .foot{color:#A9C7B8;font-size:.8rem;margin:18px 0 0;text-align:center}
+#p26auth .code{font-family:"Bodoni Moda",Georgia,serif;font-weight:900;font-size:1.9rem;letter-spacing:.12em;text-align:center;background:var(--card-soft,#EFEFE9);border-radius:12px;padding:14px;margin:12px 0;user-select:all;-webkit-user-select:all}
+#p26auth .foot{color:var(--felt-mute,#A9C7B8);font-size:.8rem;margin:18px 0 0;text-align:center}
 #p26auth .ok{color:#1E7D4A;font-weight:700;font-size:.88rem;margin:10px 0 0}
 #p26auth .chk{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;margin-top:12px}
 #p26auth .chk input{width:20px;height:20px;margin:2px 0 0;flex:0 0 auto}

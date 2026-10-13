@@ -114,8 +114,10 @@
 
   /* ---------------- Objectif de cartes par semaine et par matière ---------------- */
   P26ui.fusion("ob",(l,d)=>{const src=l&&typeof l==="object"&&!Array.isArray(l)?l:d;const o={};if(src&&typeof src==="object"&&!Array.isArray(src))Object.entries(src).forEach(([k,v])=>{if(/^[a-z0-9_-]{1,24}$/.test(k))o[k]=N(v,0,500)});return o});
-  function matieres(){let L=[];try{if(typeof clsMats==="function"&&P.cls)L=clsMats(P.cls)}catch(e){}
-    const M=typeof C!=="undefined"&&C.M&&typeof C.M==="object"?C.M:{};if(!L.length)L=Object.keys(M);
+  // Lot P3b : identifiants du contenu (clsIds), pas ceux du Programme (clsMats) : « es » est l'Ens. scientifique dans le Programme
+  // mais l'Espagnol dans le contenu. Sans classe : les matières affichées (pas celles des autres voies).
+  function matieres(){let L=[];try{if(typeof clsIds==="function"&&P.cls)L=clsIds(P.cls)}catch(e){}
+    const M=typeof C!=="undefined"&&C.M&&typeof C.M==="object"?C.M:{};if(etatV.tout)L=L.concat(Object.keys(M));else if(!L.length)L=(C.mats||[]).map(m=>m.id);
     // Seulement les matières qui ont du contenu (C.M) : pas d'identifiant brut à l'écran.
     return [...new Set(L)].filter(m=>typeof m==="string"&&/^[a-z0-9_-]{1,24}$/.test(m)&&has(M,m))}
   const nomMat=m=>{try{const M=typeof C!=="undefined"&&C.M&&C.M[m];return M&&(M.nom||M.court)?String(M.nom||M.court):m}catch(e){return m}};
@@ -187,6 +189,7 @@
     const atteints=L.filter(o=>o.but&&o.fait>=o.but).length,fixes=L.filter(o=>o.but).length;
     return `<div class="sec"><h2>Objectifs de la semaine</h2><span>${fixes?atteints+" / "+fixes:"à fixer"}</span></div>
       <p class="p1note">Choisis combien de cartes tu veux revoir par matière cette semaine. Le compteur repart lundi.</p>
+      <div class="pick sm" role="group" aria-label="Matières affichées"><button type="button" class="${etatV.tout?"":"on"}" data-saotout="0" aria-pressed="${!etatV.tout}">Mes matières</button><button type="button" class="${etatV.tout?"on":""}" data-saotout="1" aria-pressed="${!!etatV.tout}">Toutes les matières</button></div>
       <ul class="sa-obj">${L.map(o=>{const p=o.but?Math.min(1,o.fait/o.but):0;return `<li class="${o.but&&o.fait>=o.but?"ok":""}"><b>${esc(o.nom)}</b>
         <span class="bar" style="--p:${p.toFixed(3)}"><i></i></span><small>${o.but?fmtN(o.fait)+" / "+fmtN(o.but)+" cartes":fmtN(o.fait)+" cartes, pas d’objectif"}</small>
         <span class="sa-step"><button type="button" class="sa-pm" data-sao="${esc(o.m)}" data-d="-5" aria-label="Baisser l’objectif en ${esc(o.nom)}" ${o.but?"":"disabled"}>−</button><output aria-live="polite">${o.but||0}</output><button type="button" class="sa-pm" data-sao="${esc(o.m)}" data-d="5" aria-label="Monter l’objectif en ${esc(o.nom)}">+</button></span></li>`}).join("")}</ul>`}
@@ -205,6 +208,7 @@
     const rc=PASSE_ACTIF&&box.querySelector("[data-sarec]");if(rc)rc.onclick=()=>{buzz(18);recuperer(true);P26ui._rendre()};
     const rr=box.querySelector("[data-saret]");if(rr)rr.onclick=()=>{buzz(18);retourRecuperer();P26ui._rendre()};
     box.querySelectorAll("[data-sap]").forEach(b=>b.onclick=()=>{etatV.sel=+b.dataset.sap;P26ui._rendre()});
+    box.querySelectorAll("[data-saotout]").forEach(b=>b.onclick=()=>{etatV.tout=b.dataset.saotout==="1";buzz(8);P26ui._rendre()});
     box.querySelectorAll("[data-sao]").forEach(b=>b.onclick=()=>{const m=b.dataset.sao;const o=objectifs().find(x=>x.m===m);if(!o)return;fixer(m,o.but+(+b.dataset.d||0));buzz(8);P26ui._rendre()});
     box.querySelectorAll("[data-saes]").forEach(b=>b.onclick=()=>{const g=esGagnes().find(x=>x.id===b.dataset.saes);if(!g||!(P.own&&P.own["cad:"+g.id]))return;esCadres();choisirCadre(g.id)})}});
   function retourHTML(){return retourEnAttente()?`<div class="sa-ret"><i aria-hidden="true">🎁</i><div><b>Bon retour !</b><span>${RETOUR_PIECES} pièces t’attendent${N(P.p1.re,0,999)>=RETOUR_JOURS?" après "+N(P.p1.re,0,999)+" jours sans réviser":""}.</span></div><button class="btn light" type="button" data-saret>Récupérer</button></div>`:""}

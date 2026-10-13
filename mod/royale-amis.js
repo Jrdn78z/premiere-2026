@@ -1,5 +1,5 @@
 /* ================= Lot P2 : Bataille royale entre amis =================
-   Module chargé à la demande (bouton « Entre amis » de la Bataille royale, lien #royale-amis=CODE). 2 à 8 joueurs.
+   Module chargé à la demande (bouton « Entre amis » de la Bataille royale, lien #royale-amis=CODE qui propose sans entrer). 2 à 8 joueurs.
    Temps réel : les mêmes mécanismes que l'Arène (maj8.js), rien d'autre : salle ROOM.join("royale-"+code) (présence
    Supabase Realtime), code de 5 caractères (arCode), l'hôte pilote toute la partie dans SA présence (phase, manche, question,
    joueurs, résultats). Chaque joueur ne publie que son pseudo, son apparence (p2 : dos, skin, Personnage, cadre, comme skins.js)
@@ -22,10 +22,12 @@
   const pret=()=>{try{return !!ROOM&&roomState==="ok"}catch(e){return false}};
   const uidDe=k=>{const m=/^([0-9a-f-]{36}):/.exec(String(k||""));return m?m[1]:""};
   const pl=(n,mot)=>n+" "+mot+(n>1?"s":"");
+  // Lot P3b : code de la partie visible pendant toute la partie (salle, manches, podium), avec un bouton Copier (même barre que l'Arène).
+  const barre=()=>{try{if(typeof arCodeBarHTML==="function")return arCodeBarHTML(S.code,"la partie")}catch(e){}return ""};
 
   /* ---------------- État ---------------- */
   const S=RA.S={g:null,code:"",host:false,unsub:null,me:"",hk:"",t:0,box:null,cle:"",hp:null,cur:null,mine:null,bon:{},fin:null,
-    perdu:"",hAbs:0,iv:null,tm:[],tmH:[],src:"*",note:"",H:null};
+    perdu:"",hAbs:0,iv:null,tm:[],tmH:[],src:"*",note:"",H:null,prop:""};
   const moi=()=>{if(!S.me&&S.g){try{S.me=(S.g.peers().find(p=>p.isMe&&p.sameTab)||{}).peer||""}catch(e){}}return S.me};
   const apres=(ms,f)=>{const t=setTimeout(()=>{S.tm=S.tm.filter(x=>x!==t);f()},ms);S.tm.push(t);return t};
   const apresH=(ms,f)=>{const t=setTimeout(()=>{S.tmH=S.tmH.filter(x=>x!==t);if(S.g&&S.host)f()},ms);S.tmH.push(t);return t};
@@ -178,6 +180,9 @@
   function peindre(force){const box=boxOk();if(!box)return;const hp=S.hp;
     const cle=S.perdu?"perdu":!S.g?"off":!hp?"cherche":hp.ph+":"+hp.m;
     if(!force&&cle===S.cle){maj(box);return}S.cle=cle;
+    if(!S.g&&!S.perdu&&CODE.test(S.prop||"")){const c=S.prop;box.innerHTML=`<div class="j2 j2ra"><div class="ihead"><h1>Bataille royale</h1></div>
+      <div class="arprop ra-prop" role="group" aria-label="Invitation à la partie ${c.split("").join(" ")}"><b>Invitation : partie entre amis <span class="arpc">${c}</span></b><span>Rien ne démarre tant que tu ne touches pas Rejoindre.</span>
+      <div class="olrow"><button class="btn light" type="button" data-rapgo>Rejoindre la partie ${c}</button><button class="btn ghost" type="button" data-rapno>Pas maintenant</button></div></div></div>`;brancher(box);return}
     if(S.perdu||!S.g){box.innerHTML=`<div class="j2 j2ra"><div class="ihead"><h1>Bataille royale</h1></div><div class="ra-vide" role="status"><b>${esc(S.perdu||"Pas de partie en cours.")}</b><span>Crée une partie ou rejoins tes amis avec leur code.</span></div>
       <div class="exrow" style="justify-content:center"><button class="btn light" type="button" data-raret aria-label="Retour à la Bataille royale">Retour</button></div></div>`;brancher(box);return}
     if(!hp){box.innerHTML=`<div class="j2 j2ra"><div class="ihead"><h1>Bataille royale</h1><button class="linkbtn" type="button" data-raq aria-label="Quitter la partie">Quitter</button></div>
@@ -195,7 +200,7 @@
        <div class="exrow" style="justify-content:center"><button class="btn light" type="button" data-rago aria-label="Lancer la partie" ${n>=2&&src.length?"":"disabled"}>Lancer la partie</button></div>
        <p class="ra-st" role="status">${esc(S.note||(n<2?"Il faut au moins 2 joueurs : attends un ami ou ajoute un Bot.":"Les questions viennent de tes matières. Une erreur et c’est fini."))}</p>`}
     else bas=`<p class="ra-att" role="status">${dans?"Tu es dans la partie. ":"La salle est pleine : tu regarderas la partie. "}${esc(hn)} la lance quand tout le monde est là.</p>`;
-    box.innerHTML=`<div class="j2 j2ra"><div class="ihead"><h1>Bataille royale</h1><button class="linkbtn" type="button" data-raq aria-label="Quitter la partie">Quitter</button></div>
+    box.innerHTML=`<div class="j2 j2ra">${barre()}<div class="ihead"><h1>Bataille royale</h1><button class="linkbtn" type="button" data-raq aria-label="Quitter la partie">Quitter</button></div>
       <div class="ra-code"><span>Code de la partie</span><b class="bigcode" aria-label="Code de la partie : ${[...S.code].join(" ")}">${esc(S.code)}</b><small>Tes amis le tapent dans Jeu, Bataille royale, Entre amis.</small></div>
       <div class="sec"><h2>Joueurs</h2><span>${n} / ${MAXJ}</span></div>
       <div class="j2table ra-salle" role="list" aria-label="Joueurs de la partie">${seats||`<p class="ra-att">Connexion…</p>`}</div>${bas}</div>`;
@@ -216,7 +221,7 @@
     const opts=hp.o.map((o,i)=>{let c="opt";if(rev){if(i===hp.ok)c+=" good";else if(mine&&mine.c===i)c+=" bad"}else if(mine&&mine.c===i)c+=" choisi";
       return `<button class="${c}" type="button" data-i="${i}" aria-label="Réponse : ${u.lab(o)}" ${rev||!vivant||mine?"disabled":""}>${tex(o)}</button>`}).join("");
     const etatMoi=!moiE?"Tu regardes":rev?(moiE.r===1?"Juste":moiE.r===-1?"Temps écoulé":moiE.r===0?"Raté":""):!vivant?"Tu regardes":mine?"Carte posée":"À toi";
-    box.innerHTML=`<div class="j2 j2br j2ra"><div class="role j2top"><span>Bataille royale · ${esc(S.code)}</span><span>${viv} en jeu</span></div>
+    box.innerHTML=`<div class="j2 j2br j2ra">${barre()}<div class="role j2top"><span>Bataille royale · ${esc(S.code)}</span><span>${viv} en jeu</span></div>
       <div class="j2table" role="list" aria-label="Les joueurs">${seats}</div>
       <p class="j2ban${rev?" on":""}" role="status" aria-live="polite">${rev?banniere(hp):`Manche ${hp.m}${hp.m>=MORT?" · mort subite":""}`}</p>
       <div class="qcard j2brq"><div class="role"><span>Manche ${hp.m}</span><span data-raetat>${etatMoi}</span></div>
@@ -240,7 +245,7 @@
     const L=hp.js.slice().sort((a,b)=>(a.p||99)-(b.p||99)||b.cr-a.cr);
     const pod=`<ol class="j2pod" aria-label="Podium">${L.map(e=>{const j=joueurDe(e);return `<li class="${j.me?"me":""}${e.p===1?" un":""}"><span class="rk">${e.p||"·"}</span>${avDe(j)}<span class="bn">${esc(j.nick)}${j.bot?` <em class="ra-tag">Bot</em>`:""}</span>${u.dos(j.dos,"j2mini")}<small>${e.p===1?"Vainqueur":"sorti manche "+e.o}${e.cr?" · ♛ "+e.cr:""}</small></li>`}).join("")}</ol>`;
     const p=R.place||0;
-    box.innerHTML=`<div class="j2 j2ra"><div class="result j2fin" data-j2fin="royale-amis">${moiE&&p?`<p class="muted">${p===1?"Dernier debout !":`Éliminé à la manche ${moiE.o}.`}</p>${p===1?`<p class="j2win">Victoire royale</p>`:""}
+    box.innerHTML=`<div class="j2 j2ra">${barre()}<div class="result j2fin" data-j2fin="royale-amis">${moiE&&p?`<p class="muted">${p===1?"Dernier debout !":`Éliminé à la manche ${moiE.o}.`}</p>${p===1?`<p class="j2win">Victoire royale</p>`:""}
       <div class="sc">${p}<sup>${p===1?"re":"e"}</sup></div><p>sur ${T} joueurs · ${(R.bonnes||0)>1?R.bonnes+" bonnes réponses":(R.bonnes||0)+" bonne réponse"} · ${pl(moiE.cr,"couronne")}</p>`:`<p class="muted">Partie terminée.</p><div class="sc">♛</div>`}
       ${pod}${moiE&&p?`<p class="j2xp">${R.xp?`+${fmtN(R.xp)} XP`:R.dem?"XP du jour au plafond : pas d’XP en plus":"Pas d’XP cette fois"}</p>`:""}
       <div class="exrow" style="justify-content:center">${S.host?`<button class="btn light" type="button" data-raagain aria-label="Rejouer avec les mêmes joueurs">Rejouer</button>`:""}<button class="btn ghost" type="button" data-raq aria-label="Quitter la partie">Quitter</button></div>
@@ -256,6 +261,10 @@
     else S.g.presence(maPresence()).catch(()=>{})}
   function brancher(box){
     box.querySelectorAll("[data-raq]").forEach(b=>b.onclick=sortir);
+    box.querySelectorAll("[data-arcopy]").forEach(b=>b.onclick=()=>{try{arCopier(S.code,b)}catch(e){}});
+    const pg=box.querySelector("[data-rapgo]");if(pg)pg.onclick=()=>{const c=S.prop;if(!CODE.test(c||""))return;pg.disabled=true;buzz(10);
+      directPret().then(()=>RA.entrer(c)).then(t=>{if(!t){S.prop="";return}pg.disabled=false;toast(`<span class="tm">!</span><div><b>Bataille royale entre amis</b><span>${esc(t)}</span></div>`)})};
+    const pn=box.querySelector("[data-rapno]");if(pn)pn.onclick=()=>{S.prop="";P26ui.ouvrir("royale")};
     box.querySelectorAll("[data-raret]").forEach(b=>b.onclick=sortir);
     box.querySelectorAll(".j2brq .opt").forEach(b=>b.onclick=()=>repondre(+b.dataset.i,b));
     box.querySelectorAll("[data-rab]").forEach(b=>b.onclick=()=>{const H=S.H;if(!S.host||!H||H.ph!=="lobby")return;
@@ -266,10 +275,12 @@
     const ag=box.querySelector("[data-raagain]");if(ag)ag.onclick=()=>{const H=S.H;if(!S.host||!H)return;Object.assign(H,{ph:"lobby",js:[],m:0,sig:""});publier()}}
 
   P26ui.vue("royale-amis",{titre:"Bataille royale entre amis",rendre(box){S.box=box;S.cle="";peindre(true)},quitter(){partir()}});
-  // Lien #royale-amis=CODE : attend la connexion au direct (8 s au plus) avant d'entrer.
+  // Lien #royale-amis=CODE (lot P3b) : n'entre plus tout seul. La vue s'ouvre sur une invitation ; seul le bouton « Rejoindre » fait
+  // entrer (après la connexion au direct, 8 s au plus). Le lien est effacé de l'adresse : un rechargement ne rouvre rien.
   const directPret=()=>new Promise(res=>{let n=0;(function f(){let w=false;try{w=typeof roomState!=="undefined"&&roomState==="wait"}catch(e){}if(!w||n++>=40){res();return}setTimeout(f,200)})()});
   P26ui.route("royale-amis",v=>{const c=String(v||"").toUpperCase();if(!CODE.test(c))return;try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}
-    directPret().then(()=>RA.entrer(c)).then(t=>{if(t)toast(`<span class="tm">!</span><div><b>Bataille royale entre amis</b><span>${esc(t)}</span></div>`)})});
+    if(S.g&&S.code===c)return;if(S.g){toast(`<span class="tm">!</span><div><b>Invitation : partie ${esc(c)}</b><span>Quitte d’abord ta partie, puis touche Rejoindre.</span></div>`);return}
+    S.prop=c;S.perdu="";P26ui.ouvrir("royale-amis")});
   Object.assign(RA,{lineup:()=>S.H?lineup():[],hote,MAXJ,DUREE});   // pour les tests
 })();
 P26mod.ok("royale-amis");

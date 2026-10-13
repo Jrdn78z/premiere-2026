@@ -392,8 +392,8 @@ function pickRow(el,items,cur,cb){el.innerHTML=items.map(it=>`<button type="butt
 function renderJeuPicks(){
   if(!C.ready){$("#stage").innerHTML=`<div class="empty"><h2>Un instant</h2><p>${dbState==="off"?"Ouvre la page depuis claude.ai, connecté, pour charger tes cartes.":"Je distribue les cartes…"}</p></div>`;$("#ctrl").style.visibility="hidden";return}
   P26ui.slot("jeu",document.querySelector('#v-jeu [data-slot="jeu"]'));
-  const mats=[...(QUICK.on?[{k:"@cinq",l:(QUICK.min||5)+" minutes"}]:[]),{k:"@donne",l:"Donne du soir"},{k:"@faibles",l:"Points faibles · "+weakCards().length},{k:"@err",l:"Erreurs · "+errCards().length},...C.mats.filter(m=>Object.values(C.chaps).some(c=>c.mat===m.id&&cardsOfChap(c).length)).map(m=>({k:m.id,l:m.court||m.nom,suit:m.suit,dot:1}))];
-  pickRow($("#jMat"),mats,sel.mat,k=>{sel.mat=k;sel.chap=null;sel.paq="*";LS.set("mat",k);renderJeuPicks();startPile()});
+  const mats=[...(QUICK.on?[{k:"@cinq",l:(QUICK.min||5)+" minutes"}]:[]),{k:"@donne",l:"Donne du soir"},{k:"@faibles",l:"Points faibles · "+weakCards().length},{k:"@err",l:"Erreurs · "+errCards().length},...C.mats.filter(m=>Object.values(C.chaps).some(c=>c.mat===m.id&&cardsOfChap(c).length)).map(m=>({k:m.id,l:m.court||m.nom,suit:m.suit,dot:1})),...matsBascule()];
+  pickRow($("#jMat"),mats,sel.mat,k=>{if(k==="@toutes"){basculerToutes();renderJeuPicks();return}sel.mat=k;sel.chap=null;sel.paq="*";LS.set("mat",k);renderJeuPicks();startPile()});
   if(sel.mat==="@cinq"&&!QUICK.on)sel.mat="@donne";
   srcSeg($("#jSrc"),sel.mat,()=>{sel.chap=null;sel.paq="*";renderJeuPicks();startPile()});
   if(sel.mat[0]==="@"){$("#jChap").hidden=true;$("#jPaq").hidden=true}
@@ -771,7 +771,7 @@ function renderCours(){
   const box=$("#cours");
   if(!C.ready){box.innerHTML=`<p class="loading">${dbState==="off"?"Ouvre la page depuis claude.ai, connecté.":"Chargement du cours…"}</p>`;return}
   if(!sel.mat||sel.mat[0]==="@"||!C.M[sel.mat])sel.mat=C.mats[0]?C.mats[0].id:null;
-  pickRow($("#cMat"),C.mats.map(m=>({k:m.id,l:m.court||m.nom,suit:m.suit,dot:1})),sel.mat,k=>{sel.mat=k;sel.chap=null;renderCours()});
+  pickRow($("#cMat"),[...C.mats.map(m=>({k:m.id,l:m.court||m.nom,suit:m.suit,dot:1})),...matsBascule()],sel.mat,k=>{if(k==="@toutes"){basculerToutes();renderCours();return}sel.mat=k;sel.chap=null;renderCours()});
   srcSeg($("#cSrc"),sel.mat,()=>{sel.chap=null;renderCours()});
   const chs=chapsOf(sel.mat);
   if(!sel.chap||!chs.find(c=>c.id===sel.chap))sel.chap=chs[0]?chs[0].id:null;
@@ -1032,7 +1032,18 @@ const DEFI={pool:null,req:false};function defiLoad(){if(DEFI.req||typeof fetch!=
 function defiQs(){defiLoad();const all=(DEFI.pool||Object.values(C.qs).filter(x=>!x.ch._doc||(x.ch.vis||"hub")==="hub").map(x=>x.q)).filter(q=>q&&q.ok&&(q.no||[]).length).sort((a,b)=>a.id<b.id?-1:1);
   let seed=0;for(const ch of TODAY_ISO)seed=(seed*31+ch.charCodeAt(0))|0;const r=rng(seed);
   return sshuffle(all,r).slice(0,10).map(q=>({q,opts:optsOf(q,r)}))}
-function renderLigue(){
+/* Lot P3b : renderLigue reconstruit toute la page ; on garde la place (voir patch13.py). LG._stable : vrai une fois la vue
+   Ligue affichée (pas pendant go(), qui remonte en haut exprès). */
+function lgCle(p){return p.id||p.className+"|"+[...p.children].map(b=>(b.dataset&&(b.dataset.t||b.dataset.f||b.dataset.k||b.dataset.m))||b.textContent).join(",").slice(0,300)}
+function renderLigue(){const box=$("#lg");let av=null;
+  if(box&&view==="ligue"&&LG._stable){const t=box.querySelector("#shopTabs");av={y:scrollY,top:t?t.getBoundingClientRect().top:null,tab:LG.shop||"dos",picks:[...box.querySelectorAll(".pick")].map(p=>[lgCle(p),p.scrollLeft])}}
+  renderLigue0();if(!box)return;const t=box.querySelector("#shopTabs");
+  if(av){if(t&&av.top!=null){const d=t.getBoundingClientRect().top-av.top;if(Math.abs(d)>1)scrollTo(0,scrollY+d)}else if(Math.abs(scrollY-av.y)>1)scrollTo(0,av.y)}
+  box.querySelectorAll(".pick").forEach(p=>{const o=av&&av.picks.find(x=>x[0]===lgCle(p));if(o)p.scrollLeft=o[1];const on=p.querySelector("button.on");if(!on||p.scrollWidth<=p.clientWidth)return;
+    const pr=p.getBoundingClientRect(),r=on.getBoundingClientRect();if(r.left<pr.left)p.scrollLeft-=pr.left-r.left+24;else if(r.right>pr.right)p.scrollLeft+=r.right-pr.right+24});
+  if(av&&t&&(LG.shop||"dos")!==av.tab){const r=t.nextElementSibling;if(r){const y=r.getBoundingClientRect().top;if(y>innerHeight-90)scrollTo(0,scrollY+y-innerHeight*.45)}}}
+P26ui.on("vue",v=>{LG._stable=false;if(v==="ligue")setTimeout(()=>{if(view==="ligue")LG._stable=true},0)});
+function renderLigue0(){
   LG.cur="HUB";eloLoad();if(SOC()&&Date.now()-NT.amisT>20000)amisLoad().then(()=>{if(view==="ligue"&&!LG.defi)renderLigue()});
   markLigue(false);const box=$("#lg");
   if(!C.ready){box.innerHTML=`<p class="loading">${dbState==="off"?"Ouvre la page depuis claude.ai, connecté, pour voir la ligue.":"Chargement de la ligue…"}</p>`;return}
@@ -1189,7 +1200,10 @@ function mergeAll(){
   C.ech=[...(IMP.isOwner?(C.ech0||[]):[]),...IMP.ech,...gEch,...shared].filter(e=>e&&e.date);
   Object.values(FI.ext).forEach(f=>addMat(f.mat,f.matNom));
 }
-function matOn(id){if(String(id).startsWith("x-"))return ADM();if(Array.isArray(P.mats)&&P.mats.length)return P.mats.includes(id);
+function toutesMats(){return ADM()&&LS.get("p3b_toutes",false)===true}
+function basculerToutes(){LS.set("p3b_toutes",!toutesMats());reindex()}
+const matsBascule=()=>ADM()?[{k:"@toutes",l:toutesMats()?"Mes matières seulement":"Toutes les matières"}]:[];
+function matOn(id){if(String(id).startsWith("x-"))return toutesMats();if(Array.isArray(P.mats)&&P.mats.length)return P.mats.includes(id);
   return Object.values(C.chaps||{}).some(c=>c.mat===id&&((c.paquets||[]).some(p=>(p.cartes||[]).length)||(c.quiz||[]).length))||(IMP.isOwner&&!!(C.M0&&C.M0[id]))||IMP.ech.some(e=>e.mat===id)}
 function rebuild(){if(!C.ready)return;mergeAll();reindex();if(view==="import"||(view==="ligue"&&LG.defi)||(view==="duel"&&inDuel))return;render()}
 async function impInit(){
@@ -1788,10 +1802,10 @@ function renderProfil(){const box=$("#pf");P.pf=P.pf||{};
   box.innerHTML=`<div class="ihead"><span></span><button class="linkbtn" type="button" id="pfBack">Retour</button></div>
    <div class="pfhead">${avHTML(P26ui._moi({nick:n||"Moi",av:avData(),avk:avK()}),"xl")}<div><h1>${esc(n||"Ton profil")}</h1>${(x=>x?`<small class="p1s">${x}</small>`:"")(P26ui.sousHTML(P26ui._moi({nick:n})))}<p>${esc(P.pf.cl||"Première")}${LG.nick?" · "+DIVS[LG.div||0]:""}</p>${GUEST?`<p><span class="gbadge">Mode invité</span></p>`:""}</div></div>
    <div data-slot="profil"></div>
-   <div class="sec"><h2>Ma classe et mes révisions</h2></div>
-   ${P.cls?`<div class="clsbox"><b>${esc(CLS[clsOk(P.cls).niv].nom)}</b><span>${CLS[clsOk(P.cls).niv].nspe?"Spécialités : "+clsOk(P.cls).spes.map(m=>esc(MATDEF[m].court)).join(", ")+" · ":""}${CLS[clsOk(P.cls).niv].tronc.includes("lvb")?"LVB : "+esc(MATDEF[clsOk(P.cls).lvb].court)+" · ":""}${clsMats(P.cls).reduce((a,m)=>a+clsOk(P.cls).th[m].length,0)} thèmes</span>
-     <div class="clsact"><button class="btn ghost" type="button" data-onb="0">Classe</button><button class="btn ghost" type="button" data-onb="1">${CLS[clsOk(P.cls).niv].tronc.includes("lvb")?"Spécialités et LVB":"Spécialités"}</button><button class="btn ghost" type="button" data-onb="2">Ce que je révise</button></div></div>`
-   :`<div class="exrow" style="margin:0"><button class="btn light" type="button" data-onb="0">Choisir ma classe</button></div>`}
+   <div class="sec"><h2>Ma voie et mes spécialités</h2></div>
+   ${P.cls?`<div class="clsbox"><b>Ma voie : ${esc(CLS[clsOk(P.cls).niv].nom)}</b><span>${CLS[clsOk(P.cls).niv].nspe?"Spécialités : "+clsOk(P.cls).spes.map(m=>esc(MATDEF[m].court)).join(", ")+" · ":""}${CLS[clsOk(P.cls).niv].tronc.includes("lvb")?"LVB : "+esc(MATDEF[clsOk(P.cls).lvb].court)+" · ":""}${clsMats(P.cls).reduce((a,m)=>a+clsOk(P.cls).th[m].length,0)} thèmes</span>
+     <div class="clsact"><button class="btn ghost" type="button" data-onb="0">Ma voie</button><button class="btn ghost" type="button" data-onb="1">${CLS[clsOk(P.cls).niv].tronc.includes("lvb")?"Mes spécialités et LVB":"Mes spécialités"}</button><button class="btn ghost" type="button" data-onb="2">Ce que je révise</button></div></div>`
+   :`<div class="exrow" style="margin:0"><button class="btn light" type="button" data-onb="0">Choisir ma voie et mes spécialités</button></div>`}
    <div class="sec"><h2>Mon avatar</h2></div>
    <div class="seg" id="avTabs" role="tablist"><span class="segi" aria-hidden="true"></span>${[["p","Photo"],["i","Initiales"],["e","Emoji"],["a","Personnage"]].map(([k,l])=>`<button type="button" role="tab" class="${avTab()===k?"on":""}" data-k="${k}">${l}</button>`).join("")}</div>
    <div class="aved" id="avEd">${avEditor()}</div>
@@ -2813,7 +2827,7 @@ const VERB_HTML_LANG={"verbes-ang":"en","verbes-esp":"es","verbes-all":"de","ver
 function verbSets(){const s=new Set();const c=clsOk(P.cls);if(c)clsMats(c).forEach(pm=>{if(VERB_OF[pm])s.add(VERB_OF[pm])});if(ADM())Object.values(VERB_OF).forEach(v=>s.add(v));return [...s]}
 const VB={set:null,niv:1,mode:"serie",q:null,list:[],i:0,ok:0,ko:0,t0:0,timer:null,done:false};
 const vbNorm=s=>String(s||"").toLowerCase().replace(/[’']/g,"'").replace(/\s+/g," ").replace(/^to /,"").trim();
-const vbBare=s=>vbNorm(s).normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/ß/g,"ss");
+const vbBare=s=>vbNorm(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ß/g,"ss");
 function vbCheck(user,expected){const alts=String(expected).split("/").map(vbNorm).filter(Boolean);const u=vbNorm(user);if(!u)return "vide";
   if(alts.includes(u)||vbNorm(expected)===u)return "ok";if(alts.map(vbBare).includes(vbBare(u)))return "accent";return "ko"}
 function vbData(set){const d=PG.base[set];return d&&Array.isArray(d.verbes)?d:null}
@@ -2903,7 +2917,14 @@ function arClean(hp){const ph=["lobby","start","q","rev","end"].includes(hp.ph)?
   const opts=Array.isArray(hp.opts)?hp.opts.slice(0,4).map(o=>arStr(o,160)):[];const ok=Math.max(0,Math.min(3,+hp.ok|0));
   const board=Array.isArray(hp.board)?hp.board.slice(0,60).map(r=>({k:arStr(r&&r.k,80),nick:cleanNick(arStr(r&&r.nick,40))||"?",s:Math.max(0,+(r&&r.s)|0),l:Math.max(0,+(r&&r.l)|0),x:Math.max(0,Math.min(50,+(r&&r.x)|0)),f:r&&r.f===1?1:0})):[];
   return {ph,n,i,q:arStr(hp.q,240),opts,ok,why:arStr(hp.why,300),dur:Math.max(5000,Math.min(60000,+hp.dur|0||20000)),board,pid:/^[a-z0-9]{1,12}$/.test(hp.pid||"")?hp.pid:"",eloId:/^[0-9a-f]{18}$/.test(hp.eloId||"")?hp.eloId:null,nick:cleanNick(arStr(hp.nick,40)),qid:/^[A-Za-z0-9._:-]{1,100}$/.test(hp.qid||"")?hp.qid:""}}
-function arEntryHTML(){return `<div class="online arene"><h2>Arène</h2><p class="muted">Quiz en direct à plusieurs, façon Kahoot. Tout le monde a la même question au même moment : plus tu réponds vite, plus tu marques. Partie classée : ton Elo bouge.</p>
+/* Lot P3b : un lien #arene=CODE (QR code, notification, lien partagé) ne lance plus rien tout seul. Le code est retenu comme
+   invitation (AR.prop), le lien est effacé de l'adresse (un rechargement ne rouvre rien), et seul le bouton « Rejoindre » fait entrer. */
+function arHashProp(){const m=/arene=([A-Z0-9]{5})/i.exec(location.hash||"");if(!m)return "";const c=m[1].toUpperCase();
+  try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}if(!(AR.g&&AR.code===c))AR.prop=c;return c}
+function arEntryHTML(){arHashProp();const pr=!AR.g&&/^[A-Z0-9]{5}$/.test(AR.prop||"")?AR.prop:"";
+  return `<div class="online arene"><h2>Arène</h2><p class="muted">Quiz en direct à plusieurs, façon Kahoot. Tout le monde a la même question au même moment : plus tu réponds vite, plus tu marques. Partie classée : ton Elo bouge.</p>
+   ${pr?`<div class="arprop" role="group" aria-label="Invitation à l’arène ${pr.split("").join(" ")}"><b>Invitation : arène <span class="arpc">${pr}</span></b><span>Rien ne démarre tant que tu ne touches pas Rejoindre.</span>
+     <div class="olrow"><button class="btn light" type="button" id="arPropGo">Rejoindre l’arène ${pr}</button><button class="btn ghost" type="button" id="arPropNo">Ignorer</button></div></div>`:""}
    <div class="olrow"><button class="btn light" type="button" id="arCreate">Créer une arène</button></div>
    <label class="lab" for="arCodeIn">Ou rejoins avec un code</label>
    <div class="olrow"><input id="arCodeIn" class="inp code" maxlength="5" autocomplete="off" placeholder="ABCDE"><button class="btn ghost" type="button" id="arJoin">Rejoindre</button></div>
@@ -2913,8 +2934,20 @@ function arEntryBind(){const need=()=>{if(!arNick()){$("#arErr").textContent="Aj
   if($("#arCreate"))$("#arCreate").onclick=()=>{if(need())arEnter(arCode(),true)};
   if($("#arJoin"))$("#arJoin").onclick=()=>{if(!need())return;const c=$("#arCodeIn").value.toUpperCase().replace(/[^A-Z0-9]/g,"");if(c.length!==5){$("#arErr").textContent="Le code fait 5 caractères.";return}arEnter(c,false)};
   if($("#arQr"))$("#arQr").onchange=async e=>{const f=e.target.files[0];if(!f||!need())return;$("#arErr").textContent="Lecture du QR code…";let c="";try{c=await qrRead(f)}catch(x){}const m=/([A-Z0-9]{5})$/i.exec(c||"");if(!m){$("#arErr").textContent="QR code illisible. Tape le code.";return}arEnter(m[1].toUpperCase(),false)};
-  const m=/arene=([A-Z0-9]{5})/i.exec(location.hash||"");if(m&&!AR.autoTried&&!AR.g){$("#arCodeIn").value=m[1].toUpperCase();if(arNick()&&ROOM&&roomState==="ok"){history.replaceState(null,"",location.pathname+location.search);arEnter(m[1].toUpperCase(),false)}}}
-addEventListener("hashchange",()=>{const m=/arene=([A-Z0-9]{5})/i.exec(location.hash||"");if(m){AR.autoTried=false;ntFollow("#arene="+m[1].toUpperCase())}});
+  if(AR.prop&&$("#arCodeIn")&&!$("#arCodeIn").value)$("#arCodeIn").value=AR.prop;
+  if($("#arPropGo"))$("#arPropGo").onclick=()=>{if(!need())return;const c=AR.prop;AR.prop="";arEnter(c,false)};
+  if($("#arPropNo"))$("#arPropNo").onclick=()=>{AR.prop="";if($("#arCodeIn"))$("#arCodeIn").value="";arEntryPaint()}}
+// Lien suivi pendant que le site est ouvert (notification, lien d'un ami) : on ouvre Duel et on propose, sans entrer.
+addEventListener("hashchange",()=>{const c=/arene=([A-Z0-9]{5})/i.test(location.hash||"")?arHashProp():"";if(!c||(AR.g&&AR.code===c))return;
+  if(AR.g){toast(`<span class="tm">⚔</span><div><b>Invitation : arène ${esc(c)}</b><span>Quitte d’abord ta partie, puis touche Rejoindre.</span></div>`);return}
+  if(view!=="duel")go("duel");else arEntryPaint()});
+// Barre du code, visible pendant toute la partie (salle d'attente, questions, réponses, podium), avec un bouton Copier.
+function arCopier(code,btn){const fin=ok=>{if(btn){btn.textContent=ok?"Copié":"Copie impossible";setTimeout(()=>{if(btn.isConnected)btn.textContent="Copier"},1600)}if(ok)buzz(8)};
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(code).then(()=>fin(true),()=>fin(arCopier0(code)));return}}catch(e){}fin(arCopier0(code))}
+function arCopier0(code){try{const t=document.createElement("textarea");t.value=code;t.setAttribute("readonly","");t.style.cssText="position:fixed;top:-100px;opacity:0";document.body.appendChild(t);t.select();const ok=document.execCommand("copy");t.remove();return !!ok}catch(e){return false}}
+function arCodeBarHTML(code,quoi){return `<div class="arcodebar" role="group" aria-label="Code de ${quoi} : ${esc(code.split("").join(" "))}"><span>Code</span><b>${esc(code)}</b><button type="button" class="arcopy" data-arcopy="${esc(code)}" aria-label="Copier le code ${esc(code)}">Copier</button></div>`}
+function arCodeBarre(){const box=$("#duel");if(!box||!AR.g||!AR.code)return;let b=box.querySelector(":scope > .arcodebar");if(!b){box.insertAdjacentHTML("afterbegin",arCodeBarHTML(AR.code,"l’arène"));b=box.firstElementChild}
+  const k=b.querySelector("[data-arcopy]");if(k)k.onclick=()=>arCopier(AR.code,k)}
 async function arEnter(code,host){AR.err="";if(AR.g)await arLeave();if(typeof OL!=="undefined"&&OL.g)await leaveRoom();AR.autoTried=true;try{AR.g=await ROOM.join("arene-"+code.toLowerCase())}catch(e){AR.g=null;AR.err="Impossible de rejoindre l’arène. Réessaie.";renderSeries();return}
   Object.assign(AR,{code,host,ph:"lobby",qs:null,i:-1,ans:{},score:{},nick:{},last:{},eloId:null,myAns:null,seenI:-1,seenPh:"",sel:AR.sel||new Set()});inDuel=true;
   AR.hk=null;AR.t0c=Date.now();AR.mine=0;AR.got={};AR.mst=0;AR.st={};AR.nx={};AR.qm=null;AR.qt=0;AR.bul={};AR.vus={};AR.revanche=0;await arPres(host?{nick:arNick(),ah:true,ph:"lobby",t:AR.t0c}:{nick:arNick(),prop:[]}).catch(()=>{});
@@ -2932,15 +2965,20 @@ function arPeers(){if(!AR.g)return;arMsgs();P26ui.emit("arene.pairs",{el:$("#due
   if(hp.ph!==AR.seenPh||(hp.ph==="rev"&&AR.revI!==hp.i)){AR.seenPh=hp.ph;AR.revI=hp.i;AR.ph=hp.ph==="q"&&!AR.cur?"lobby":hp.ph;AR.hp=hp;arRender();return}
   AR.hp=hp;if(AR.ph==="lobby")arRender()}
 /* --- côté hôte --- */
+/* Lot P3b : un seul thème par chapitre (chaque série de quiz d'un chapitre de Mon cours était listée à part, sous le même titre :
+   « Révolution » trois fois en Histoire), et « (mon cours) » quand un chapitre du Programme de la même matière porte presque le même titre. */
+const arNorm=t=>String(t||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim().replace(/s\b/g,"");
 function arThemes(){const out=[];const own=new Set();
-  (C.mats||[]).forEach(m=>{chapsOf2(m.id).forEach(ch=>{(ch.quiz||[]).forEach((s,si)=>{if((s.qs||[]).length){const k=ch._tid?"p:"+ch._tid:"c:"+ch.id+"#"+si;if(own.has(k))return;own.add(k);out.push({k,mat:m.id,matNom:m.court||m.nom,t:ch.court||ch.titre,n:s.qs.length})}})})});
+  (C.mats||[]).forEach(m=>{const chs=chapsOf2(m.id),prog=new Set(chs.filter(c=>c._tid).map(c=>arNorm(c.court||c.titre)));
+    chs.forEach(ch=>{const n=(ch.quiz||[]).reduce((a,s)=>a+((s&&s.qs)||[]).length,0);if(!n)return;const k=ch._tid?"p:"+ch._tid:"c:"+ch.id;if(own.has(k))return;own.add(k);
+      const t=ch.court||ch.titre;out.push({k,mat:m.id,matNom:m.court||m.nom,t:!ch._tid&&prog.has(arNorm(t))?t+" (mon cours)":t,n})})});
   return out}
 function chapsOf2(mid){return Object.values(C.chaps).filter(c=>c.mat===mid).sort((a,b)=>(isProg(a)?0:1)-(isProg(b)?0:1)||(a.ordre||0)-(b.ordre||0))}
 function arOtherThemes(){const mine=new Set(arThemes().map(x=>x.k));const out=[];Object.entries(MATDEF).forEach(([pm,M])=>M.themes.forEach(t=>{const k="p:"+t.id;if(!mine.has(k))out.push({k,mat:"o-"+pm,matNom:M.court+" ("+CLS_OF(pm).join(", ")+")",t:t.c})}));
   Object.entries(VERB_LANG).forEach(([v,l])=>{const k="p:"+v;if(!mine.has(k))out.push({k,mat:"o-verbes",matNom:"Verbes irréguliers",t:l})});return out}
 const arLabel=k=>{const a=[...arThemes(),...arOtherThemes()].find(x=>x.k===k);return a?a.matNom+" · "+a.t:k};
 async function arBuild(){const pool=[];
-  for(const k of AR.sel){if(k.startsWith("c:")){const [c,s]=k.slice(2).split("#"),ch=C.chaps[c];if(ch&&ch.quiz[+s])ch.quiz[+s].qs.forEach(q=>pool.push(q));continue}
+  for(const k of AR.sel){if(k.startsWith("c:")){const [c,s]=k.slice(2).split("#"),ch=C.chaps[c];if(ch)(s===undefined?ch.quiz||[]:[ch.quiz[+s]]).forEach(z=>z&&(z.qs||[]).forEach(q=>pool.push(q)));continue}
     const tid=k.slice(2),pm=tid.startsWith("verbes-")?tid:tid.slice(0,tid.lastIndexOf("-"));await progFetchAll(pm);const d=progDocOf(tid).d;if(d)(d.quiz||[]).forEach(z=>(z.qs||[]).forEach(q=>pool.push(q)))}
   return shuffle(pool.filter(q=>q&&q.q&&q.ok&&(q.no||[]).length>=2)).slice(0,AR.n).map(q=>{const o=shuffle([q.ok,...q.no.slice(0,3)]);return {q:q.q,opts:o,ok:o.indexOf(q.ok),why:q.why||"",id:q.id||""}})}
 async function arStart(){const st=$("#arSt");if(AR.starting)return;if(!AR.sel.size){st.textContent="Choisis au moins un thème.";return}
@@ -2971,7 +3009,7 @@ async function arReveal(){if(AR.ph!=="q")return;AR.ph="rev";clearInterval(AR.tim
 function arBoard(){return Object.keys(AR.nick).filter(k=>k!=="__host"||AR.plays).map(k=>({k:k==="__host"?"h:"+(AR.g&&AR.g.peers().find(p=>p.isMe&&p.sameTab)||{}).peer:k,nick:AR.nick[k],s:AR.score[k]||0,l:AR.last[k]||0,x:(AR.nx||{})[k]||0,f:((AR.st||{})[k]||0)>=3?1:0})).sort((a,b)=>b.s-a.s||a.nick.localeCompare(b.nick)).slice(0,60)}
 function arTick(){const el=$("#arBar");if(!el||!AR.cur)return;const left=Math.max(0,AR.cur.dur-(performance.now()-AR.cur.tl));el.style.setProperty("--p",(left/AR.cur.dur).toFixed(3));const s=$("#arSec");if(s)s.textContent=Math.ceil(left/1000)}
 /* --- rendu (hôte et joueurs) --- */
-function arRender(){try{arRender0()}finally{P26ui.emit("arene.rendu",{el:$("#duel"),ph:AR.ph})}}
+function arRender(){try{arRender0();arCodeBarre()}finally{P26ui.emit("arene.rendu",{el:$("#duel"),ph:AR.ph})}}
 function arRender0(){const box=$("#duel");if(!box||!AR.g)return;/* P26ui */if(AR.ph!=="end")AR.p1fin=0;const me=(AR.g.peers().find(p=>p.isMe&&p.sameTab)||{}).peer;
   if(AR.ph==="lobby"||AR.ph==="start"){const ps=arPlayers(),h=arHostPeer();
     box.innerHTML=`<div class="olhead"><div><span class="muted">Code de l’arène</span><div class="bigcode">${esc(AR.code)}</div><button class="linkbtn" type="button" id="arQuit">Quitter</button></div><div class="qrbox" id="arQrImg" aria-label="QR code de l’arène"></div></div>
@@ -3077,7 +3115,7 @@ async function renderNotifs(){const box=$("#nt");if(!box)return;const ps=await p
   box.querySelectorAll("[data-acc],[data-ref]").forEach(b=>b.onclick=async()=>{b.disabled=true;const id=b.dataset.acc||b.dataset.ref;try{await window.P26.social.repondre(id,!!b.dataset.acc);await amisLoad(true);toast(`<span class="tm">${b.dataset.acc?"♥":"·"}</span><div><b>${b.dataset.acc?"Vous êtes amis":"Demande refusée"}</b></div>`)}catch(e){}renderNotifs()});
   box.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>ntFollow(b.dataset.go));
   const unread=L.filter(n=>!n.lu).map(n=>n.id);if(unread.length){try{await window.P26.social.lues(unread)}catch(e){}L.forEach(n=>n.lu=true);ntPaint()}}
-function ntFollow(lien){const m=/^#arene=([A-Z0-9]{5})$/.exec(lien||"");if(m){if(AR.g&&AR.code===m[1])return;if(AR.g&&!confirm("Quitter l’arène en cours pour rejoindre ce défi ?"))return;go("duel");setTimeout(()=>{if(arNick()&&ROOM&&roomState==="ok")arEnter(m[1],false);else{history.replaceState(null,"",location.pathname+lien);AR.autoTried=false}},50);return}
+function ntFollow(lien){const m=/^#arene=([A-Z0-9]{5})$/.exec(lien||"");if(m){if(AR.g&&AR.code===m[1])return;if(AR.g&&!confirm("Quitter l’arène en cours pour rejoindre ce défi ?"))return;go("duel");setTimeout(()=>{if(arNick()&&ROOM&&roomState==="ok")arEnter(m[1],false);else{AR.prop=m[1];arEntryPaint()}},50);return}
   /* P26ui */if(P26ui.suivre(lien))return;
   const v=(lien||"").slice(1);if(views.includes(v))go(v)}
 /* Liste d'amis (onglet Ligue) */

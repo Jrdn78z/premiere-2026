@@ -446,8 +446,10 @@
   const arme_=k=>!!(etatUI.arme&&etatUI.arme.k===k&&Date.now()-etatUI.arme.t<8000);
   const lib=(k,txt,pr)=>arme_(k)?"Acheter ? "+fmtN(pr):txt;
   function mesGroupes(){try{if(typeof clsMats==="function"&&P.cls){const g=new Set(clsMats(P.cls).map(m=>GDE[m]||groupeMat(m)).filter(Boolean));g.add("bonus");return g}}catch(e){}return null}
-  function filtres(){const mg=mesGroupes(),L=[["","Tout"]];if(mg)L.unshift(["moi","Pour toi"]);GRP.forEach(([g,n])=>{if(SK.some(s=>s.g===g))L.push([g,n])});
-    if(!etatUI.f)etatUI.f=mg?"moi":"tout";return L}
+  // Lot P3b : par défaut, seulement les matières de l'élève (sa voie et ses spécialités) ; « Toutes les matières » montre les autres voies.
+  function filtres(){const mg=mesGroupes(),L=[];if(!etatUI.f)etatUI.f=mg?"moi":"tout";const tous=GRP.filter(([g])=>SK.some(s=>s.g===g));
+    const large=!mg||etatUI.f==="tout"||(etatUI.f!=="moi"&&!mg.has(etatUI.f));if(mg)L.push(["moi","Mes matières"]);
+    (large?tous:tous.filter(([g])=>mg.has(g))).forEach(([g,n])=>L.push([g,n]));L.push(["","Toutes les matières"]);return L}
   function visibles(){const f=etatUI.f,mg=mesGroupes();return SK.filter(s=>f==="moi"?(!mg||mg.has(s.g)):f&&f!=="tout"?s.g===f:true)}
   function chips(){const L=filtres();return `<div class="pick sm s2f" role="group" aria-label="Filtrer par matière">${L.map(([k,n])=>{const kk=k||"tout";return `<button type="button" class="${etatUI.f===kk?"on":""}" data-s2f="${kk}" aria-pressed="${etatUI.f===kk}">${esc(n)}</button>`}).join("")}</div>`}
   const monPerso=()=>{const k=avK();return k&&k.t==="b"?k.a:null};

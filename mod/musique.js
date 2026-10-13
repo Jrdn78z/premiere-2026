@@ -44,8 +44,10 @@
   M.monLigue=monLigue;M.parMatiere=()=>Object.assign({},propre(parMatiere()));
 
   /* ---------------- Matières (celles qui ont du contenu) ---------------- */
-  function matieres(){let L=[];try{if(typeof clsMats==="function"&&P.cls)L=clsMats(P.cls)}catch(e){}
-    const CM=typeof C!=="undefined"&&C.M&&typeof C.M==="object"?C.M:{};if(!L.length)L=Object.keys(CM);
+  // Lot P3b : identifiants du contenu (clsIds), pas ceux du Programme (clsMats) : « es » est l'Ens. scientifique dans le Programme
+  // mais l'Espagnol dans le contenu. Sans classe : les matières affichées (pas celles des autres voies).
+  function matieres(){let L=[];try{if(typeof clsIds==="function"&&P.cls)L=clsIds(P.cls)}catch(e){}
+    const CM=typeof C!=="undefined"&&C.M&&typeof C.M==="object"?C.M:{};if(!L.length)L=(C.mats||[]).map(m=>m.id);
     return [...new Set(L)].filter(m=>typeof m==="string"&&MAT.test(m)&&has(CM,m))}
   const nomMat=m=>{try{const x=C.M[m];return x&&(x.nom||x.court)?String(x.nom||x.court):m}catch(e){return m}};
 

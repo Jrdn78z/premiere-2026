@@ -53,7 +53,7 @@ body[data-th="papier"][data-theme="clair"]{--felt:#F3EEE2;--felt-hi:#FBF8F1;--fe
 body[data-th="papier"] :is(h1,h2){font-weight:700;letter-spacing:0}
 body[data-th="papier"] .adh,body[data-th="papier"] .hello h1{font-size:2.5rem}
 /* Sur papier, les boutons sombres et les puces choisies restent lisibles (encre sur papier, comme le mode clair du site) */
-body[data-th="papier"] .btn.light,body[data-th="papier"] .pick button.on,body[data-th="papier"] .per button.on{background:#2B2018;color:#FAFAF7}
+body[data-th="papier"] .btn.light,body[data-th="papier"] .pick button.on,body[data-th="papier"] .per button.on{background:#2B2018;color:var(--felt-hi)}
 
 /* ---------- Commun : texte sur fond or, barre du bas, barre du haut ---------- */
 /* --gold-ink : couleur du texte posé sur var(--gold) (sombre si l'or est clair, blanc si l'or est foncé). Les modules du site
@@ -114,3 +114,19 @@ body[data-th-essai] .wrap{outline:2px dashed var(--gold);outline-offset:-2px}
 .p3tact .btn.buy{box-shadow:inset 0 0 0 2px var(--gold);color:var(--gold);background:transparent}
 @media (max-width:400px){.p3td{grid-template-columns:1fr}.p3tact{justify-content:flex-start}}
 @media (prefers-reduced-motion:reduce){body[data-th="neon"] :is(h1,h2){text-shadow:none}}
+
+/* Lot P3b : variables dérivées de chaque thème. Les teintes d’or (rgba de l’or de base), les gris des champs et boutons doux,
+   les puces choisies et barres du mode clair étaient écrits en dur aux couleurs du thème de base (tapis vert, ivoire, or) :
+   ils passent par ces variables (patch13.py, avec la couleur de base en secours), redéfinies ici pour chaque thème et chaque mode. */
+[data-th="casino"]{--gold-rgb:243,210,122;--card-rgb:255,252,244;--card-soft:#F0ECE4;--card-soft2:#ECE8DF;--hair:rgba(var(--fw),.22);--sub:var(--felt-mute);--chip-on:#FBEFE6;--chip-on-ink:#5E1729;--clair-fort:#FBEFE6}
+body[data-th="casino"][data-theme="clair"]{--gold-rgb:95,51,14;--card-rgb:255,251,242;--card-soft:#F0EBE2;--card-soft2:#ECE7DE;--hair:rgba(var(--fw),.22);--sub:var(--felt-mute);--chip-on:#3A0E18;--chip-on-ink:#FCF3F5;--clair-fort:#3A0E18}
+[data-th="bibliotheque"]{--gold-rgb:235,202,136;--card-rgb:255,253,248;--card-soft:#F0EDE8;--card-soft2:#ECE9E3;--hair:rgba(var(--fw),.22);--sub:var(--felt-mute);--chip-on:#F4E9D8;--chip-on-ink:#4A3626;--clair-fort:#F4E9D8}
+body[data-th="bibliotheque"][data-theme="clair"]{--gold-rgb:83,58,0;--card-rgb:255,251,243;--card-soft:#F0ECE3;--card-soft2:#ECE7DF;--hair:rgba(var(--fw),.22);--sub:var(--felt-mute);--chip-on:#2A1E12;--chip-on-ink:#F9F3E8;--clair-fort:#2A1E12}
+[data-th="espace"]{--gold-rgb:255,209,102;--card-rgb:253,253,255;--card-soft:#EDEDF1;--card-soft2:#E8E9ED;--hair:rgba(var(--fw),.22);--sub:var(--felt-mute);--chip-on:#E9EEFF;--chip-on-ink:#1E2652;--clair-fort:#E9EEFF}
+body[data-th="espace"][data-theme="clair"]{--gold-rgb:79,65,0;--card-rgb:255,255,255;--card-soft:#EFEFF1;--card-soft2:#EAEAED;--hair:rgba(var(--fw),.22);--sub:var(--felt-mute);--chip-on:#141A33;--chip-on-ink:#F5F7FD;--clair-fort:#141A33}
+[data-th="neon"]{--gold-rgb:255,128,234;--card-rgb:252,250,255;--card-soft:#ECEAF1;--card-soft2:#E8E5ED;--hair:rgba(var(--fw),.22);--sub:var(--felt-mute);--chip-on:#F6F0FF;--chip-on-ink:#26183F;--clair-fort:#F6F0FF}
+body[data-th="neon"][data-theme="clair"]{--gold-rgb:125,0,107;--card-rgb:255,255,255;--card-soft:#EFEEF1;--card-soft2:#EAE9ED;--hair:rgba(var(--fw),.22);--sub:var(--felt-mute);--chip-on:#241444;--chip-on-ink:#FAF6FF;--clair-fort:#241444}
+[data-th="papier"]{--gold-rgb:76,55,6;--card-rgb:255,253,247;--card-soft:#EFEDE7;--card-soft2:#EBE9E3;--hair:rgba(var(--fw),.22);--sub:var(--felt-mute);--chip-on:#2B2018;--chip-on-ink:#F0E9D9;--clair-fort:#2B2018}
+body[data-th="papier"][data-theme="clair"]{--gold-rgb:90,66,11;--card-rgb:255,253,247;--card-soft:#EFEDE7;--card-soft2:#EBE9E3;--hair:rgba(var(--fw),.22);--sub:var(--felt-mute);--chip-on:#2B2520;--chip-on-ink:#FBF8F1;--clair-fort:#2B2520}
+
+body[data-th]:not([data-th=""]) .sa-p.sel{outline-color:var(--felt-ink)}
